@@ -1,0 +1,219 @@
+/* ============================================================
+   FishiFishi B2B — Pricing Page
+   ============================================================ */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.page-header__left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.page-title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+}
+
+.page-subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ---- Tier Cards ---- */
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.tier-card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.tier-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.tier-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.tier-card--gold::before   { background: linear-gradient(90deg, hsl(38, 92%, 50%), hsl(25, 90%, 55%)); }
+.tier-card--silver::before { background: linear-gradient(90deg, var(--color-aqua), hsl(200, 60%, 40%)); }
+.tier-card--bronze::before { background: linear-gradient(90deg, hsl(260, 50%, 50%), hsl(280, 50%, 40%)); }
+
+.tier-card__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  margin: 0 auto var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-2xl);
+}
+
+.tier-card--gold .tier-card__icon   { background: hsla(38, 92%, 50%, 0.15); }
+.tier-card--silver .tier-card__icon { background: var(--color-aqua-soft); }
+.tier-card--bronze .tier-card__icon { background: hsla(260, 50%, 50%, 0.12); }
+
+.tier-card__name {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
+.tier-card__desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-5);
+  line-height: var(--leading-relaxed);
+}
+
+.tier-card__discount {
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  margin-bottom: var(--space-1);
+}
+
+.tier-card--gold .tier-card__discount   { color: hsl(38, 92%, 55%); }
+.tier-card--silver .tier-card__discount { color: var(--color-aqua); }
+.tier-card--bronze .tier-card__discount { color: hsl(260, 50%, 60%); }
+
+.tier-card__discount-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-6);
+}
+
+.tier-card__features {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+.tier-card__feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.tier-card__feature-check {
+  color: var(--color-success);
+  font-weight: bold;
+}
+
+.tier-card__clients {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+}
+
+.tier-card__clients strong {
+  color: var(--color-text-primary);
+}
+
+/* ---- Pricing Table ---- */
+.pricing-table-section {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.pricing-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pricing-table-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+}
+
+.pricing-table {
+  width: 100%;
+}
+
+.pricing-table th {
+  text-align: left;
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pricing-table td {
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.pricing-table tr:last-child td {
+  border-bottom: none;
+}
+
+.pricing-table tbody tr:hover td {
+  background: var(--color-bg-tertiary);
+}
+
+.price-base {
+  font-weight: 600;
+}
+
+.price-tier {
+  font-weight: 700;
+}
+
+.price-tier--gold   { color: hsl(38, 92%, 55%); }
+.price-tier--silver { color: var(--color-aqua); }
+.price-tier--bronze { color: hsl(260, 50%, 60%); }
+
+.price-discount {
+  font-size: var(--text-xs);
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .tiers {
+    grid-template-columns: 1fr;
+  }
+}

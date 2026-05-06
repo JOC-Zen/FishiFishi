@@ -1,0 +1,14 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">FishiFishi icono</title>
+  <desc id="desc">Icono de FishiFishi con dos peces opuestos y una marca central de confianza.</desc>
+  <rect width="512" height="512" rx="92" fill="#087F7A"/>
+  <path d="M130 256C176 173 270 140 363 180C401 196 432 221 459 256C432 291 401 316 363 332C270 372 176 339 130 256Z" fill="#F7FBF8"/>
+  <path d="M380 256L459 194V318L380 256Z" fill="#F7FBF8"/>
+  <circle cx="193" cy="236" r="15" fill="#087F7A"/>
+  <path d="M382 256C336 339 242 372 149 332C111 316 80 291 53 256C80 221 111 196 149 180C242 140 336 173 382 256Z" fill="#D75F45"/>
+  <path d="M132 256L53 318V194L132 256Z" fill="#D75F45"/>
+  <circle cx="319" cy="276" r="15" fill="#F7FBF8"/>
+  <path d="M164 256H348" stroke="#F7FBF8" stroke-width="24" stroke-linecap="round"/>
+  <path d="M247 190L297 256L247 322" stroke="#087F7A" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+

@@ -1,0 +1,120 @@
+/* ============================================================
+   FishiFishi B2B — TopBar (Header del Dashboard)
+   ============================================================ */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-8);
+  background: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.topbar__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.topbar__title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.topbar__breadcrumb {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+}
+
+.topbar__breadcrumb a {
+  color: var(--color-text-tertiary);
+  transition: color var(--transition-fast);
+}
+
+.topbar__breadcrumb a:hover {
+  color: var(--color-text-primary);
+}
+
+.topbar__breadcrumb span {
+  margin: 0 var(--space-2);
+}
+
+/* ---- Right Actions ---- */
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.topbar__search {
+  position: relative;
+}
+
+.topbar__search-input {
+  width: 260px;
+  padding: var(--space-2) var(--space-4);
+  padding-left: var(--space-10);
+  background: var(--color-bg-tertiary);
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+  transition: all var(--transition-fast);
+}
+
+.topbar__search-input:focus {
+  border-color: var(--color-aqua);
+  width: 320px;
+  background: var(--color-bg-secondary);
+}
+
+.topbar__search-input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.topbar__search-icon {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+  pointer-events: none;
+}
+
+.topbar__icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.topbar__icon-btn:hover {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+.topbar__notification-dot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  border: 2px solid var(--color-bg-secondary);
+}

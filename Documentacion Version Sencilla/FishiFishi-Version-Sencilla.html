@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>FishiFishi - Documento Tecnico Version Sencilla</title>
+    <style>
+      :root {
+        --ink: #17211f;
+        --muted: #5f6f6b;
+        --line: #d8e3df;
+        --soft: #f3f7f4;
+        --teal: #087f7a;
+        --coral: #d75f45;
+        --green: #2f8a4b;
+        --amber: #ba7c1b;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      @page {
+        size: A4;
+        margin: 18mm;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11pt;
+        line-height: 1.48;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 28pt;
+        line-height: 1.05;
+      }
+
+      h2 {
+        margin-top: 26px;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+        color: var(--teal);
+        font-size: 17pt;
+      }
+
+      h3 {
+        margin-top: 18px;
+        color: var(--ink);
+        font-size: 12.5pt;
+      }
+
+      p {
+        margin-top: 8px;
+      }
+
+      ul,
+      ol {
+        margin: 8px 0 0 20px;
+        padding: 0;
+      }
+
+      li {
+        margin: 4px 0;
+      }
+
+      table {
+        width: 100%;
+        margin-top: 10px;
+        border-collapse: collapse;
+        page-break-inside: avoid;
+      }
+
+      th,
+      td {
+        padding: 8px 9px;
+        border: 1px solid var(--line);
+        vertical-align: top;
+        text-align: left;
+      }
+
+      th {
+        background: var(--soft);
+        color: var(--teal);
+      }
+
+      .cover {
+        min-height: 250px;
+        padding: 28px;
+        border: 1px solid var(--line);
+        background:
+          linear-gradient(135deg, rgba(8, 127, 122, 0.12), transparent 45%),
+          linear-gradient(315deg, rgba(215, 95, 69, 0.12), transparent 40%),
+          var(--soft);
+      }
+
+      .brand-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 42px;
+      }
+
+      .mark {
+        display: inline-flex;
+        width: 46px;
+        height: 46px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background: var(--teal);
+        color: #ffffff;
+        font-weight: 800;
+      }
+
+      .brand-row strong {
+        display: block;
+        font-size: 15pt;
+      }
+
+      .brand-row span {
+        color: var(--muted);
+        font-size: 9pt;
+        text-transform: uppercase;
+      }
+
+      .subtitle {
+        max-width: 600px;
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 13pt;
+      }
+
+      .meta {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 34px;
+      }
+
+      .meta div,
+      .callout,
+      .module-card,
+      .requirement {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      .meta div {
+        padding: 12px;
+      }
+
+      .label {
+        display: block;
+        color: var(--muted);
+        font-size: 8.5pt;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .meta strong {
+        display: block;
+        margin-top: 4px;
+      }
+
+      .callout {
+        margin-top: 16px;
+        padding: 14px;
+        border-left: 5px solid var(--coral);
+        page-break-inside: avoid;
+      }
+
+      .callout strong {
+        color: var(--coral);
+      }
+
+      .grid-two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 10px;
+      }
+
+      .module-card,
+      .requirement {
+        padding: 12px;
+        page-break-inside: avoid;
+      }
+
+      .module-card h3,
+      .requirement h3 {
+        margin-top: 0;
+      }
+
+      .badge {
+        display: inline-block;
+        margin: 2px 4px 2px 0;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: var(--soft);
+        color: var(--teal);
+        font-size: 9pt;
+        font-weight: 700;
+      }
+
+      .flow {
+        counter-reset: step;
+        display: grid;
+        gap: 8px;
+        margin-top: 10px;
+        padding: 0;
+        list-style: none;
+      }
+
+      .flow li {
+        counter-increment: step;
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 8px;
+        align-items: start;
+        margin: 0;
+      }
+
+      .flow li::before {
+        content: counter(step);
+        display: inline-flex;
+        width: 24px;
+        height: 24px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--teal);
+        color: #ffffff;
+        font-size: 9pt;
+        font-weight: 700;
+      }
+
+      .status-ok {
+        color: var(--green);
+        font-weight: 700;
+      }
+
+      .status-warn {
+        color: var(--amber);
+        font-weight: 700;
+      }
+
+      .page-break {
+        break-before: page;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="cover">
+      <div class="brand-row">
+        <div class="mark">FF</div>
+        <div>
+          <strong>FishiFishi</strong>
+          <span>Ecommerce B2B mayorista de pescados y mariscos</span>
+        </div>
+      </div>
+
+      <h1>Documento tecnico y funcional<br />Version sencilla</h1>
+      <p class="subtitle">
+        Estructura inicial del proyecto, tecnologias recomendadas, arquitectura, modulos y requerimientos para lanzar una plataforma B2B con pagos asegurados y confirmacion de recibido.
+      </p>
+
+      <div class="meta">
+        <div>
+          <span class="label">Version</span>
+          <strong>1.0 conceptual</strong>
+        </div>
+        <div>
+          <span class="label">Enfoque</span>
+          <strong>MVP operativo</strong>
+        </div>
+        <div>
+          <span class="label">Prioridad</span>
+          <strong>Pago asegurado</strong>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>1. Resumen Ejecutivo</h2>
+      <p>
+        La version sencilla de FishiFishi es una plataforma B2B mayorista para vender pescados y mariscos a empresas. Su objetivo no es automatizar toda la operacion internacional desde el inicio, sino ordenar el proceso comercial: registro de compradores, catalogo, solicitudes de cotizacion, pagos confirmados, seguimiento de entrega y confirmacion de recibido.
+      </p>
+      <p>
+        El equipo FishiFishi conserva el control sobre precio final, disponibilidad, impuestos, logistica y condiciones de entrega. La plataforma sirve como sistema comercial y operativo para reducir desorden, evitar riesgos de impago y dar trazabilidad al comprador.
+      </p>
+
+      <div class="callout">
+        <strong>Regla central:</strong> no se libera mercancia sin pago confirmado, preautorizacion valida o garantia capturada. No se recomienda operar con notas de credito, credito abierto ni promesas de pago como base del modelo.
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Alcance De La Version Sencilla</h2>
+      <div class="grid-two">
+        <div class="module-card">
+          <h3>Incluye</h3>
+          <ul>
+            <li>Registro de clientes empresariales.</li>
+            <li>Catalogo mayorista.</li>
+            <li>Solicitud de cotizacion.</li>
+            <li>Solicitud de compra programada.</li>
+            <li>Pago por tarjeta, WeChat Pay y cripto/stablecoins.</li>
+            <li>Panel administrativo.</li>
+            <li>Seguimiento tipo DiDi.</li>
+            <li>Confirmacion de recibido por comprador.</li>
+            <li>Estadisticas basicas.</li>
+          </ul>
+        </div>
+
+        <div class="module-card">
+          <h3>No Incluye Al Inicio</h3>
+          <ul>
+            <li>Calculo automatico avanzado de impuestos por pais.</li>
+            <li>Motor aduanal automatizado.</li>
+            <li>Integracion completa con navieras y paqueterias.</li>
+            <li>Credito abierto para compradores.</li>
+            <li>ERP completo.</li>
+            <li>Marketplace con multiples vendedores.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Arquitectura Recomendada</h2>
+      <p>
+        Se recomienda una arquitectura modular monolitica para el MVP. Esto permite avanzar rapido, mantener el codigo ordenado y evitar complejidad innecesaria de microservicios desde la primera version.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Capa</th>
+            <th>Responsabilidad</th>
+            <th>Tecnologia Recomendada</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Frontend</td>
+            <td>Interfaz del comprador y panel administrativo.</td>
+            <td>Next.js, React, TypeScript, Tailwind CSS o CSS Modules.</td>
+          </tr>
+          <tr>
+            <td>Backend</td>
+            <td>Logica de negocio, ordenes, pagos, cotizaciones y permisos.</td>
+            <td>NestJS con TypeScript o Laravel con PHP.</td>
+          </tr>
+          <tr>
+            <td>Base de datos</td>
+            <td>Clientes, productos, solicitudes, ordenes, pagos y estados.</td>
+            <td>PostgreSQL.</td>
+          </tr>
+          <tr>
+            <td>Archivos</td>
+            <td>Facturas, documentos, comprobantes y evidencia de entrega.</td>
+            <td>Amazon S3, Cloudflare R2 o storage compatible S3.</td>
+          </tr>
+          <tr>
+            <td>Pagos</td>
+            <td>Tarjetas, WeChat Pay y cripto/stablecoins.</td>
+            <td>Stripe, proveedor WeChat Pay, proveedor cripto regulado.</td>
+          </tr>
+          <tr>
+            <td>Notificaciones</td>
+            <td>Alertas de estado, pago y recibido.</td>
+            <td>Email, WhatsApp Business API, WeChat notifications.</td>
+          </tr>
+          <tr>
+            <td>Infraestructura</td>
+            <td>Hosting, despliegue y monitoreo.</td>
+            <td>Vercel/Cloudflare para frontend, Render/Fly/AWS para backend.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>4. Jerarquia Del Proyecto</h2>
+      <p>Ejemplo de estructura si se desarrolla con Next.js y backend separado:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Ruta</th>
+            <th>Contenido</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>apps/web</td>
+            <td>Frontend comprador y panel administrativo.</td>
+          </tr>
+          <tr>
+            <td>apps/api</td>
+            <td>API backend y modulos de negocio.</td>
+          </tr>
+          <tr>
+            <td>packages/ui</td>
+            <td>Componentes visuales compartidos.</td>
+          </tr>
+          <tr>
+            <td>packages/config</td>
+            <td>Configuraciones compartidas de TypeScript, linting y entorno.</td>
+          </tr>
+          <tr>
+            <td>docs</td>
+            <td>Documentacion funcional, tecnica y decisiones de arquitectura.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Modulos sugeridos del backend</h3>
+      <div>
+        <span class="badge">auth</span>
+        <span class="badge">buyers</span>
+        <span class="badge">products</span>
+        <span class="badge">quotes</span>
+        <span class="badge">orders</span>
+        <span class="badge">payments</span>
+        <span class="badge">deliveries</span>
+        <span class="badge">documents</span>
+        <span class="badge">notifications</span>
+        <span class="badge">analytics</span>
+      </div>
+    </section>
+
+    <section class="page-break">
+      <h2>5. Modulos Funcionales</h2>
+
+      <div class="grid-two">
+        <div class="module-card">
+          <h3>Clientes Empresariales</h3>
+          <p>Registro de razon social, pais, datos fiscales, contacto de compras, contacto financiero, contacto autorizado para confirmar recibido y metodo de pago preferido.</p>
+        </div>
+
+        <div class="module-card">
+          <h3>Catalogo Mayorista</h3>
+          <p>Productos con presentacion, unidad de venta, volumen minimo, temporada, disponibilidad, ficha tecnica y boton de solicitar cotizacion.</p>
+        </div>
+
+        <div class="module-card">
+          <h3>Cotizaciones</h3>
+          <p>El comprador envia cantidad, destino, fecha deseada y comentarios. El equipo FishiFishi revisa costos reales y genera una cotizacion personalizada.</p>
+        </div>
+
+        <div class="module-card">
+          <h3>Pago Asegurado</h3>
+          <p>Modulo central para generar links de pago, confirmar pagos, detectar pagos fallidos y bloquear ordenes sin pago confirmado.</p>
+        </div>
+
+        <div class="module-card">
+          <h3>Ordenes</h3>
+          <p>Convierte cotizaciones aceptadas en ordenes. Controla estados desde pago pendiente hasta recibido confirmado.</p>
+        </div>
+
+        <div class="module-card">
+          <h3>Seguimiento Tipo DiDi</h3>
+          <p>Permite al comprador ver avance, recibir notificaciones, confirmar recibido y reportar incidencias con evidencia.</p>
+        </div>
+
+        <div class="module-card">
+          <h3>Panel Administrativo</h3>
+          <p>Permite aprobar compradores, crear cotizaciones, cambiar estados, registrar pagos, subir documentos y gestionar incidencias.</p>
+        </div>
+
+        <div class="module-card">
+          <h3>Estadisticas Basicas</h3>
+          <p>Volumen solicitado, volumen comprado, pagos fallidos, ordenes cerradas, incidencias y productos con mayor demanda.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>6. Flujos Principales</h2>
+
+      <h3>Compra simple</h3>
+      <ol class="flow">
+        <li>El comprador se registra como empresa.</li>
+        <li>FishiFishi valida o aprueba la cuenta.</li>
+        <li>El comprador selecciona producto y solicita cotizacion.</li>
+        <li>FishiFishi revisa costos reales y envia cotizacion.</li>
+        <li>El comprador acepta la cotizacion.</li>
+        <li>La plataforma genera link de pago.</li>
+        <li>El comprador paga con tarjeta, WeChat Pay o cripto/stablecoin.</li>
+        <li>El sistema confirma el pago.</li>
+        <li>FishiFishi prepara y envia la mercancia.</li>
+        <li>El comprador confirma recibido o reporta incidencia.</li>
+      </ol>
+
+      <h3>Compra programada simple</h3>
+      <ol class="flow">
+        <li>El comprador solicita volumen total, fechas y frecuencia de entregas.</li>
+        <li>FishiFishi revisa disponibilidad y condiciones.</li>
+        <li>Se genera una cotizacion o contrato manual.</li>
+        <li>Cada entrega queda como orden parcial.</li>
+        <li>La orden parcial solo se libera con pago confirmado o garantia capturada.</li>
+        <li>El comprador confirma recibido por cada entrega.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>7. Requerimientos Funcionales</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Requerimiento</th>
+            <th>Prioridad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>RF-01</td>
+            <td>El sistema debe permitir registro de empresas compradoras con datos fiscales y comerciales.</td>
+            <td class="status-ok">Alta</td>
+          </tr>
+          <tr>
+            <td>RF-02</td>
+            <td>El administrador debe poder aprobar, bloquear o editar compradores.</td>
+            <td class="status-ok">Alta</td>
+          </tr>
+          <tr>
+            <td>RF-03</td>
+            <td>El comprador debe poder solicitar cotizacion por producto, volumen, fecha y destino.</td>
+            <td class="status-ok">Alta</td>
+          </tr>
+          <tr>
+            <td>RF-04</td>
+            <td>El sistema debe generar links de pago para cotizaciones aprobadas.</td>
+            <td class="status-ok">Alta</td>
+          </tr>
+          <tr>
+            <td>RF-05</td>
+            <td>El sistema debe bloquear preparacion y envio si el pago no esta confirmado.</td>
+            <td class="status-ok">Alta</td>
+          </tr>
+          <tr>
+            <td>RF-06</td>
+            <td>El comprador debe poder ver estados de orden y confirmar recibido.</td>
+            <td class="status-ok">Alta</td>
+          </tr>
+          <tr>
+            <td>RF-07</td>
+            <td>El comprador debe poder reportar incidencia y subir evidencia.</td>
+            <td class="status-warn">Media</td>
+          </tr>
+          <tr>
+            <td>RF-08</td>
+            <td>El administrador debe poder subir facturas, documentos y comprobantes.</td>
+            <td class="status-warn">Media</td>
+          </tr>
+          <tr>
+            <td>RF-09</td>
+            <td>El sistema debe mostrar estadisticas basicas por comprador y producto.</td>
+            <td class="status-warn">Media</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="page-break">
+      <h2>8. Requerimientos No Funcionales</h2>
+      <div class="grid-two">
+        <div class="requirement">
+          <h3>Seguridad</h3>
+          <ul>
+            <li>Autenticacion con roles.</li>
+            <li>Contrasenas hasheadas.</li>
+            <li>2FA para administradores.</li>
+            <li>No almacenar tarjetas directamente.</li>
+            <li>Uso de proveedores tokenizados.</li>
+          </ul>
+        </div>
+
+        <div class="requirement">
+          <h3>Pagos</h3>
+          <ul>
+            <li>Confirmacion mediante webhooks.</li>
+            <li>Registro de eventos de pago.</li>
+            <li>Estados claros: pendiente, confirmado, fallido, reembolsado.</li>
+            <li>Bloqueo automatico de orden sin pago.</li>
+          </ul>
+        </div>
+
+        <div class="requirement">
+          <h3>Escalabilidad</h3>
+          <ul>
+            <li>Arquitectura modular.</li>
+            <li>Base de datos relacional.</li>
+            <li>Separacion entre frontend, backend y storage.</li>
+            <li>Preparado para integraciones futuras.</li>
+          </ul>
+        </div>
+
+        <div class="requirement">
+          <h3>Compatibilidad Internacional</h3>
+          <ul>
+            <li>Multidioma desde el inicio.</li>
+            <li>Multi moneda desde modelo de datos.</li>
+            <li>Evitar dependencias bloqueadas en China.</li>
+            <li>Soporte futuro para chino simplificado.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>9. Modelo De Datos Inicial</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Entidad</th>
+            <th>Campos Clave</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>buyers</td>
+            <td>id, company_name, country, tax_id, billing_address, delivery_address, language, currency, status.</td>
+          </tr>
+          <tr>
+            <td>buyer_contacts</td>
+            <td>id, buyer_id, name, email, phone, role, can_pay, can_confirm_delivery.</td>
+          </tr>
+          <tr>
+            <td>products</td>
+            <td>id, name, species, presentation, min_volume, season, status, description.</td>
+          </tr>
+          <tr>
+            <td>quotes</td>
+            <td>id, buyer_id, status, destination, requested_date, currency, total_amount, expires_at.</td>
+          </tr>
+          <tr>
+            <td>orders</td>
+            <td>id, quote_id, buyer_id, payment_status, delivery_status, total_amount, confirmed_at.</td>
+          </tr>
+          <tr>
+            <td>payments</td>
+            <td>id, order_id, provider, method, status, amount, transaction_id, confirmed_at.</td>
+          </tr>
+          <tr>
+            <td>deliveries</td>
+            <td>id, order_id, status, carrier_reference, shipped_at, delivered_at, received_confirmed_at.</td>
+          </tr>
+          <tr>
+            <td>incidents</td>
+            <td>id, order_id, buyer_id, type, description, status, created_at, resolved_at.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>10. Roadmap Sugerido</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Fase</th>
+            <th>Objetivo</th>
+            <th>Entregables</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Fase 1</td>
+            <td>MVP comercial</td>
+            <td>Registro, catalogo, cotizaciones, panel admin y estados basicos.</td>
+          </tr>
+          <tr>
+            <td>Fase 2</td>
+            <td>Pago asegurado</td>
+            <td>Tarjetas, WeChat Pay, cripto/stablecoins, webhooks y bloqueo por pago fallido.</td>
+          </tr>
+          <tr>
+            <td>Fase 3</td>
+            <td>Seguimiento y recibido</td>
+            <td>Estados tipo DiDi, notificaciones, confirmacion de recibido e incidencias.</td>
+          </tr>
+          <tr>
+            <td>Fase 4</td>
+            <td>Escalamiento</td>
+            <td>Multidioma, chino simplificado, analitica, documentos y pagos programados.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>11. Recomendacion Tecnica</h2>
+      <p>
+        Para la primera version, se recomienda construir FishiFishi como un monolito modular con frontend moderno y backend API. La prioridad debe ser tener un flujo comercial completo y seguro antes de automatizar calculos complejos.
+      </p>
+      <p>
+        La plataforma debe quedar preparada para crecer, pero sin cargar al MVP con integraciones que todavia pueden resolverse manualmente por el equipo. El diferenciador real desde la primera version debe ser la disciplina operativa: pago confirmado, estado visible, evidencia, recibido confirmado e historial por comprador.
+      </p>
+    </section>
+  </body>
+</html>
+

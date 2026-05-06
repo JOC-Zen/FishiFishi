@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FishiFishi | B2B Seafood Platform</title>
+    <link rel="stylesheet" href="src/styles/base.css" />
+    <link rel="stylesheet" href="src/styles/layout.css" />
+    <link rel="stylesheet" href="src/styles/components.css" />
+    <link rel="stylesheet" href="src/styles/responsive.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navegacion principal">
+        <a class="brand" href="#" aria-label="FishiFishi inicio">
+          <span class="brand-mark">FF</span>
+          <span>
+            <strong>FishiFishi</strong>
+            <small>Wholesale seafood</small>
+          </span>
+        </a>
+
+        <nav class="nav-list">
+          <a class="nav-item active" href="#dashboard">
+            <span class="nav-icon">01</span>
+            Operacion
+          </a>
+          <a class="nav-item" href="#orders">
+            <span class="nav-icon">02</span>
+            Ordenes
+          </a>
+          <a class="nav-item" href="#payments">
+            <span class="nav-icon">03</span>
+            Pagos
+          </a>
+          <a class="nav-item" href="#buyers">
+            <span class="nav-icon">04</span>
+            Compradores
+          </a>
+          <a class="nav-item" href="#contracts">
+            <span class="nav-icon">05</span>
+            Contratos
+          </a>
+        </nav>
+
+        <section class="sidebar-panel" aria-labelledby="risk-title">
+          <span class="eyebrow" id="risk-title">Riesgo operativo</span>
+          <strong>0 ordenes liberadas sin pago</strong>
+          <p>Politica activa: pago confirmado antes de preparar mercancia.</p>
+        </section>
+      </aside>
+
+      <main class="workspace" id="dashboard">
+        <header class="topbar">
+          <div>
+            <span class="eyebrow">Panel operativo</span>
+            <h1>Pagos asegurados y entregas verificadas</h1>
+          </div>
+          <div class="topbar-actions">
+            <label class="select-field">
+              <span>Idioma</span>
+              <select id="languageSelect">
+                <option>ES</option>
+                <option>EN</option>
+                <option>ZH</option>
+              </select>
+            </label>
+            <button class="icon-button" type="button" aria-label="Notificaciones">
+              <span aria-hidden="true">!</span>
+            </button>
+            <button class="primary-button" type="button">Nueva cotizacion</button>
+          </div>
+        </header>
+
+        <section class="hero-grid" aria-label="Resumen principal">
+          <article class="operation-panel live-order" id="orders">
+            <div class="panel-heading">
+              <div>
+                <span class="eyebrow">Orden activa</span>
+                <h2 id="activeOrderTitle">Cargando orden</h2>
+              </div>
+              <span class="status-pill paid">Pago confirmado</span>
+            </div>
+
+            <div class="route-card">
+              <div>
+                <span>Origen</span>
+                <strong>Topolobampo, MX</strong>
+              </div>
+              <div class="route-line" aria-hidden="true"></div>
+              <div>
+                <span>Destino</span>
+                <strong>Shanghai, CN</strong>
+              </div>
+            </div>
+
+            <ol class="timeline" id="deliveryTimeline" aria-label="Estado de entrega"></ol>
+
+            <div class="action-row">
+              <button class="secondary-button" type="button" id="reportIssueButton">Reportar incidencia</button>
+              <button class="primary-button" type="button" id="confirmReceivedButton">Confirmar recibido</button>
+            </div>
+          </article>
+
+          <article class="operation-panel payment-panel" id="payments">
+            <div class="panel-heading">
+              <div>
+                <span class="eyebrow">Motor de pago</span>
+                <h2>Orden bloqueada hasta pago real</h2>
+              </div>
+              <span class="status-pill secure">Sin nota de credito</span>
+            </div>
+
+            <div class="payment-total">
+              <span>Total protegido</span>
+              <strong id="protectedAmount">$428,600 USD</strong>
+            </div>
+
+            <div class="payment-methods" id="paymentMethods" aria-label="Metodos de pago"></div>
+
+            <div class="compliance-strip">
+              <span>Tokenizacion</span>
+              <span>3DS</span>
+              <span>Stablecoin</span>
+              <span>WeChat</span>
+            </div>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <article class="operation-panel buyer-panel" id="buyers">
+            <div class="panel-heading">
+              <div>
+                <span class="eyebrow">Comprador empresarial</span>
+                <h2>Pacific Dragon Foods Ltd.</h2>
+              </div>
+              <span class="status-pill verified">Verificado</span>
+            </div>
+
+            <div class="buyer-profile">
+              <div>
+                <span>Pais</span>
+                <strong>China</strong>
+              </div>
+              <div>
+                <span>Tax ID</span>
+                <strong>CN-8842-91</strong>
+              </div>
+              <div>
+                <span>Moneda</span>
+                <strong>USD / CNY</strong>
+              </div>
+              <div>
+                <span>Recibe</span>
+                <strong>Li Wei</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="operation-panel product-panel">
+            <div class="panel-heading">
+              <div>
+                <span class="eyebrow">Producto solicitado</span>
+                <h2>Jaiba azul congelada</h2>
+              </div>
+              <span class="status-pill season">Temporada</span>
+            </div>
+
+            <div class="product-visual" aria-label="Jaiba azul congelada">
+              <div class="seafood-shape shell-one"></div>
+              <div class="seafood-shape shell-two"></div>
+              <div class="seafood-shape shell-three"></div>
+            </div>
+
+            <div class="product-specs">
+              <span>6,000 ton</span>
+              <span>Ene-Jun</span>
+              <span>IQF</span>
+              <span>Contenedor frio</span>
+            </div>
+          </article>
+        </section>
+
+        <section class="operation-panel schedule-panel" id="contracts">
+          <div class="panel-heading">
+            <div>
+              <span class="eyebrow">Contrato programado</span>
+              <h2>Entregas por temporada</h2>
+            </div>
+            <button class="secondary-button" type="button">Ver contrato</button>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Entrega</th>
+                  <th>Volumen</th>
+                  <th>Pago</th>
+                  <th>Estado</th>
+                  <th>Confirmacion</th>
+                </tr>
+              </thead>
+              <tbody id="scheduleRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="src/scripts/data.js"></script>
+    <script src="src/scripts/ui.js"></script>
+    <script src="src/scripts/app.js"></script>
+  </body>
+</html>

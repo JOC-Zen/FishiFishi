@@ -1,0 +1,254 @@
+/* ============================================================
+   FishiFishi B2B — Orders Page
+   ============================================================ */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.page-header__left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.page-title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+}
+
+.page-subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ---- Status Tabs ---- */
+.tabs {
+  display: flex;
+  gap: var(--space-1);
+  margin-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+  overflow-x: auto;
+}
+
+.tab {
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  border-bottom: 2px solid transparent;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.tab:hover {
+  color: var(--color-text-primary);
+}
+
+.tab--active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+.tab__count {
+  margin-left: var(--space-2);
+  font-size: var(--text-xs);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-tertiary);
+}
+
+.tab--active .tab__count {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+/* ---- Orders Table ---- */
+.table-wrapper {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.orders-table {
+  width: 100%;
+}
+
+.orders-table th {
+  text-align: left;
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.orders-table td {
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.orders-table tr:last-child td {
+  border-bottom: none;
+}
+
+.orders-table tbody tr {
+  transition: background var(--transition-fast);
+  cursor: pointer;
+}
+
+.orders-table tbody tr:hover td {
+  background: var(--color-bg-tertiary);
+}
+
+.order-id {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-aqua);
+}
+
+.order-client {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.order-client__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-bg-tertiary), var(--color-surface));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.order-client__details {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-client__name {
+  font-weight: 600;
+}
+
+.order-client__company {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+.order-total {
+  font-weight: 700;
+  font-size: var(--text-base);
+}
+
+.order-items-count {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+.order-date {
+  color: var(--color-text-secondary);
+}
+
+.order-delivery {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* ---- Status Progress ---- */
+.status-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.status-progress__step {
+  width: 24px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-tertiary);
+}
+
+.status-progress__step--done {
+  background: var(--color-success);
+}
+
+.status-progress__step--current {
+  background: var(--color-aqua);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ---- Pagination ---- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+}
+
+.pagination__info {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.pagination__buttons {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.pagination__btn {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-fast);
+}
+
+.pagination__btn:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-border-hover);
+}
+
+.pagination__btn--active {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent);
+}
+
+@media (max-width: 900px) {
+  .orders-table th:nth-child(5),
+  .orders-table td:nth-child(5),
+  .orders-table th:nth-child(6),
+  .orders-table td:nth-child(6) {
+    display: none;
+  }
+}

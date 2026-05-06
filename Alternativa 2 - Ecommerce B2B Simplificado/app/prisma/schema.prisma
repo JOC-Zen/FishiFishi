@@ -1,0 +1,135 @@
+// FishiFishi B2B — Prisma Schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---- Enums ----
+
+enum UserRole {
+  ADMIN
+  CLIENT
+}
+
+enum UserStatus {
+  ACTIVE
+  PENDING
+  SUSPENDED
+}
+
+enum UserTier {
+  GOLD
+  SILVER
+  BRONZE
+}
+
+enum ProductStatus {
+  ACTIVE
+  INACTIVE
+  DISCONTINUED
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+// ---- Models ----
+
+model User {
+  id            String     @id @default(cuid())
+  email         String     @unique
+  password      String     // Hashed
+  name          String
+  companyName   String?
+  role          UserRole   @default(CLIENT)
+  status        UserStatus @default(PENDING)
+  tier          UserTier   @default(BRONZE)
+  phone         String?
+  
+  orders        Order[]
+  
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@map("users")
+}
+
+model Product {
+  id               String        @id @default(cuid())
+  sku              String        @unique
+  name             String
+  description      String?
+  category         String
+  basePrice        Decimal       @db.Decimal(10, 2)
+  unit             String        // kg, docena, etc.
+  stock            Decimal       @default(0) @db.Decimal(10, 2)
+  minOrderQuantity Decimal       @default(1) @db.Decimal(10, 2)
+  imageUrl         String?
+  status           ProductStatus @default(ACTIVE)
+  
+  priceTiers       PriceTier[]
+  orderItems       OrderItem[]
+  
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@map("products")
+}
+
+model PriceTier {
+  id          String   @id @default(cuid())
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  minQuantity Decimal  @db.Decimal(10, 2)
+  unitPrice   Decimal  @db.Decimal(10, 2)
+  
+  @@map("price_tiers")
+}
+
+model Order {
+  id                String      @id @default(cuid())
+  orderNumber       Int         @unique @default(autoincrement())
+  
+  clientId          String
+  client            User        @relation(fields: [clientId], references: [id])
+  
+  items             OrderItem[]
+  totalAmount       Decimal     @db.Decimal(10, 2)
+  status            OrderStatus @default(PENDING)
+  
+  notes             String?
+  shippingAddress   String?
+  estimatedDelivery DateTime?
+  
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String   @id @default(cuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id])
+  
+  productName String   // Snapshot of the name at order time
+  sku         String   // Snapshot of the SKU
+  quantity    Decimal  @db.Decimal(10, 2)
+  unitPrice   Decimal  @db.Decimal(10, 2)
+  subtotal    Decimal  @db.Decimal(10, 2)
+
+  @@map("order_items")
+}

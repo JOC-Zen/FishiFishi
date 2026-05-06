@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FishiFishi - Preview Logotipo</title>
+    <style>
+      :root {
+        --bg: #f6faf7;
+        --ink: #14201e;
+        --muted: #5f6f6b;
+        --line: #d8e3df;
+        --teal: #087f7a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      main {
+        display: grid;
+        gap: 24px;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 36px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 34px;
+      }
+
+      p {
+        max-width: 720px;
+        margin: 8px 0 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      section {
+        display: grid;
+        gap: 16px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      section.dark {
+        background: #14201e;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .icon-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        align-items: center;
+      }
+
+      .icon-box {
+        display: grid;
+        width: 160px;
+        height: 160px;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      .caption {
+        color: var(--teal);
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>FishiFishi - propuesta de logotipo</h1>
+        <p>Primera direccion visual para una plataforma B2B de pescados y mariscos con foco en pago asegurado, trazabilidad y confirmacion de recibido.</p>
+      </header>
+
+      <section>
+        <span class="caption">Logo principal</span>
+        <img src="logo-principal.svg" alt="FishiFishi logo principal" />
+      </section>
+
+      <section class="dark">
+        <span class="caption">Uso sobre fondo oscuro</span>
+        <img src="logo-principal.svg" alt="FishiFishi logo principal sobre fondo oscuro" />
+      </section>
+
+      <section>
+        <span class="caption">Icono y solo texto</span>
+        <div class="icon-row">
+          <div class="icon-box">
+            <img src="logo-icono.svg" alt="FishiFishi icono" />
+          </div>
+          <img src="logo-solo-texto.svg" alt="FishiFishi logo solo texto" />
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
+

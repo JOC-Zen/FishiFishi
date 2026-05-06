@@ -1,0 +1,104 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>FishiFishi Frontend Prototype</title>
+    <style>
+      @page { size: A4; margin: 18mm; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: #17211f;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11pt;
+        line-height: 1.5;
+      }
+      h1 {
+        margin: 0 0 18px;
+        padding-bottom: 16px;
+        border-bottom: 3px solid #087f7a;
+        color: #087f7a;
+        font-size: 26pt;
+        line-height: 1.08;
+      }
+      h2 {
+        margin: 24px 0 8px;
+        padding-top: 12px;
+        border-top: 1px solid #d8e3df;
+        color: #087f7a;
+        font-size: 17pt;
+      }
+      h3 {
+        margin: 18px 0 7px;
+        color: #17211f;
+        font-size: 13pt;
+      }
+      h4 {
+        margin: 14px 0 6px;
+        color: #17211f;
+        font-size: 11.5pt;
+      }
+      p { margin: 7px 0; }
+      ul { margin: 8px 0 12px 20px; padding: 0; }
+      li { margin: 4px 0; }
+      code {
+        padding: 2px 5px;
+        border-radius: 4px;
+        background: #f3f7f4;
+        color: #075f5c;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 9.5pt;
+      }
+      pre {
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+        margin: 12px 0;
+        padding: 12px;
+        border: 1px solid #d8e3df;
+        border-radius: 8px;
+        background: #f3f7f4;
+      }
+      pre code {
+        padding: 0;
+        background: transparent;
+        color: #17211f;
+      }
+      .doc-meta {
+        margin-bottom: 20px;
+        color: #5f6f6b;
+        font-size: 9pt;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="doc-meta">FishiFishi / documento generado desde Markdown</div>
+    <h1>FishiFishi Frontend Prototype</h1>
+<p>Primera interfaz estatica para visualizar FishiFishi como plataforma B2B de pescados y mariscos con foco en pagos asegurados, seguimiento tipo delivery y compradores empresariales.</p>
+<h2>Estructura</h2>
+<pre><code>
+frontend/
+  index.html
+  src/
+    scripts/
+      app.js
+      data.js
+      ui.js
+    styles/
+      base.css
+      components.css
+      layout.css
+      responsive.css
+</code></pre>
+<h2>Principios De Arquitectura</h2>
+<ul>
+<li>Separacion entre datos, renderizado e interaccion.</li>
+<li>CSS dividido por responsabilidad.</li>
+<li>Componentes visuales reutilizables mediante clases.</li>
+<li>Sin dependencias externas para facilitar apertura local.</li>
+<li>Interfaz pensada para evolucionar a React, Vue, Svelte o Next.js.</li>
+</ul>
+<h2>Como Abrir</h2>
+<p>Abrir el archivo <code>index.html</code> directamente en el navegador.</p>
+  </body>
+</html>

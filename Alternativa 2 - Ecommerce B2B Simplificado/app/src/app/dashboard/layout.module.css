@@ -1,0 +1,35 @@
+/* ============================================================
+   FishiFishi B2B — Dashboard Layout
+   ============================================================ */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--color-bg-primary);
+}
+
+.layout__main {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Prevent flex overflow */
+}
+
+.layout__content {
+  flex: 1;
+  padding: var(--space-8);
+  max-width: var(--max-width-content);
+  width: 100%;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@media (max-width: 768px) {
+  .layout__main {
+    margin-left: 0;
+  }
+
+  .layout__content {
+    padding: var(--space-4);
+  }
+}

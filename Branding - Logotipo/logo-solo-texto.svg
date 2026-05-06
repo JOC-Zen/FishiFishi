@@ -1,0 +1,12 @@
+<svg width="1000" height="220" viewBox="0 0 1000 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">FishiFishi logo solo texto</title>
+  <desc id="desc">Version tipografica del logotipo FishiFishi.</desc>
+  <rect width="1000" height="220" fill="#F6FAF7"/>
+  <text x="60" y="118" fill="#14201E" font-family="Arial, Helvetica, sans-serif" font-size="86" font-weight="800" letter-spacing="0">FishiFishi</text>
+  <text x="65" y="166" fill="#5F6F6B" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" letter-spacing="5">B2B SEAFOOD PLATFORM</text>
+  <path d="M840 106C858 74 893 61 929 76C944 83 956 92 966 106C956 120 944 129 929 136C893 151 858 138 840 106Z" fill="#087F7A"/>
+  <path d="M936 106L966 82V130L936 106Z" fill="#087F7A"/>
+  <path d="M936 106C918 138 883 151 847 136C832 129 820 120 810 106C820 92 832 83 847 76C883 61 918 74 936 106Z" fill="#D75F45"/>
+  <path d="M840 106L810 130V82L840 106Z" fill="#D75F45"/>
+</svg>
+
