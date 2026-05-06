@@ -2,30 +2,21 @@
 **/node_modules
 .pnp
 .pnp.js
-**/ .next/
-**/ out/
-**/ build/
 
 # testing
 coverage
 
 # next.js
-.next/
-out/
+**/.next/
+**/out/
 
 # production
-build
+**/build/
+**/dist/
 
 # misc
 .DS_Store
 *.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# local env files
 .env
 .env.local
 .env.development.local
@@ -40,6 +31,7 @@ yarn-error.log*
 next-env.d.ts
 
 # prisma
-/prisma/migrations
-/prisma/dev.db
-/prisma/dev.db-journal
+**/prisma/migrations
+**/prisma/dev.db
+**/prisma/dev.db-journal
+**/generated/
