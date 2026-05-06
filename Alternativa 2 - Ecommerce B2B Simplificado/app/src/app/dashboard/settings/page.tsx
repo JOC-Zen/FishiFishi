@@ -1,11 +1,15 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/shared/lib/auth";
 import TopBar from "@/shared/components/TopBar";
 import styles from "./page.module.css";
+import { redirect } from "next/navigation";
 
 /**
  * Página de Configuración del sistema.
- * Permite editar datos de la empresa, notificaciones y preferencias.
  */
-export default function SettingsPage() {
+export default async function SettingsPage() {
+  const session = await getServerSession(authOptions);
+  if (!session) redirect("/");
   return (
     <>
       <TopBar title="Configuración" breadcrumb={["Dashboard", "Configuración"]} />

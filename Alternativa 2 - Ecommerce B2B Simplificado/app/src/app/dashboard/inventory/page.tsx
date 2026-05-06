@@ -1,5 +1,9 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/shared/lib/auth";
+import prisma from "@/shared/lib/prisma";
 import TopBar from "@/shared/components/TopBar";
 import styles from "./page.module.css";
+import { redirect } from "next/navigation";
 
 /** Datos mock de inventario */
 const mockInventory = [
@@ -20,14 +24,54 @@ function getStockLevel(stock: number, max: number): "healthy" | "warning" | "cri
   return "critical";
 }
 
+const emojiMap: Record<string, string> = {
+  "Salmón": "🐟",
+  "Camarón": "🦐",
+  "Pulpo": "🐙",
+  "Atún": "🐟",
+  "Robalo": "🐠",
+  "Mariscos": "🦪",
+  "Langosta": "🦞",
+};
+
 /**
  * Página de Inventario.
- * Muestra el estado de stock con barras visuales y movimientos de entrada/salida.
  */
-export default function InventoryPage() {
-  const criticalItems = mockInventory.filter((i) => getStockLevel(i.stock, i.maxStock) === "critical").length;
-  const warningItems = mockInventory.filter((i) => getStockLevel(i.stock, i.maxStock) === "warning").length;
-  const totalStock = mockInventory.reduce((s, i) => s + i.stock, 0);
+export default async function InventoryPage() {
+  const session = await getServerSession(authOptions);
+  if (!session) redirect("/");
+
+  let inventory: any[] = [];
+
+  try {
+    const products = await prisma.product.findMany({
+      orderBy: { name: "asc" },
+    });
+
+    inventory = products.map((p: any) => ({
+      id: p.id,
+      name: p.name,
+      sku: p.sku,
+      emoji: emojiMap[p.category] || "🐟",
+      category: p.category,
+      stock: p.stock.toNumber(),
+      maxStock: 100, // Valor por defecto para demo
+      unit: p.unit,
+      inWeek: 0,
+      outWeek: 0,
+      lastUpdate: "Reciente",
+    }));
+  } catch (error) {
+    console.warn("DB not connected for Inventory. Using mock data.");
+    inventory = [
+      { id: "1", name: "Filete de Salmón Premium", sku: "SAL-FIL-001", emoji: "🐟", category: "Salmón", stock: 12, maxStock: 100, unit: "kg", inWeek: 50, outWeek: 38, lastUpdate: "Hace 2h" },
+      { id: "2", name: "Camarón Jumbo (16/20)", sku: "CAM-JUM-002", emoji: "🦐", category: "Camarón", stock: 25, maxStock: 80, unit: "kg", inWeek: 40, outWeek: 55, lastUpdate: "Hace 1h" },
+    ];
+  }
+
+  const criticalItems = inventory.filter((i) => getStockLevel(i.stock, i.maxStock) === "critical").length;
+  const warningItems = inventory.filter((i) => getStockLevel(i.stock, i.maxStock) === "warning").length;
+  const totalStock = inventory.reduce((s, i) => s + i.stock, 0);
 
   return (
     <>
@@ -57,7 +101,7 @@ export default function InventoryPage() {
           <div className={styles["summary-card"]}>
             <span className={styles["summary-card__label"]}>Total en Stock</span>
             <span className={styles["summary-card__value"]}>{totalStock}</span>
-            <span className={styles["summary-card__sub"]}>unidades en {mockInventory.length} productos</span>
+            <span className={styles["summary-card__sub"]}>unidades en {inventory.length} productos</span>
           </div>
           <div className={styles["summary-card"]}>
             <span className={styles["summary-card__label"]}>Stock Crítico</span>
@@ -76,7 +120,7 @@ export default function InventoryPage() {
           <div className={styles["summary-card"]}>
             <span className={styles["summary-card__label"]}>Entradas esta Semana</span>
             <span className={styles["summary-card__value"]} style={{ color: "var(--color-success)" }}>
-              +{mockInventory.reduce((s, i) => s + i.inWeek, 0)}
+              +{inventory.reduce((s: any, i: any) => s + i.inWeek, 0)}
             </span>
             <span className={styles["summary-card__sub"]}>unidades recibidas</span>
           </div>
@@ -117,7 +161,7 @@ export default function InventoryPage() {
               </tr>
             </thead>
             <tbody>
-              {mockInventory.map((item) => {
+              {inventory.map((item) => {
                 const level = getStockLevel(item.stock, item.maxStock);
                 const pct = Math.round((item.stock / item.maxStock) * 100);
 

@@ -1,5 +1,19 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/shared/lib/auth";
+import prisma from "@/shared/lib/prisma";
 import TopBar from "@/shared/components/TopBar";
 import styles from "./page.module.css";
+import { redirect } from "next/navigation";
+
+const emojiMap: Record<string, string> = {
+  "Salmón": "🐟",
+  "Camarón": "🦐",
+  "Pulpo": "🐙",
+  "Atún": "🐟",
+  "Robalo": "🐠",
+  "Mariscos": "🦪",
+  "Langosta": "🦞",
+};
 
 /** Datos mock de precios por producto y tier */
 const mockPricingTable = [
@@ -15,9 +29,35 @@ const mockPricingTable = [
 
 /**
  * Página de Precios B2B.
- * Muestra las 3 tiers de precios y una tabla comparativa por producto.
  */
-export default function PricingPage() {
+export default async function PricingPage() {
+  const session = await getServerSession(authOptions);
+  if (!session) redirect("/");
+
+  let pricingTable: any[] = [];
+
+  try {
+    const products = await prisma.product.findMany();
+
+    pricingTable = products.map((p: any) => {
+      const base = p.basePrice.toNumber();
+      return {
+        name: p.name,
+        sku: p.sku,
+        emoji: emojiMap[p.category] || "🐟",
+        base,
+        gold: base * 0.85,    // 15% discount
+        silver: base * 0.90,  // 10% discount
+        bronze: base * 0.95,  // 5% discount
+      };
+    });
+  } catch (error) {
+    console.warn("DB not connected for Pricing. Using mock data.");
+    pricingTable = [
+      { name: "Filete de Salmón Premium", sku: "SAL-FIL-001", emoji: "🐟", base: 285, gold: 242.25, silver: 256.50, bronze: 270.75 },
+      { name: "Camarón Jumbo (16/20)", sku: "CAM-JUM-002", emoji: "🦐", base: 420, gold: 357.00, silver: 378.00, bronze: 399.00 },
+    ];
+  }
   return (
     <>
       <TopBar title="Precios" breadcrumb={["Dashboard", "Precios"]} />
@@ -101,7 +141,7 @@ export default function PricingPage() {
               </tr>
             </thead>
             <tbody>
-              {mockPricingTable.map((product) => (
+              {pricingTable.map((product) => (
                 <tr key={product.sku}>
                   <td>
                     <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>

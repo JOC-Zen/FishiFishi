@@ -117,8 +117,8 @@ export default async function OrdersPage() {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => {
-                const initials = order.client.name.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
+              {orders.map((order: any) => {
+                const initials = order.client.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase();
                 return (
                   <tr key={order.id}>
                     <td>

@@ -1,5 +1,9 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/shared/lib/auth";
+import prisma from "@/shared/lib/prisma";
 import TopBar from "@/shared/components/TopBar";
 import styles from "./page.module.css";
+import { redirect } from "next/navigation";
 
 /** Datos mock de clientes B2B */
 const mockClients = [
@@ -113,11 +117,50 @@ const tierLabels: Record<number, string> = { 1: "Gold", 2: "Silver", 3: "Bronze"
 
 /**
  * Página de Clientes B2B.
- * Muestra tarjetas de cada cliente con detalles de compras y nivel de pricing.
  */
-export default function ClientsPage() {
-  const activeClients = mockClients.filter((c) => c.status === "active");
-  const pendingClients = mockClients.filter((c) => c.status === "pending");
+export default async function ClientsPage() {
+  const session = await getServerSession(authOptions);
+  if (!session) redirect("/");
+
+  let clients: any[] = [];
+
+  try {
+    const dbUsers = await prisma.user.findMany({
+      where: { role: "CLIENT" },
+      include: {
+        orders: {
+          select: { totalAmount: true, createdAt: true }
+        }
+      },
+      orderBy: { name: "asc" }
+    });
+
+    clients = dbUsers.map((u: any) => ({
+      id: u.id,
+      name: u.name,
+      contact: u.companyName || "N/A",
+      initials: u.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase(),
+      email: u.email,
+      phone: "+52 00 0000 0000",
+      tier: u.tier === "GOLD" ? 1 : u.tier === "SILVER" ? 2 : 3,
+      status: u.status === "ACTIVE" ? "active" : "pending",
+      totalOrders: u.orders.length,
+      totalSpent: u.orders.reduce((sum: number, o: any) => sum + o.totalAmount.toNumber(), 0),
+      lastOrder: u.orders.length > 0 
+        ? new Date(Math.max(...u.orders.map((o: any) => o.createdAt.getTime()))).toLocaleDateString("es-MX")
+        : "—",
+    }));
+  } catch (error) {
+    console.warn("DB not connected for Clients. Using mock data.");
+    clients = [
+      { id: "1", name: "Pescadería del Norte", contact: "Juan Gutiérrez", initials: "PN", email: "juan@pescaderianorte.com", phone: "+52 81 1234 5678", tier: 1, status: "active", totalOrders: 45, totalSpent: 284500, lastOrder: "Hoy" },
+      { id: "2", name: "Restaurante Marea", contact: "Ana López", initials: "RM", email: "ana@restaurantemarea.com", phone: "+52 33 9876 5432", tier: 2, status: "active", totalOrders: 32, totalSpent: 156200, lastOrder: "Hace 2 días" },
+      { id: "3", name: "Distribuidora Costa", contact: "Roberto Díaz", initials: "DC", email: "roberto@distcosta.com", phone: "+52 55 4567 8901", tier: 1, status: "active", totalOrders: 78, totalSpent: 523000, lastOrder: "Ayer" },
+    ];
+  }
+
+  const activeClients = clients.filter((c) => c.status === "active");
+  const pendingClients = clients.filter((c) => c.status === "pending");
 
   return (
     <>
@@ -196,7 +239,7 @@ export default function ClientsPage() {
 
         {/* Client Grid */}
         <div className={styles["clients-grid"]}>
-          {mockClients.map((client) => (
+          {clients.map((client) => (
             <article key={client.id} className={styles["client-card"]}>
               <div className={styles["client-card__header"]}>
                 <div

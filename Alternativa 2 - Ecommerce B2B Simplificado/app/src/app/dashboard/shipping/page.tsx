@@ -1,5 +1,8 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/shared/lib/auth";
 import TopBar from "@/shared/components/TopBar";
 import styles from "./page.module.css";
+import { redirect } from "next/navigation";
 
 const mockShipments = [
   { id: "SHP-1024", orderId: "ORD-2845", client: "Distribuidora Costa", origin: "Almacén Central", destination: "CDMX, Col. Roma", carrier: "FedEx", carrierEmoji: "📦", status: "in_transit", progress: 3, totalSteps: 4, eta: "7 may 2026", etaLabel: "Mañana", weight: "48 kg" },
@@ -16,7 +19,10 @@ const statusMap: Record<string, { label: string; badge: string }> = {
   delivered: { label: "Entregado", badge: "badge badge-success" },
 };
 
-export default function ShippingPage() {
+export default async function ShippingPage() {
+  const session = await getServerSession(authOptions);
+  if (!session) redirect("/");
+
   const inTransit = mockShipments.filter((s) => s.status === "in_transit").length;
   const preparing = mockShipments.filter((s) => s.status === "preparing").length;
   const delivered = mockShipments.filter((s) => s.status === "delivered").length;
