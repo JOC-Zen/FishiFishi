@@ -54,6 +54,34 @@
   gap: var(--space-3);
 }
 
+.topbar__language {
+  display: flex;
+  background: var(--color-bg-tertiary);
+  padding: 2px;
+  border-radius: var(--radius-md);
+  margin-right: var(--space-2);
+}
+
+.topbar__lang-btn {
+  padding: var(--space-1) var(--space-2);
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-tertiary);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.topbar__lang-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.topbar__lang-btn--active {
+  background: var(--color-bg-secondary);
+  color: var(--color-aqua);
+  box-shadow: var(--shadow-sm);
+}
+
 .topbar__search {
   position: relative;
 }

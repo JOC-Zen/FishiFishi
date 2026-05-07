@@ -1,0 +1,63 @@
+{
+  "common": {
+    "search": "Buscar...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "view": "Ver",
+    "loading": "Cargando...",
+    "no_data": "No se encontraron datos",
+    "confirm": "Confirmar",
+    "status": "Estado",
+    "date": "Fecha",
+    "total": "Total",
+    "actions": "Acciones"
+  },
+  "auth": {
+    "sign_in": "Iniciar Sesión",
+    "sign_out": "Cerrar Sesión",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "remember_me": "Recordarme",
+    "forgot_password": "¿Olvidaste tu contraseña?",
+    "no_account": "¿No tienes una cuenta?",
+    "contact_sales": "Contactar ventas",
+    "invalid_credentials": "Credenciales inválidas. Inténtalo de nuevo.",
+    "error": "Ocurrió un error inesperado.",
+    "request_access": "Solicitar acceso como nuevo cliente"
+  },
+  "sidebar": {
+    "dashboard": "Panel",
+    "clients": "Clientes",
+    "inventory": "Inventario",
+    "pricing": "Precios",
+    "shipping": "Envíos",
+    "settings": "Ajustes",
+    "products": "Productos",
+    "catalog": "Catálogo",
+    "orders": "Pedidos",
+    "cart": "Carrito",
+    "account": "Mi Cuenta"
+  },
+  "dashboard": {
+    "welcome": "Bienvenido de nuevo",
+    "metrics": {
+      "revenue": "Ingresos Totales",
+      "orders": "Pedidos Activos",
+      "inventory": "Valor de Stock",
+      "clients": "Clientes Nuevos"
+    },
+    "recent_orders": "Pedidos Recientes",
+    "activity": "Actividad Reciente"
+  },
+  "portal": {
+    "catalog_title": "Catálogo B2B",
+    "catalog_subtitle": "Explora nuestros productos de mariscos premium. Precios exclusivos para mayoristas.",
+    "my_cart": "Mi Carrito",
+    "my_orders": "Mis Pedidos",
+    "my_account": "Mi Cuenta",
+    "add_to_cart": "Agregar al Carrito",
+    "checkout": "Confirmar Pedido"
+  }
+}

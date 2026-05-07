@@ -4,11 +4,13 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
+import { useTranslation } from "@/shared/i18n/I18nProvider";
 
 /**
  * Home Page (Landing + Login) for FishiFishi B2B.
  */
 export default function Home() {
+  const { dict } = useTranslation();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,13 +30,13 @@ export default function Home() {
       });
 
       if (result?.error) {
-        setError("Invalid credentials. Please try again.");
+        setError(dict.auth.invalid_credentials);
       } else {
         router.push("/dashboard");
         router.refresh();
       }
     } catch (err) {
-      setError("An unexpected error occurred.");
+      setError(dict.auth.error);
     } finally {
       setIsLoading(false);
     }
@@ -48,8 +50,7 @@ export default function Home() {
           <div className={styles["landing__logo-icon"]}>🐟</div>
           <h1 className={styles.landing__title}>FishiFishi</h1>
           <p className={styles.landing__subtitle}>
-            Your B2B platform for wholesale orders. Manage inventory,
-            volume pricing, and orders in one place.
+            {dict.portal.catalog_subtitle}
           </p>
         </div>
 
@@ -76,7 +77,7 @@ export default function Home() {
       {/* ---- Right Panel: Login ---- */}
       <aside className={styles["landing__form-panel"]}>
         <div className={styles["landing__form-header"]}>
-          <h2 className={styles["landing__form-title"]}>Sign In</h2>
+          <h2 className={styles["landing__form-title"]}>{dict.auth.sign_in}</h2>
           <p className={styles["landing__form-desc"]}>
             Access your wholesale client account
           </p>
@@ -91,7 +92,7 @@ export default function Home() {
 
           <div className={styles["landing__form-group"]}>
             <label htmlFor="email" className="form-label">
-              Email Address
+              {dict.auth.email}
             </label>
             <input
               id="email"
@@ -107,7 +108,7 @@ export default function Home() {
 
           <div className={styles["landing__form-group"]}>
             <label htmlFor="password" className="form-label">
-              Password
+              {dict.auth.password}
             </label>
             <input
               id="password"
@@ -133,10 +134,10 @@ export default function Home() {
               }}
             >
               <input type="checkbox" id="remember" />
-              Remember me
+              {dict.auth.remember_me}
             </label>
             <a href="#" className={styles["landing__form-link"]}>
-              Forgot your password?
+              {dict.auth.forgot_password}
             </a>
           </div>
 
@@ -145,7 +146,7 @@ export default function Home() {
             className="btn btn-primary btn-lg"
             disabled={isLoading}
           >
-            {isLoading ? "Signing in..." : "Sign In"}
+            {isLoading ? dict.common.loading : dict.auth.sign_in}
           </button>
 
           <div className={styles["landing__form-divider"]}>
@@ -153,7 +154,7 @@ export default function Home() {
           </div>
 
           <button type="button" className="btn btn-secondary">
-            Request access as a new client
+            {dict.auth.request_access}
           </button>
         </form>
 
@@ -161,8 +162,8 @@ export default function Home() {
           className={styles["landing__form-register"]}
           style={{ marginTop: "var(--space-8)" }}
         >
-          Don&apos;t have an account?{" "}
-          <a href="#">Contact sales</a>
+          {dict.auth.no_account}{" "}
+          <a href="#">{dict.auth.contact_sales}</a>
         </p>
       </aside>
     </main>

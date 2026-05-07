@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./layout.module.css";
+import { getDictionary } from "@/shared/i18n/server";
 
 export const metadata: Metadata = {
   title: "Client Portal — FishiFishi B2B",
@@ -11,11 +12,13 @@ export const metadata: Metadata = {
  * B2B Client Portal Layout.
  * Horizontal navigation bar + main content.
  */
-export default function PortalLayout({
+export default async function PortalLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { dict } = await getDictionary();
+
   return (
     <div className={styles.portal}>
       {/* ---- Navbar ---- */}
@@ -28,20 +31,20 @@ export default function PortalLayout({
         <div className={styles.navbar__nav}>
           <Link href="/portal" className={styles.navbar__link} id="nav-catalog">
             <span className={styles["navbar__link-icon"]}>🛍️</span>
-            <span>Catalog</span>
+            <span>{dict.sidebar.catalog}</span>
           </Link>
           <Link href="/portal/orders" className={styles.navbar__link} id="nav-orders">
             <span className={styles["navbar__link-icon"]}>📋</span>
-            <span>My Orders</span>
+            <span>{dict.portal.my_orders}</span>
           </Link>
           <Link href="/portal/cart" className={styles.navbar__link} id="nav-cart">
             <span className={styles["navbar__link-icon"]}>🛒</span>
-            <span>Cart</span>
+            <span>{dict.sidebar.cart}</span>
             <span className={styles.navbar__badge}>3</span>
           </Link>
           <Link href="/portal/account" className={styles.navbar__link} id="nav-account">
             <span className={styles["navbar__link-icon"]}>👤</span>
-            <span>My Account</span>
+            <span>{dict.portal.my_account}</span>
           </Link>
         </div>
 

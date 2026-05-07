@@ -1,0 +1,63 @@
+{
+  "common": {
+    "search": "Search...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View",
+    "loading": "Loading...",
+    "no_data": "No data found",
+    "confirm": "Confirm",
+    "status": "Status",
+    "date": "Date",
+    "total": "Total",
+    "actions": "Actions"
+  },
+  "auth": {
+    "sign_in": "Sign In",
+    "sign_out": "Sign Out",
+    "email": "Email Address",
+    "password": "Password",
+    "remember_me": "Remember me",
+    "forgot_password": "Forgot your password?",
+    "no_account": "Don't have an account?",
+    "contact_sales": "Contact sales",
+    "invalid_credentials": "Invalid credentials. Please try again.",
+    "error": "An unexpected error occurred.",
+    "request_access": "Request access as a new client"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "inventory": "Inventory",
+    "pricing": "Pricing",
+    "shipping": "Shipping",
+    "settings": "Settings",
+    "products": "Products",
+    "catalog": "Catalog",
+    "orders": "Orders",
+    "cart": "Cart",
+    "account": "Account"
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "metrics": {
+      "revenue": "Total Revenue",
+      "orders": "Active Orders",
+      "inventory": "Stock Value",
+      "clients": "New Clients"
+    },
+    "recent_orders": "Recent Orders",
+    "activity": "Recent Activity"
+  },
+  "portal": {
+    "catalog_title": "B2B Catalog",
+    "catalog_subtitle": "Explore our premium seafood products. Exclusive pricing for wholesale clients.",
+    "my_cart": "My Cart",
+    "my_orders": "My Orders",
+    "my_account": "My Account",
+    "add_to_cart": "Add to Cart",
+    "checkout": "Checkout"
+  }
+}

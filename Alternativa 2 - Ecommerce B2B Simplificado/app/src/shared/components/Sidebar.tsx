@@ -3,56 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Sidebar.module.css";
-
-/**
- * Navigation item definition for the sidebar.
- * Each item has an icon (emoji for now, replaceable with SVG),
- * a label, a route, and an optional badge with a counter.
- */
-interface NavItem {
-  icon: string;
-  label: string;
-  href: string;
-  badge?: number;
-}
-
-interface NavSection {
-  title: string;
-  items: NavItem[];
-}
-
-const navigation: NavSection[] = [
-  {
-    title: "General",
-    items: [
-      { icon: "📊", label: "Dashboard", href: "/dashboard" },
-      { icon: "📦", label: "Products", href: "/dashboard/products" },
-      { icon: "🛒", label: "Orders", href: "/dashboard/orders", badge: 3 },
-      { icon: "👥", label: "Clients", href: "/dashboard/clients" },
-    ],
-  },
-  {
-    title: "Management",
-    items: [
-      { icon: "📋", label: "Inventory", href: "/dashboard/inventory" },
-      { icon: "💰", label: "Pricing", href: "/dashboard/pricing" },
-      { icon: "🚚", label: "Shipping", href: "/dashboard/shipping" },
-    ],
-  },
-  {
-    title: "System",
-    items: [
-      { icon: "⚙️", label: "Settings", href: "/dashboard/settings" },
-    ],
-  },
-];
-
 import { useSession, signOut } from "next-auth/react";
 
 /**
  * Sidebar — Main lateral navigation component.
  */
-export default function Sidebar() {
+export default function Sidebar({ dict }: { dict: any }) {
   const pathname = usePathname();
   const { data: session } = useSession();
 
@@ -65,6 +21,32 @@ export default function Sidebar() {
         .toUpperCase()
         .slice(0, 2)
     : "??";
+
+  const navigation = [
+    {
+      title: "General",
+      items: [
+        { icon: "📊", label: dict.sidebar.dashboard, href: "/dashboard" },
+        { icon: "📦", label: dict.sidebar.products, href: "/dashboard/products" },
+        { icon: "🛒", label: dict.sidebar.orders, href: "/dashboard/orders", badge: 3 },
+        { icon: "👥", label: dict.sidebar.clients, href: "/dashboard/clients" },
+      ],
+    },
+    {
+      title: "Management",
+      items: [
+        { icon: "📋", label: dict.sidebar.inventory, href: "/dashboard/inventory" },
+        { icon: "💰", label: dict.sidebar.pricing, href: "/dashboard/pricing" },
+        { icon: "🚚", label: dict.sidebar.shipping, href: "/dashboard/shipping" },
+      ],
+    },
+    {
+      title: "System",
+      items: [
+        { icon: "⚙️", label: dict.sidebar.settings, href: "/dashboard/settings" },
+      ],
+    },
+  ];
 
   return (
     <aside className={styles.sidebar}>
@@ -117,7 +99,7 @@ export default function Sidebar() {
           <div className={styles.sidebar__avatar}>{initials}</div>
           <div className={styles["sidebar__user-info"]}>
             <span className={styles["sidebar__user-name"]}>
-              {user?.name || "Loading..."}
+              {user?.name || dict.common.loading}
             </span>
             <span className={styles["sidebar__user-role"]}>
               {user?.role === "ADMIN" ? "Administrator" : "B2B Client"}
@@ -129,7 +111,7 @@ export default function Sidebar() {
           onClick={() => signOut({ callbackUrl: "/" })}
           style={{ marginTop: "var(--space-3)", width: "100%", justifyContent: "flex-start", paddingLeft: "var(--space-1)" }}
         >
-          🚪 Sign Out
+          🚪 {dict.auth.sign_out}
         </button>
       </div>
     </aside>
