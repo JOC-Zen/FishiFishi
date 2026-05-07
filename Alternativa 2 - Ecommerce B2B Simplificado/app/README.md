@@ -1,34 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🐟 FishiFishi B2B — Premium Seafood Ecommerce
 
-## Getting Started
+FishiFishi B2B is a state-of-the-art ecommerce platform designed specifically for the seafood wholesale industry. Built with a focus on high-performance, resilience, and a premium "Deep Ocean" aesthetic.
 
-First, run the development server:
+## 🚀 Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Dynamic Dashboard**: Real-time insights into orders, inventory, and client activity.
+- **Smart Catalog**: B2B product management with category-specific mapping and tiered pricing.
+- **Resilient Architecture**: Automatic fallback to local mock data if the database connection is interrupted.
+- **Secure Authentication**: NextAuth.js integration with JWT-based sessions and role-based access control.
+- **Professional Logistics**: Real-time shipment tracking and inventory level alerts.
+
+## 🛠️ Technology Stack
+
+- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **ORM**: [Prisma v7](https://www.prisma.io/) with PostgreSQL Driver Adapter
+- **Authentication**: [NextAuth.js](https://next-auth.js.org/)
+- **State Management**: [Zustand](https://zustand-demo.pmnd.rs/)
+- **Styling**: Vanilla CSS Modules (Zero-dependency, high performance)
+
+## 📁 Project Structure
+
+```text
+src/
+├── app/              # Routes, Layouts and Server Components
+├── core/             # Core business logic and providers
+├── features/         # Module-specific logic (Orders, Products, etc.)
+├── shared/           # Reusable components, hooks, and libraries
+│   ├── components/   # UI System components
+│   └── lib/          # Utilities (Prisma client, Auth options)
+└── types/            # Global TypeScript definitions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚙️ Deployment & Configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
+- Node.js 20+
+- PostgreSQL (Optional, fallback data included)
 
-## Learn More
+### Environment Variables
+Create a `.env` file in the root:
+```bash
+DATABASE_URL="postgresql://user:password@localhost:5432/fishifishi"
+NEXTAUTH_SECRET="your-secret-here"
+NEXTAUTH_URL="http://localhost:3000"
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Installation
+```bash
+npm install
+npx prisma generate
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛡️ Resilience & Demo Mode
+The application includes a **Database Fallback Mechanism**. If `DATABASE_URL` is not provided or unreachable, the system will automatically serve pre-configured mock data for:
+- Product Catalog
+- Order History
+- Client Database
+- Inventory Levels
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This ensures the UI can be showcased and explored even without a live backend environment.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Built with ❤️ for FishiFishi by Antigravity.*

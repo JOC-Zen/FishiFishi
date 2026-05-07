@@ -1,6 +1,6 @@
 /**
- * Barrel export para utilidades compartidas.
- * Permite importar cualquier utilidad desde '@/shared/utils'.
+ * Barrel export for shared utilities.
+ * Allows importing any utility from '@/shared/utils'.
  */
 
 export { formatCurrency, formatNumber, calculateDiscount } from "./formatCurrency";

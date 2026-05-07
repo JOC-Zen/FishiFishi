@@ -2,10 +2,10 @@ import { withAuth } from "next-auth/middleware";
 
 export default withAuth({
   pages: {
-    signIn: "/", // Redirigir a la landing (donde está el login) si no está autenticado
+    signIn: "/", // Redirect to landing (with login form) if not authenticated
   },
 });
 
 export const config = {
-  matcher: ["/dashboard/:path*"],
+  matcher: ["/dashboard/:path*", "/portal/:path*"],
 };

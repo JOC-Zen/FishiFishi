@@ -5,9 +5,9 @@ import { usePathname } from "next/navigation";
 import styles from "./Sidebar.module.css";
 
 /**
- * Definición de los items de navegación del sidebar.
- * Cada item tiene un icono (emoji por ahora, reemplazable por SVG),
- * una etiqueta, una ruta, y opcionalmente un badge con contador.
+ * Navigation item definition for the sidebar.
+ * Each item has an icon (emoji for now, replaceable with SVG),
+ * a label, a route, and an optional badge with a counter.
  */
 interface NavItem {
   icon: string;
@@ -26,23 +26,23 @@ const navigation: NavSection[] = [
     title: "General",
     items: [
       { icon: "📊", label: "Dashboard", href: "/dashboard" },
-      { icon: "📦", label: "Productos", href: "/dashboard/products" },
-      { icon: "🛒", label: "Pedidos", href: "/dashboard/orders", badge: 3 },
-      { icon: "👥", label: "Clientes", href: "/dashboard/clients" },
+      { icon: "📦", label: "Products", href: "/dashboard/products" },
+      { icon: "🛒", label: "Orders", href: "/dashboard/orders", badge: 3 },
+      { icon: "👥", label: "Clients", href: "/dashboard/clients" },
     ],
   },
   {
-    title: "Gestión",
+    title: "Management",
     items: [
-      { icon: "📋", label: "Inventario", href: "/dashboard/inventory" },
-      { icon: "💰", label: "Precios", href: "/dashboard/pricing" },
-      { icon: "🚚", label: "Envíos", href: "/dashboard/shipping" },
+      { icon: "📋", label: "Inventory", href: "/dashboard/inventory" },
+      { icon: "💰", label: "Pricing", href: "/dashboard/pricing" },
+      { icon: "🚚", label: "Shipping", href: "/dashboard/shipping" },
     ],
   },
   {
-    title: "Sistema",
+    title: "System",
     items: [
-      { icon: "⚙️", label: "Configuración", href: "/dashboard/settings" },
+      { icon: "⚙️", label: "Settings", href: "/dashboard/settings" },
     ],
   },
 ];
@@ -50,7 +50,7 @@ const navigation: NavSection[] = [
 import { useSession, signOut } from "next-auth/react";
 
 /**
- * Sidebar — Componente de navegación lateral principal.
+ * Sidebar — Main lateral navigation component.
  */
 export default function Sidebar() {
   const pathname = usePathname();
@@ -117,10 +117,10 @@ export default function Sidebar() {
           <div className={styles.sidebar__avatar}>{initials}</div>
           <div className={styles["sidebar__user-info"]}>
             <span className={styles["sidebar__user-name"]}>
-              {user?.name || "Cargando..."}
+              {user?.name || "Loading..."}
             </span>
             <span className={styles["sidebar__user-role"]}>
-              {user?.role === "ADMIN" ? "Administrador" : "Cliente B2B"}
+              {user?.role === "ADMIN" ? "Administrator" : "B2B Client"}
             </span>
           </div>
         </div>
@@ -129,7 +129,7 @@ export default function Sidebar() {
           onClick={() => signOut({ callbackUrl: "/" })}
           style={{ marginTop: "var(--space-3)", width: "100%", justifyContent: "flex-start", paddingLeft: "var(--space-1)" }}
         >
-          🚪 Cerrar sesión
+          🚪 Sign Out
         </button>
       </div>
     </aside>

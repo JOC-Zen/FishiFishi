@@ -1,19 +1,19 @@
 /**
- * Utilidades para formateo de moneda y números.
- * Todas las funciones son puras (sin efectos secundarios).
+ * Currency and number formatting utilities.
+ * All functions are pure (no side effects).
  */
 
 /**
- * Formatea un número como moneda (USD por defecto).
- * @param amount - Cantidad numérica a formatear.
- * @param currency - Código ISO de la moneda (default: "USD").
- * @param locale - Locale para el formato (default: "es-MX").
- * @returns String formateado, ej: "$1,234.56"
+ * Formats a number as currency (USD by default).
+ * @param amount - Numeric amount to format.
+ * @param currency - ISO currency code (default: "USD").
+ * @param locale - Formatting locale (default: "en-US").
+ * @returns Formatted string, e.g. "$1,234.56"
  */
 export function formatCurrency(
   amount: number,
   currency: string = "USD",
-  locale: string = "es-MX"
+  locale: string = "en-US"
 ): string {
   return new Intl.NumberFormat(locale, {
     style: "currency",
@@ -24,20 +24,20 @@ export function formatCurrency(
 }
 
 /**
- * Formatea un número con separadores de miles.
- * @param value - Número a formatear.
- * @param locale - Locale para el formato.
- * @returns String formateado, ej: "1,234"
+ * Formats a number with thousands separators.
+ * @param value - Number to format.
+ * @param locale - Formatting locale.
+ * @returns Formatted string, e.g. "1,234"
  */
-export function formatNumber(value: number, locale: string = "es-MX"): string {
+export function formatNumber(value: number, locale: string = "en-US"): string {
   return new Intl.NumberFormat(locale).format(value);
 }
 
 /**
- * Calcula el porcentaje de descuento entre dos precios.
- * @param originalPrice - Precio original.
- * @param discountedPrice - Precio con descuento.
- * @returns Porcentaje de descuento redondeado.
+ * Calculates the discount percentage between two prices.
+ * @param originalPrice - Original price.
+ * @param discountedPrice - Price after discount.
+ * @returns Rounded discount percentage.
  */
 export function calculateDiscount(originalPrice: number, discountedPrice: number): number {
   if (originalPrice <= 0) return 0;

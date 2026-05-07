@@ -1,7 +1,7 @@
 /**
- * Errores de dominio personalizados para FishiFishi B2B.
- * Estos errores son agnósticos al framework y se usan
- * tanto en servicios como en API routes.
+ * Custom domain errors for FishiFishi B2B.
+ * These errors are framework-agnostic and are used
+ * in both services and API routes.
  */
 
 export class AppError extends Error {
@@ -19,8 +19,8 @@ export class AppError extends Error {
 export class NotFoundError extends AppError {
   constructor(resource: string, id?: string) {
     const message = id
-      ? `${resource} con ID "${id}" no fue encontrado.`
-      : `${resource} no encontrado.`;
+      ? `${resource} with ID "${id}" was not found.`
+      : `${resource} not found.`;
     super(message, 404);
   }
 }
@@ -35,13 +35,13 @@ export class ValidationError extends AppError {
 }
 
 export class UnauthorizedError extends AppError {
-  constructor(message: string = "No tienes autorización para esta acción.") {
+  constructor(message: string = "You are not authorized to perform this action.") {
     super(message, 401);
   }
 }
 
 export class ForbiddenError extends AppError {
-  constructor(message: string = "No tienes permisos suficientes.") {
+  constructor(message: string = "You do not have sufficient permissions.") {
     super(message, 403);
   }
 }

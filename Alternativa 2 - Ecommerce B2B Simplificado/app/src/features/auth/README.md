@@ -1,17 +1,17 @@
 # Feature: Auth
 
-Módulo responsable de la autenticación y autorización B2B.
+Module responsible for B2B authentication and authorization.
 
-## Responsabilidades
+## Responsibilities
 - Login / Logout
-- Registro de nuevos clientes (con aprobación manual)
-- Gestión de sesiones (JWT)
-- Protección de rutas
+- New client registration (with manual approval)
+- Session management (JWT)
+- Route protection
 - Roles: `admin`, `client`
 
-## Estructura
+## Structure
 ```
 auth/
-├── components/  → Componentes UI (LoginForm, RegisterForm, etc.)
-└── services/    → Lógica de autenticación y manejo de tokens
+├── components/  → UI Components (LoginForm, RegisterForm, etc.)
+└── services/    → Authentication logic and token handling
 ```

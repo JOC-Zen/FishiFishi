@@ -1,78 +1,48 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/shared/lib/auth";
-import prisma from "@/shared/lib/prisma";
+import { AuthService } from "@/features/auth/services/AuthService";
+import { ProductService } from "@/features/products/services/ProductService";
 import TopBar from "@/shared/components/TopBar";
 import styles from "./page.module.css";
-import { redirect } from "next/navigation";
 
 const emojiMap: Record<string, string> = {
-  "Salmón": "🐟",
-  "Camarón": "🦐",
-  "Pulpo": "🐙",
-  "Atún": "🐟",
-  "Robalo": "🐠",
-  "Mariscos": "🦪",
-  "Langosta": "🦞",
+  "Salmon": "🐟", "Shrimp": "🦐", "Octopus": "🐙", "Tuna": "🐟",
+  "Sea Bass": "🐠", "Shellfish": "🦪", "Lobster": "🦞",
 };
 
-/** Datos mock de precios por producto y tier */
-const mockPricingTable = [
-  { name: "Filete de Salmón Premium", sku: "SAL-FIL-001", emoji: "🐟", base: 285, gold: 242.25, silver: 256.50, bronze: 270.75 },
-  { name: "Camarón Jumbo (16/20)", sku: "CAM-JUM-002", emoji: "🦐", base: 420, gold: 357.00, silver: 378.00, bronze: 399.00 },
-  { name: "Pulpo Fresco Entero", sku: "PUL-FRE-001", emoji: "🐙", base: 350, gold: 297.50, silver: 315.00, bronze: 332.50 },
-  { name: "Atún Aleta Amarilla", sku: "ATU-ALE-001", emoji: "🐟", base: 520, gold: 442.00, silver: 468.00, bronze: 494.00 },
-  { name: "Filete de Robalo", sku: "ROB-FIL-001", emoji: "🐠", base: 310, gold: 263.50, silver: 279.00, bronze: 294.50 },
-  { name: "Ostión Fresco", sku: "OST-FRE-001", emoji: "🦪", base: 180, gold: 153.00, silver: 162.00, bronze: 171.00 },
-  { name: "Almeja Chocolata", sku: "ALM-FRE-001", emoji: "🐚", base: 220, gold: 187.00, silver: 198.00, bronze: 209.00 },
-  { name: "Langosta de Cola", sku: "LAN-COL-001", emoji: "🦞", base: 890, gold: 756.50, silver: 801.00, bronze: 845.50 },
-];
-
 /**
- * Página de Precios B2B.
+ * B2B Pricing Page.
  */
 export default async function PricingPage() {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/");
+  await AuthService.requireRole("ADMIN");
+  const products = await ProductService.getAllProducts();
 
-  let pricingTable: any[] = [];
+  const pricingTable = products.map((p) => {
+    const base = p.basePrice;
+    return {
+      name: p.name,
+      sku: p.sku,
+      emoji: emojiMap[p.category] || "🐟",
+      base,
+      gold: base * 0.85,
+      silver: base * 0.90,
+      bronze: base * 0.95,
+    };
+  });
 
-  try {
-    const products = await prisma.product.findMany();
-
-    pricingTable = products.map((p: any) => {
-      const base = p.basePrice.toNumber();
-      return {
-        name: p.name,
-        sku: p.sku,
-        emoji: emojiMap[p.category] || "🐟",
-        base,
-        gold: base * 0.85,    // 15% discount
-        silver: base * 0.90,  // 10% discount
-        bronze: base * 0.95,  // 5% discount
-      };
-    });
-  } catch (error) {
-    console.warn("DB not connected for Pricing. Using mock data.");
-    pricingTable = [
-      { name: "Filete de Salmón Premium", sku: "SAL-FIL-001", emoji: "🐟", base: 285, gold: 242.25, silver: 256.50, bronze: 270.75 },
-      { name: "Camarón Jumbo (16/20)", sku: "CAM-JUM-002", emoji: "🦐", base: 420, gold: 357.00, silver: 378.00, bronze: 399.00 },
-    ];
-  }
   return (
     <>
-      <TopBar title="Precios" breadcrumb={["Dashboard", "Precios"]} />
+      <TopBar title="Pricing" breadcrumb={["Dashboard", "Pricing"]} />
 
       <div style={{ padding: "var(--space-8)" }}>
         {/* Header */}
         <div className={styles["page-header"]}>
           <div className={styles["page-header__left"]}>
-            <h1 className={styles["page-title"]}>Precios por Volumen</h1>
+            <h1 className={styles["page-title"]}>Volume Pricing</h1>
             <p className={styles["page-subtitle"]}>
-              Configura los niveles de descuento para tus clientes mayoristas
+              Configure discount tiers for your wholesale clients
             </p>
           </div>
           <button className="btn btn-primary" id="edit-pricing-btn">
-            ✏️ Editar Precios
+            ✏️ Edit Pricing
           </button>
         </div>
 
@@ -83,13 +53,13 @@ export default async function PricingPage() {
             name="Gold"
             icon="🏆"
             discount="15%"
-            description="Para clientes con más de 50 pedidos o compras superiores a $300,000 anuales."
+            description="For clients with 50+ orders or annual purchases exceeding $300,000."
             features={[
-              "Descuento del 15% sobre precio base",
-              "Prioridad en entregas",
-              "Crédito a 30 días",
-              "Ejecutivo de cuenta dedicado",
-              "Acceso anticipado a nuevos productos",
+              "15% discount on base price",
+              "Priority shipping",
+              "Net 30 payment terms",
+              "Dedicated account manager",
+              "Early access to new products",
             ]}
             clientCount={3}
           />
@@ -98,12 +68,12 @@ export default async function PricingPage() {
             name="Silver"
             icon="🥈"
             discount="10%"
-            description="Para clientes con más de 20 pedidos o compras superiores a $100,000 anuales."
+            description="For clients with 20+ orders or annual purchases exceeding $100,000."
             features={[
-              "Descuento del 10% sobre precio base",
-              "Envío gratuito en pedidos +$5,000",
-              "Crédito a 15 días",
-              "Soporte prioritario",
+              "10% discount on base price",
+              "Free shipping on orders $5,000+",
+              "Net 15 payment terms",
+              "Priority support",
             ]}
             clientCount={3}
           />
@@ -112,12 +82,12 @@ export default async function PricingPage() {
             name="Bronze"
             icon="🥉"
             discount="5%"
-            description="Para nuevos clientes verificados que están empezando su relación comercial."
+            description="For newly verified clients starting their business relationship."
             features={[
-              "Descuento del 5% sobre precio base",
-              "Envío gratuito en pedidos +$10,000",
-              "Pago contra entrega",
-              "Soporte estándar",
+              "5% discount on base price",
+              "Free shipping on orders $10,000+",
+              "Cash on delivery",
+              "Standard support",
             ]}
             clientCount={2}
           />
@@ -127,14 +97,14 @@ export default async function PricingPage() {
         <div className={styles["pricing-table-section"]}>
           <div className={styles["pricing-table-header"]}>
             <h2 className={styles["pricing-table-title"]}>
-              Tabla Comparativa de Precios por Producto
+              Comparative Price Table by Product
             </h2>
           </div>
           <table className={styles["pricing-table"]}>
             <thead>
               <tr>
-                <th>Producto</th>
-                <th>Precio Base</th>
+                <th>Product</th>
+                <th>Base Price</th>
                 <th>🏆 Gold (-15%)</th>
                 <th>🥈 Silver (-10%)</th>
                 <th>🥉 Bronze (-5%)</th>
@@ -189,21 +159,10 @@ export default async function PricingPage() {
 }
 
 function TierCard({
-  tier,
-  name,
-  icon,
-  discount,
-  description,
-  features,
-  clientCount,
+  tier, name, icon, discount, description, features, clientCount,
 }: {
-  tier: string;
-  name: string;
-  icon: string;
-  discount: string;
-  description: string;
-  features: string[];
-  clientCount: number;
+  tier: string; name: string; icon: string; discount: string;
+  description: string; features: string[]; clientCount: number;
 }) {
   return (
     <div className={`${styles["tier-card"]} ${styles[`tier-card--${tier}`]}`}>
@@ -211,7 +170,7 @@ function TierCard({
       <h3 className={styles["tier-card__name"]}>{name}</h3>
       <p className={styles["tier-card__desc"]}>{description}</p>
       <div className={styles["tier-card__discount"]}>{discount}</div>
-      <p className={styles["tier-card__discount-label"]}>descuento sobre precio base</p>
+      <p className={styles["tier-card__discount-label"]}>discount on base price</p>
       <div className={styles["tier-card__features"]}>
         {features.map((f) => (
           <div key={f} className={styles["tier-card__feature"]}>
@@ -221,7 +180,7 @@ function TierCard({
         ))}
       </div>
       <div className={styles["tier-card__clients"]}>
-        <strong>{clientCount}</strong> clientes en este nivel
+        <strong>{clientCount}</strong> clients at this tier
       </div>
     </div>
   );

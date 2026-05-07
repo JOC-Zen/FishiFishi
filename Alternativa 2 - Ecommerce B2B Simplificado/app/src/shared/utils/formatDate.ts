@@ -1,17 +1,17 @@
 /**
- * Utilidades para formateo de fechas.
- * Todas las funciones son puras (sin efectos secundarios).
+ * Date formatting utilities.
+ * All functions are pure (no side effects).
  */
 
 /**
- * Formatea una fecha en formato legible.
- * @param date - Fecha a formatear (Date, string o number).
- * @param locale - Locale para el formato (default: "es-MX").
- * @returns String formateado, ej: "6 de mayo de 2026"
+ * Formats a date in a human-readable format.
+ * @param date - Date to format (Date, string, or number).
+ * @param locale - Formatting locale (default: "en-US").
+ * @returns Formatted string, e.g. "May 6, 2026"
  */
 export function formatDate(
   date: Date | string | number,
-  locale: string = "es-MX"
+  locale: string = "en-US"
 ): string {
   return new Intl.DateTimeFormat(locale, {
     day: "numeric",
@@ -21,14 +21,14 @@ export function formatDate(
 }
 
 /**
- * Formatea una fecha con hora.
- * @param date - Fecha a formatear.
- * @param locale - Locale para el formato.
- * @returns String formateado, ej: "6 may 2026, 10:30 a.m."
+ * Formats a date with time.
+ * @param date - Date to format.
+ * @param locale - Formatting locale.
+ * @returns Formatted string, e.g. "May 6, 2026, 10:30 AM"
  */
 export function formatDateTime(
   date: Date | string | number,
-  locale: string = "es-MX"
+  locale: string = "en-US"
 ): string {
   return new Intl.DateTimeFormat(locale, {
     day: "numeric",
@@ -40,9 +40,9 @@ export function formatDateTime(
 }
 
 /**
- * Devuelve hace cuánto tiempo ocurrió una fecha.
- * @param date - Fecha de referencia.
- * @returns String relativo, ej: "hace 3 días"
+ * Returns a relative time string for how long ago a date occurred.
+ * @param date - Reference date.
+ * @returns Relative string, e.g. "3 days ago"
  */
 export function timeAgo(date: Date | string | number): string {
   const now = Date.now();
@@ -53,9 +53,9 @@ export function timeAgo(date: Date | string | number): string {
   const diffHour = Math.floor(diffMin / 60);
   const diffDay = Math.floor(diffHour / 24);
 
-  if (diffSec < 60) return "hace un momento";
-  if (diffMin < 60) return `hace ${diffMin} min`;
-  if (diffHour < 24) return `hace ${diffHour}h`;
-  if (diffDay < 7) return `hace ${diffDay}d`;
+  if (diffSec < 60) return "just now";
+  if (diffMin < 60) return `${diffMin}m ago`;
+  if (diffHour < 24) return `${diffHour}h ago`;
+  if (diffDay < 7) return `${diffDay}d ago`;
   return formatDate(date);
 }

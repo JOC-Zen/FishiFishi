@@ -1,18 +1,18 @@
 # Feature: Users
 
-Módulo responsable de la gestión de perfiles de usuarios/clientes B2B.
+Module responsible for managing B2B user/client profiles.
 
-## Responsabilidades
-- Perfil de empresa/cliente
-- Gestión de direcciones de envío
-- Nivel de cliente (tier) y descuentos asociados
-- Administración de usuarios (admin)
+## Responsibilities
+- Company/client profile
+- Shipping address management
+- Client tiers and associated discounts
+- User administration (admin)
 
-## Estructura
+## Structure
 ```
 users/
-├── components/  → Componentes UI (UserProfile, AddressForm, etc.)
-├── services/    → Lógica de negocio y llamadas a API
-├── store/       → Estado global del módulo
-└── styles/      → CSS Modules para los componentes de este módulo
+├── components/  → UI Components (UserProfile, AddressForm, etc.)
+├── services/    → Business logic and API calls
+├── store/       → Global module state
+└── styles/      → CSS Modules for components in this module
 ```

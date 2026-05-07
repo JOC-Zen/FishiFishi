@@ -1,0 +1,65 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import styles from "./layout.module.css";
+
+export const metadata: Metadata = {
+  title: "Client Portal — FishiFishi B2B",
+  description: "B2B shopping portal for FishiFishi wholesale clients.",
+};
+
+/**
+ * B2B Client Portal Layout.
+ * Horizontal navigation bar + main content.
+ */
+export default function PortalLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className={styles.portal}>
+      {/* ---- Navbar ---- */}
+      <nav className={styles.navbar}>
+        <Link href="/portal" className={styles.navbar__brand}>
+          <div className={styles.navbar__logo}>🐟</div>
+          <span className={styles.navbar__title}>FishiFishi</span>
+        </Link>
+
+        <div className={styles.navbar__nav}>
+          <Link href="/portal" className={styles.navbar__link} id="nav-catalog">
+            <span className={styles["navbar__link-icon"]}>🛍️</span>
+            <span>Catalog</span>
+          </Link>
+          <Link href="/portal/orders" className={styles.navbar__link} id="nav-orders">
+            <span className={styles["navbar__link-icon"]}>📋</span>
+            <span>My Orders</span>
+          </Link>
+          <Link href="/portal/cart" className={styles.navbar__link} id="nav-cart">
+            <span className={styles["navbar__link-icon"]}>🛒</span>
+            <span>Cart</span>
+            <span className={styles.navbar__badge}>3</span>
+          </Link>
+          <Link href="/portal/account" className={styles.navbar__link} id="nav-account">
+            <span className={styles["navbar__link-icon"]}>👤</span>
+            <span>My Account</span>
+          </Link>
+        </div>
+
+        <div className={styles.navbar__right}>
+          <div className={styles.navbar__user}>
+            <div className={styles.navbar__avatar}>JG</div>
+            <div>
+              <div className={styles.navbar__username}>Juan Gutierrez</div>
+              <div className={styles.navbar__tier}>⭐ Gold</div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* ---- Content ---- */}
+      <main className={styles.portal__content}>
+        {children}
+      </main>
+    </div>
+  );
+}

@@ -4,12 +4,12 @@ import styles from "./TopBar.module.css";
 
 interface TopBarProps {
   title: string;
-  /** Breadcrumb segments, e.g. ["Dashboard", "Productos"] */
+  /** Breadcrumb segments, e.g. ["Dashboard", "Products"] */
   breadcrumb?: string[];
 }
 
 /**
- * TopBar — Barra superior del dashboard con búsqueda y notificaciones.
+ * TopBar — Dashboard top bar with search and notifications.
  */
 export default function TopBar({ title, breadcrumb }: TopBarProps) {
   return (
@@ -36,7 +36,7 @@ export default function TopBar({ title, breadcrumb }: TopBarProps) {
           <input
             type="search"
             className={styles["topbar__search-input"]}
-            placeholder="Buscar productos, pedidos..."
+            placeholder="Search products, orders..."
             id="global-search"
           />
         </div>
@@ -44,7 +44,7 @@ export default function TopBar({ title, breadcrumb }: TopBarProps) {
         {/* Notifications */}
         <button
           className={styles["topbar__icon-btn"]}
-          aria-label="Notificaciones"
+          aria-label="Notifications"
           id="notifications-btn"
         >
           🔔
@@ -54,7 +54,7 @@ export default function TopBar({ title, breadcrumb }: TopBarProps) {
         {/* Help */}
         <button
           className={styles["topbar__icon-btn"]}
-          aria-label="Ayuda"
+          aria-label="Help"
           id="help-btn"
         >
           ❓

@@ -4,13 +4,13 @@ import styles from "./layout.module.css";
 
 export const metadata: Metadata = {
   title: "Dashboard — FishiFishi B2B",
-  description: "Panel de control de la plataforma B2B FishiFishi.",
+  description: "FishiFishi B2B platform control panel.",
 };
 
 /**
- * Layout del Dashboard.
- * Envuelve todas las páginas dentro de /dashboard con
- * la barra lateral y la estructura principal.
+ * Dashboard Layout.
+ * Wraps all pages within /dashboard with
+ * the sidebar and main content structure.
  */
 export default function DashboardLayout({
   children,

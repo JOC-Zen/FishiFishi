@@ -1,18 +1,18 @@
 # Feature: Products
 
-Módulo responsable de toda la lógica relacionada con el catálogo de productos B2B.
+Module responsible for all logic related to the B2B product catalog.
 
-## Responsabilidades
-- Listado y búsqueda de productos
-- Detalle de producto con precios escalonados por volumen
-- Gestión de inventario (admin)
-- Categorización y filtrado
+## Responsibilities
+- Product listing and search
+- Product details with tiered volume pricing
+- Inventory management (admin)
+- Categorization and filtering
 
-## Estructura
+## Structure
 ```
 products/
-├── components/  → Componentes UI específicos (ProductCard, ProductGrid, etc.)
-├── services/    → Lógica de negocio y llamadas a API
-├── store/       → Estado global del módulo (Zustand slice)
-└── styles/      → CSS Modules para los componentes de este módulo
+├── components/  → Specific UI Components (ProductCard, ProductGrid, etc.)
+├── services/    → Business logic and API calls
+├── store/       → Global module state (Zustand slice)
+└── styles/      → CSS Modules for components in this module
 ```

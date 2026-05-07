@@ -6,7 +6,7 @@ import styles from "./page.module.css";
 import { redirect } from "next/navigation";
 
 /**
- * Dashboard Home — Página principal del panel B2B.
+ * Dashboard Home — Main B2B panel page.
  */
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -23,7 +23,6 @@ export default async function DashboardPage() {
   let totalRevenue = 248530;
 
   try {
-    // Attempt to fetch from real DB
     const [dbOrdersCount, dbProductsCount, dbClientsCount, dbRecentOrders, dbRevenue] = await Promise.all([
       prisma.order.count(),
       prisma.product.count({ where: { status: "ACTIVE" } }),
@@ -45,10 +44,9 @@ export default async function DashboardPage() {
     totalRevenue = dbRevenue._sum.totalAmount?.toNumber() || 0;
   } catch (error) {
     console.warn("Database not connected. Using mock data for demo.");
-    // Mock recent orders if DB fails
     recentOrders = [
-      { orderNumber: 2847, client: { name: "Pescadería del Norte", companyName: "Juan Gutiérrez" }, totalAmount: 12450, status: "CONFIRMED", createdAt: new Date() },
-      { orderNumber: 2846, client: { name: "Restaurante Marea", companyName: "Ana López" }, totalAmount: 8230, status: "PROCESSING", createdAt: new Date() },
+      { orderNumber: 2847, client: { name: "Northern Fishery", companyName: "Juan Gutierrez" }, totalAmount: 12450, status: "CONFIRMED", createdAt: new Date() },
+      { orderNumber: 2846, client: { name: "Marea Restaurant", companyName: "Ana Lopez" }, totalAmount: 8230, status: "PROCESSING", createdAt: new Date() },
     ];
   }
 
@@ -58,13 +56,13 @@ export default async function DashboardPage() {
 
       <div className={styles.header} style={{ padding: "var(--space-8)", paddingBottom: 0 }}>
         <div className={styles.header__greeting}>
-          <h1 className={styles.header__title}>¡Hola, {session?.user?.name || "Usuario"}! 👋</h1>
+          <h1 className={styles.header__title}>Hello, {session?.user?.name || "User"}! 👋</h1>
           <p className={styles.header__subtitle}>
-            Aquí tienes un resumen de tu actividad B2B
+            Here is a summary of your B2B activity
           </p>
         </div>
         <div className={styles.header__date}>
-          {new Date().toLocaleDateString("es-MX", {
+          {new Date().toLocaleDateString("en-US", {
             weekday: "long",
             year: "numeric",
             month: "long",
@@ -74,11 +72,11 @@ export default async function DashboardPage() {
       </div>
 
       <div style={{ padding: "var(--space-8)" }}>
-        {/* ---- Métricas ---- */}
+        {/* ---- Metrics ---- */}
         <div className={styles.metrics}>
           <MetricCard
             type="revenue"
-            label="Ingresos Totales"
+            label="Total Revenue"
             value={`$${totalRevenue.toLocaleString()}`}
             change="+12.5%"
             direction="up"
@@ -86,25 +84,25 @@ export default async function DashboardPage() {
           />
           <MetricCard
             type="orders"
-            label="Pedidos Totales"
+            label="Total Orders"
             value={totalOrders.toString()}
-            change="+8 esta semana"
+            change="+8 this week"
             direction="up"
             icon="🛒"
           />
           <MetricCard
             type="products"
-            label="Productos Activos"
+            label="Active Products"
             value={activeProducts.toString()}
-            change="3 nuevos"
+            change="3 new"
             direction="up"
             icon="📦"
           />
           <MetricCard
             type="clients"
-            label="Clientes B2B"
+            label="B2B Clients"
             value={totalClients.toString()}
-            change="+2 pendientes"
+            change="+2 pending"
             direction="up"
             icon="👥"
           />
@@ -115,19 +113,19 @@ export default async function DashboardPage() {
           {/* Recent Orders */}
           <section className={styles["orders-section"]}>
             <div className={styles["section-header"]}>
-              <h2 className={styles["section-title"]}>Pedidos Recientes</h2>
+              <h2 className={styles["section-title"]}>Recent Orders</h2>
               <a href="/dashboard/orders" className={styles["section-link"]}>
-                Ver todos →
+                View all →
               </a>
             </div>
             <table className={styles["orders-table"]}>
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Cliente</th>
+                  <th>Client</th>
                   <th>Total</th>
-                  <th>Estado</th>
-                  <th>Fecha</th>
+                  <th>Status</th>
+                  <th>Date</th>
                 </tr>
               </thead>
               <tbody>
@@ -140,13 +138,13 @@ export default async function DashboardPage() {
                     total={`$${order.totalAmount.toLocaleString()}`}
                     status={order.status.toLowerCase()}
                     statusLabel={order.status}
-                    date={new Date(order.createdAt).toLocaleDateString("es-MX")}
+                    date={new Date(order.createdAt).toLocaleDateString("en-US")}
                   />
                 ))}
                 {recentOrders.length === 0 && (
                   <tr>
                     <td colSpan={5} style={{ textAlign: "center", padding: "var(--space-8)" }}>
-                      No hay pedidos recientes.
+                      No recent orders.
                     </td>
                   </tr>
                 )}
@@ -159,28 +157,28 @@ export default async function DashboardPage() {
             {/* Activity Feed */}
             <section className={styles["activity-section"]}>
               <div className={styles["section-header"]}>
-                <h2 className={styles["section-title"]}>Actividad</h2>
+                <h2 className={styles["section-title"]}>Activity</h2>
               </div>
               <div className={styles["activity-list"]}>
                 <ActivityItem
                   type="order"
-                  text="Nuevo pedido de Restaurante Marea por $8,230"
-                  time="Hace 45 min"
+                  text="New order from Marea Restaurant for $8,230"
+                  time="45 min ago"
                 />
                 <ActivityItem
                   type="payment"
-                  text="Pago recibido de Distribuidora Costa"
-                  time="Hace 2h"
+                  text="Payment received from Costa Distributors"
+                  time="2h ago"
                 />
                 <ActivityItem
                   type="new"
-                  text="Nuevo cliente registrado: Super Fresco S.A."
-                  time="Hace 3h"
+                  text="New client registered: Super Fresh S.A."
+                  time="3h ago"
                 />
                 <ActivityItem
                   type="alert"
-                  text="Stock bajo: Filete de Salmón (12 unidades)"
-                  time="Hace 5h"
+                  text="Low stock: Salmon Fillet (12 units)"
+                  time="5h ago"
                 />
               </div>
             </section>
@@ -188,14 +186,14 @@ export default async function DashboardPage() {
             {/* Low Stock */}
             <section className={styles["stock-section"]}>
               <div className={styles["section-header"]}>
-                <h2 className={styles["section-title"]}>Stock Bajo</h2>
+                <h2 className={styles["section-title"]}>Low Stock</h2>
                 <a href="/dashboard/inventory" className={styles["section-link"]}>
-                  Inventario →
+                  Inventory →
                 </a>
               </div>
-              <StockItem name="Filete de Salmón" sku="SAL-FIL-001" count={12} level="critical" />
-              <StockItem name="Camarón Jumbo" sku="CAM-JUM-002" count={25} level="warning" />
-              <StockItem name="Pulpo Fresco" sku="PUL-FRE-001" count={18} level="warning" />
+              <StockItem name="Salmon Fillet" sku="SAL-FIL-001" count={12} level="critical" />
+              <StockItem name="Jumbo Shrimp" sku="SHR-JUM-002" count={25} level="warning" />
+              <StockItem name="Fresh Octopus" sku="OCT-FRE-001" count={18} level="warning" />
             </section>
           </div>
         </div>
@@ -205,8 +203,8 @@ export default async function DashboardPage() {
 }
 
 /* ============================================================
-   Sub-components (colocados aquí por simplicidad; se pueden
-   extraer a shared/components si crecen en complejidad)
+   Sub-components (kept here for simplicity; can be
+   extracted to shared/components if they grow in complexity)
    ============================================================ */
 
 function MetricCard({
@@ -338,7 +336,7 @@ function StockItem({
           styles[`stock-item__count--${level}`]
         }`}
       >
-        {count} uds
+        {count} units
       </span>
     </div>
   );

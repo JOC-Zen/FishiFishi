@@ -1,6 +1,6 @@
 /**
- * Barrel export para todas las entidades del dominio.
- * Permite importar cualquier entidad desde '@/core/entities'.
+ * Barrel export for all domain entities.
+ * Allows importing any entity from '@/core/entities'.
  */
 
 export type {

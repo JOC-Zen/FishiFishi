@@ -1,9 +1,7 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/shared/lib/auth";
-import prisma from "@/shared/lib/prisma";
+import { AuthService } from "@/features/auth/services/AuthService";
+import { OrderService } from "@/features/orders/services/OrderService";
 import TopBar from "@/shared/components/TopBar";
 import styles from "./page.module.css";
-import { redirect } from "next/navigation";
 
 const statusClassMap: Record<string, string> = {
   PENDING: "badge badge-warning",
@@ -24,69 +22,43 @@ const progressMap: Record<string, number> = {
 };
 
 /**
- * Página de gestión de Pedidos B2B.
+ * Orders Management Page.
  */
 export default async function OrdersPage() {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/");
+  await AuthService.requireRole("ADMIN");
+  const orders = await OrderService.getAllOrders();
 
-  let orders: any[] = [];
-  let statusCounts: Record<string, number> = {};
-
-  try {
-    const [dbOrders, dbCounts] = await Promise.all([
-      prisma.order.findMany({
-        orderBy: { createdAt: "desc" },
-        include: {
-          client: true,
-          _count: { select: { items: true } },
-        },
-      }),
-      prisma.order.groupBy({
-        by: ["status"],
-        _count: true,
-      }),
-    ]);
-    orders = dbOrders;
-    statusCounts = dbCounts.reduce((acc, curr) => {
-      acc[curr.status] = curr._count;
-      return acc;
-    }, {} as Record<string, number>);
-  } catch (error) {
-    console.warn("DB not connected for Orders. Using mock data.");
-    orders = [
-      { id: "1", orderNumber: 2847, client: { name: "Pescadería del Norte", companyName: "Juan Gutiérrez" }, totalAmount: { toNumber: () => 12450 }, status: "CONFIRMED", createdAt: new Date(), _count: { items: 5 } },
-      { id: "2", orderNumber: 2846, client: { name: "Restaurante Marea", companyName: "Ana López" }, totalAmount: { toNumber: () => 8230 }, status: "PROCESSING", createdAt: new Date(), _count: { items: 3 } },
-    ];
-    statusCounts = { "CONFIRMED": 1, "PROCESSING": 1 };
-  }
+  const statusCounts = orders.reduce((acc, curr) => {
+    acc[curr.status] = (acc[curr.status] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
 
   const totalCount = orders.length;
 
   const tabs = [
-    { label: "Todos", count: totalCount, status: "ALL" },
-    { label: "Pendientes", count: statusCounts["PENDING"] || 0, status: "PENDING" },
-    { label: "Confirmados", count: statusCounts["CONFIRMED"] || 0, status: "CONFIRMED" },
-    { label: "En proceso", count: statusCounts["PROCESSING"] || 0, status: "PROCESSING" },
-    { label: "Enviados", count: statusCounts["SHIPPED"] || 0, status: "SHIPPED" },
-    { label: "Entregados", count: statusCounts["DELIVERED"] || 0, status: "DELIVERED" },
+    { label: "All", count: totalCount, status: "ALL" },
+    { label: "Pending", count: statusCounts["PENDING"] || 0, status: "PENDING" },
+    { label: "Confirmed", count: statusCounts["CONFIRMED"] || 0, status: "CONFIRMED" },
+    { label: "Processing", count: statusCounts["PROCESSING"] || 0, status: "PROCESSING" },
+    { label: "Shipped", count: statusCounts["SHIPPED"] || 0, status: "SHIPPED" },
+    { label: "Delivered", count: statusCounts["DELIVERED"] || 0, status: "DELIVERED" },
   ];
 
   return (
     <>
-      <TopBar title="Pedidos" breadcrumb={["Dashboard", "Pedidos"]} />
+      <TopBar title="Orders" breadcrumb={["Dashboard", "Orders"]} />
 
       <div style={{ padding: "var(--space-8)" }}>
         {/* Header */}
         <div className={styles["page-header"]}>
           <div className={styles["page-header__left"]}>
-            <h1 className={styles["page-title"]}>Gestión de Pedidos</h1>
+            <h1 className={styles["page-title"]}>Order Management</h1>
             <p className={styles["page-subtitle"]}>
-              {totalCount} pedidos en total · {statusCounts["PENDING"] || 0} pendientes de confirmación
+              {totalCount} total orders · {statusCounts["PENDING"] || 0} pending confirmation
             </p>
           </div>
           <button className="btn btn-primary" id="new-order-btn">
-            + Nuevo Pedido
+            + New Order
           </button>
         </div>
 
@@ -108,17 +80,17 @@ export default async function OrdersPage() {
           <table className={styles["orders-table"]}>
             <thead>
               <tr>
-                <th>Pedido</th>
-                <th>Cliente</th>
+                <th>Order</th>
+                <th>Client</th>
                 <th>Total</th>
-                <th>Estado</th>
-                <th>Progreso</th>
-                <th>Fecha</th>
+                <th>Status</th>
+                <th>Progress</th>
+                <th>Date</th>
               </tr>
             </thead>
             <tbody>
-              {orders.map((order: any) => {
-                const initials = order.client.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase();
+              {orders.map((order) => {
+                const initials = order.clientName.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase();
                 return (
                   <tr key={order.id}>
                     <td>
@@ -131,10 +103,10 @@ export default async function OrdersPage() {
                         </div>
                         <div className={styles["order-client__details"]}>
                           <span className={styles["order-client__name"]}>
-                            {order.client.name}
+                            {order.clientName}
                           </span>
                           <span className={styles["order-client__company"]}>
-                            {order.client.companyName}
+                            {order.companyName}
                           </span>
                         </div>
                       </div>
@@ -142,13 +114,13 @@ export default async function OrdersPage() {
                     <td>
                       <div>
                         <span className={styles["order-total"]}>
-                          ${order.totalAmount.toNumber().toLocaleString("es-MX", {
+                          ${order.totalAmount.toLocaleString("en-US", {
                             minimumFractionDigits: 2,
                           })}
                         </span>
                         <br />
                         <span className={styles["order-items-count"]}>
-                          {order._count.items} productos
+                          {order.itemsCount} products
                         </span>
                       </div>
                     </td>
@@ -178,11 +150,11 @@ export default async function OrdersPage() {
                     </td>
                     <td>
                       <span className={styles["order-date"]}>
-                        {new Date(order.createdAt).toLocaleDateString("es-MX", { day: 'numeric', month: 'short', year: 'numeric' })}
+                        {new Date(order.createdAt).toLocaleDateString("en-US", { day: 'numeric', month: 'short', year: 'numeric' })}
                       </span>
                       <br />
                       <span className={styles["order-delivery"]}>
-                        Entrega: {order.estimatedDelivery ? new Date(order.estimatedDelivery).toLocaleDateString("es-MX") : "Pendiente"}
+                        Tracking: {order.trackingNumber || "Pending"}
                       </span>
                     </td>
                   </tr>
@@ -191,7 +163,7 @@ export default async function OrdersPage() {
               {orders.length === 0 && (
                 <tr>
                   <td colSpan={6} style={{ textAlign: "center", padding: "var(--space-8)" }}>
-                    No se encontraron pedidos.
+                    No orders found.
                   </td>
                 </tr>
               )}
@@ -201,12 +173,12 @@ export default async function OrdersPage() {
           {/* Pagination */}
           <div className={styles.pagination}>
             <span className={styles.pagination__info}>
-              Mostrando {orders.length} de {totalCount} pedidos
+              Showing {orders.length} of {totalCount} orders
             </span>
             <div className={styles.pagination__buttons}>
-              <button className={styles.pagination__btn}>← Anterior</button>
+              <button className={styles.pagination__btn}>← Previous</button>
               <button className={`${styles.pagination__btn} ${styles["pagination__btn--active"]}`}>1</button>
-              <button className={styles.pagination__btn}>Siguiente →</button>
+              <button className={styles.pagination__btn}>Next →</button>
             </div>
           </div>
         </div>

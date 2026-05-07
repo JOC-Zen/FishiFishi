@@ -1,214 +1,67 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/shared/lib/auth";
-import prisma from "@/shared/lib/prisma";
+import { AuthService } from "@/features/auth/services/AuthService";
+import { UserService } from "@/features/users/services/UserService";
 import TopBar from "@/shared/components/TopBar";
 import styles from "./page.module.css";
-import { redirect } from "next/navigation";
 
-/** Datos mock de clientes B2B */
-const mockClients = [
-  {
-    id: "1",
-    name: "Pescadería del Norte",
-    contact: "Juan Gutiérrez",
-    initials: "PN",
-    email: "juan@pescaderianorte.com",
-    phone: "+52 81 1234 5678",
-    tier: 1 as const,
-    status: "active" as const,
-    totalOrders: 45,
-    totalSpent: 284500,
-    lastOrder: "Hoy",
-  },
-  {
-    id: "2",
-    name: "Restaurante Marea",
-    contact: "Ana López",
-    initials: "RM",
-    email: "ana@restaurantemarea.com",
-    phone: "+52 33 9876 5432",
-    tier: 2 as const,
-    status: "active" as const,
-    totalOrders: 32,
-    totalSpent: 156200,
-    lastOrder: "Hace 2 días",
-  },
-  {
-    id: "3",
-    name: "Distribuidora Costa",
-    contact: "Roberto Díaz",
-    initials: "DC",
-    email: "roberto@distcosta.com",
-    phone: "+52 55 4567 8901",
-    tier: 1 as const,
-    status: "active" as const,
-    totalOrders: 78,
-    totalSpent: 523000,
-    lastOrder: "Ayer",
-  },
-  {
-    id: "4",
-    name: "Super Fresco S.A.",
-    contact: "María Torres",
-    initials: "SF",
-    email: "maria@superfresco.com",
-    phone: "+52 81 2345 6789",
-    tier: 2 as const,
-    status: "active" as const,
-    totalOrders: 21,
-    totalSpent: 89400,
-    lastOrder: "Hace 3 días",
-  },
-  {
-    id: "5",
-    name: "Cevichería La Perla",
-    contact: "Carlos Mendoza",
-    initials: "LP",
-    email: "carlos@laperla.com",
-    phone: "+52 33 6789 0123",
-    tier: 3 as const,
-    status: "active" as const,
-    totalOrders: 12,
-    totalSpent: 42300,
-    lastOrder: "Hace 1 semana",
-  },
-  {
-    id: "6",
-    name: "Hotel Grand Marina",
-    contact: "Sofía Herrera",
-    initials: "HG",
-    email: "sofia@grandmarina.com",
-    phone: "+52 55 3456 7890",
-    tier: 1 as const,
-    status: "active" as const,
-    totalOrders: 56,
-    totalSpent: 412800,
-    lastOrder: "Hace 2 días",
-  },
-  {
-    id: "7",
-    name: "Marisquería Don Pedro",
-    contact: "Pedro Ramírez",
-    initials: "DP",
-    email: "pedro@donpedro.com",
-    phone: "+52 81 5678 9012",
-    tier: 3 as const,
-    status: "pending" as const,
-    totalOrders: 0,
-    totalSpent: 0,
-    lastOrder: "—",
-  },
-  {
-    id: "8",
-    name: "Sushi Express MX",
-    contact: "Kenji Tanaka",
-    initials: "SE",
-    email: "kenji@sushiexpress.mx",
-    phone: "+52 33 7890 1234",
-    tier: 2 as const,
-    status: "pending" as const,
-    totalOrders: 0,
-    totalSpent: 0,
-    lastOrder: "—",
-  },
-];
-
-const tierLabels: Record<number, string> = { 1: "Gold", 2: "Silver", 3: "Bronze" };
+const tierLabels: Record<string, string> = { GOLD: "Gold", SILVER: "Silver", BRONZE: "Bronze" };
 
 /**
- * Página de Clientes B2B.
+ * B2B Clients Page.
  */
 export default async function ClientsPage() {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/");
+  await AuthService.requireRole("ADMIN");
+  const clients = await UserService.getAllClients();
 
-  let clients: any[] = [];
-
-  try {
-    const dbUsers = await prisma.user.findMany({
-      where: { role: "CLIENT" },
-      include: {
-        orders: {
-          select: { totalAmount: true, createdAt: true }
-        }
-      },
-      orderBy: { name: "asc" }
-    });
-
-    clients = dbUsers.map((u: any) => ({
-      id: u.id,
-      name: u.name,
-      contact: u.companyName || "N/A",
-      initials: u.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase(),
-      email: u.email,
-      phone: "+52 00 0000 0000",
-      tier: u.tier === "GOLD" ? 1 : u.tier === "SILVER" ? 2 : 3,
-      status: u.status === "ACTIVE" ? "active" : "pending",
-      totalOrders: u.orders.length,
-      totalSpent: u.orders.reduce((sum: number, o: any) => sum + o.totalAmount.toNumber(), 0),
-      lastOrder: u.orders.length > 0 
-        ? new Date(Math.max(...u.orders.map((o: any) => o.createdAt.getTime()))).toLocaleDateString("es-MX")
-        : "—",
-    }));
-  } catch (error) {
-    console.warn("DB not connected for Clients. Using mock data.");
-    clients = [
-      { id: "1", name: "Pescadería del Norte", contact: "Juan Gutiérrez", initials: "PN", email: "juan@pescaderianorte.com", phone: "+52 81 1234 5678", tier: 1, status: "active", totalOrders: 45, totalSpent: 284500, lastOrder: "Hoy" },
-      { id: "2", name: "Restaurante Marea", contact: "Ana López", initials: "RM", email: "ana@restaurantemarea.com", phone: "+52 33 9876 5432", tier: 2, status: "active", totalOrders: 32, totalSpent: 156200, lastOrder: "Hace 2 días" },
-      { id: "3", name: "Distribuidora Costa", contact: "Roberto Díaz", initials: "DC", email: "roberto@distcosta.com", phone: "+52 55 4567 8901", tier: 1, status: "active", totalOrders: 78, totalSpent: 523000, lastOrder: "Ayer" },
-    ];
-  }
-
-  const activeClients = clients.filter((c) => c.status === "active");
-  const pendingClients = clients.filter((c) => c.status === "pending");
+  const activeClients = clients.filter((c) => c.status === "ACTIVE");
+  const pendingClients = clients.filter((c) => c.status === "PENDING");
 
   return (
     <>
-      <TopBar title="Clientes" breadcrumb={["Dashboard", "Clientes"]} />
+      <TopBar title="Clients" breadcrumb={["Dashboard", "Clients"]} />
 
       <div style={{ padding: "var(--space-8)" }}>
         {/* Header */}
         <div className={styles["page-header"]}>
           <div className={styles["page-header__left"]}>
-            <h1 className={styles["page-title"]}>Clientes B2B</h1>
+            <h1 className={styles["page-title"]}>B2B Clients</h1>
             <p className={styles["page-subtitle"]}>
-              Gestiona tus clientes mayoristas y sus niveles de precios
+              Manage your wholesale clients and their pricing tiers
             </p>
           </div>
           <button className="btn btn-primary" id="add-client-btn">
-            + Nuevo Cliente
+            + New Client
           </button>
         </div>
 
         {/* Stats Row */}
         <div className={styles["stats-row"]}>
           <div className={styles["stat-card"]}>
-            <div className={`${styles["stat-card__icon"]} ${styles["stat-card__icon--active"]}`}>
+            <div className={`${styles["stat-card__icon"]} ${styles["stat-card--active"]}`}>
               ✅
             </div>
             <div className={styles["stat-card__info"]}>
               <span className={styles["stat-card__value"]}>{activeClients.length}</span>
-              <span className={styles["stat-card__label"]}>Clientes Activos</span>
+              <span className={styles["stat-card__label"]}>Active Clients</span>
             </div>
           </div>
           <div className={styles["stat-card"]}>
-            <div className={`${styles["stat-card__icon"]} ${styles["stat-card__icon--pending"]}`}>
+            <div className={`${styles["stat-card__icon"]} ${styles["stat-card--pending"]}`}>
               ⏳
             </div>
             <div className={styles["stat-card__info"]}>
               <span className={styles["stat-card__value"]}>{pendingClients.length}</span>
-              <span className={styles["stat-card__label"]}>Pendientes de Aprobación</span>
+              <span className={styles["stat-card__label"]}>Pending Approval</span>
             </div>
           </div>
           <div className={styles["stat-card"]}>
-            <div className={`${styles["stat-card__icon"]} ${styles["stat-card__icon--total"]}`}>
+            <div className={`${styles["stat-card__icon"]} ${styles["stat-card--total"]}`}>
               💰
             </div>
             <div className={styles["stat-card__info"]}>
               <span className={styles["stat-card__value"]}>
-                ${(mockClients.reduce((s, c) => s + c.totalSpent, 0) / 1000).toFixed(0)}k
+                ${(clients.reduce((s, c) => s + c.totalSpent, 0) / 1000).toFixed(0)}k
               </span>
-              <span className={styles["stat-card__label"]}>Ingresos Totales</span>
+              <span className={styles["stat-card__label"]}>Total Revenue</span>
             </div>
           </div>
         </div>
@@ -220,106 +73,83 @@ export default async function ClientsPage() {
             <input
               type="search"
               className={styles["filters__search-input"]}
-              placeholder="Buscar por nombre o empresa..."
+              placeholder="Search by name or company..."
               id="client-search"
             />
           </div>
           <select className={styles.filters__select} id="tier-filter">
-            <option value="">Todos los niveles</option>
-            <option value="1">Gold</option>
-            <option value="2">Silver</option>
-            <option value="3">Bronze</option>
+            <option value="">All Tiers</option>
+            <option value="GOLD">Gold</option>
+            <option value="SILVER">Silver</option>
+            <option value="BRONZE">Bronze</option>
           </select>
           <select className={styles.filters__select} id="status-filter">
-            <option value="">Todos los estados</option>
-            <option value="active">Activos</option>
-            <option value="pending">Pendientes</option>
+            <option value="">All Statuses</option>
+            <option value="ACTIVE">Active</option>
+            <option value="PENDING">Pending</option>
           </select>
         </div>
 
         {/* Client Grid */}
         <div className={styles["clients-grid"]}>
-          {clients.map((client) => (
-            <article key={client.id} className={styles["client-card"]}>
-              <div className={styles["client-card__header"]}>
-                <div
-                  className={`${styles["client-card__avatar"]} ${
-                    styles[`client-card__avatar--tier${client.tier}`]
-                  }`}
-                >
-                  {client.initials}
-                </div>
-                <div className={styles["client-card__info"]}>
-                  <span className={styles["client-card__name"]}>
-                    {client.name}
-                  </span>
-                  <span className={styles["client-card__company"]}>
-                    {client.contact}
-                  </span>
-                </div>
-                <span
-                  className={`${styles["client-card__tier"]} ${
-                    styles[`client-card__tier--${client.tier}`]
-                  }`}
-                >
-                  {tierLabels[client.tier]}
-                </span>
-              </div>
-
-              <div className={styles["client-card__details"]}>
-                <div className={styles["client-card__detail"]}>
-                  <span className={styles["client-card__detail-label"]}>
-                    Pedidos
-                  </span>
-                  <span className={styles["client-card__detail-value"]}>
-                    {client.totalOrders}
-                  </span>
-                </div>
-                <div className={styles["client-card__detail"]}>
-                  <span className={styles["client-card__detail-label"]}>
-                    Total Comprado
-                  </span>
-                  <span className={styles["client-card__detail-value"]}>
-                    ${client.totalSpent.toLocaleString("es-MX")}
-                  </span>
-                </div>
-                <div className={styles["client-card__detail"]}>
-                  <span className={styles["client-card__detail-label"]}>
-                    Último Pedido
-                  </span>
-                  <span className={styles["client-card__detail-value"]}>
-                    {client.lastOrder}
-                  </span>
-                </div>
-                <div className={styles["client-card__detail"]}>
-                  <span className={styles["client-card__detail-label"]}>
-                    Estado
-                  </span>
-                  <span className={styles["client-card__detail-value"]}>
-                    <span
-                      className={
-                        client.status === "active"
-                          ? "badge badge-success"
-                          : "badge badge-warning"
-                      }
-                    >
-                      {client.status === "active" ? "Activo" : "Pendiente"}
+          {clients.map((client) => {
+            const initials = client.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase();
+            return (
+              <article key={client.id} className={styles["client-card"]}>
+                <div className={styles["client-card__header"]}>
+                  <div className={`${styles["client-card__avatar"]} ${styles[`client-card__avatar--${client.tier.toLowerCase()}`]}`}>
+                    {initials}
+                  </div>
+                  <div className={styles["client-card__info"]}>
+                    <span className={styles["client-card__name"]}>
+                      {client.name}
                     </span>
+                    <span className={styles["client-card__company"]}>
+                      {client.companyName}
+                    </span>
+                  </div>
+                  <span className={`${styles["client-card__tier"]} ${styles[`client-card__tier--${client.tier.toLowerCase()}`]}`}>
+                    {tierLabels[client.tier]}
                   </span>
                 </div>
-              </div>
 
-              <div className={styles["client-card__footer"]}>
-                <span className={styles["client-card__contact"]}>
-                  {client.email}
-                </span>
-                <div className={styles["client-card__actions"]}>
-                  <button className="btn btn-ghost btn-sm">Ver</button>
-                  <button className="btn btn-ghost btn-sm">Editar</button>
+                <div className={styles["client-card__details"]}>
+                  <div className={styles["client-card__detail"]}>
+                    <span className={styles["client-card__detail-label"]}>Orders</span>
+                    <span className={styles["client-card__detail-value"]}>{client.totalOrders}</span>
+                  </div>
+                  <div className={styles["client-card__detail"]}>
+                    <span className={styles["client-card__detail-label"]}>Total Purchased</span>
+                    <span className={styles["client-card__detail-value"]}>${client.totalSpent.toLocaleString("en-US")}</span>
+                  </div>
+                  <div className={styles["client-card__detail"]}>
+                    <span className={styles["client-card__detail-label"]}>Last Order</span>
+                    <span className={styles["client-card__detail-value"]}>
+                      {client.lastOrderDate ? client.lastOrderDate.toLocaleDateString("en-US") : "—"}
+                    </span>
+                  </div>
+                  <div className={styles["client-card__detail"]}>
+                    <span className={styles["client-card__detail-label"]}>Status</span>
+                    <span className={styles["client-card__detail-value"]}>
+                      <span className={client.status === "ACTIVE" ? "badge badge-success" : "badge badge-warning"}>
+                        {client.status}
+                      </span>
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+
+                <div className={styles["client-card__footer"]}>
+                  <span className={styles["client-card__contact"]}>
+                    {client.email}
+                  </span>
+                  <div className={styles["client-card__actions"]}>
+                    <button className="btn btn-ghost btn-sm">View</button>
+                    <button className="btn btn-ghost btn-sm">Edit</button>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </>

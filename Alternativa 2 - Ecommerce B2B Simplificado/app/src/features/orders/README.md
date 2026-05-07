@@ -1,18 +1,18 @@
 # Feature: Orders
 
-Módulo responsable del flujo completo de pedidos mayoristas B2B.
+Module responsible for the complete B2B wholesale order workflow.
 
-## Responsabilidades
-- Carrito de compras / solicitud de pedido
-- Historial de pedidos
-- Seguimiento de estado (pendiente, confirmado, enviado, entregado)
-- Generación de cotizaciones
+## Responsibilities
+- Shopping cart / order request
+- Order history
+- Status tracking (pending, confirmed, processing, shipped, delivered)
+- Quote generation
 
-## Estructura
+## Structure
 ```
 orders/
-├── components/  → Componentes UI (OrderTable, OrderDetail, CartSummary, etc.)
-├── services/    → Lógica de negocio y llamadas a API
-├── store/       → Estado global del módulo
-└── styles/      → CSS Modules para los componentes de este módulo
+├── components/  → UI Components (OrderTable, OrderDetail, CartSummary, etc.)
+├── services/    → Business logic and API calls
+├── store/       → Global module state
+└── styles/      → CSS Modules for components in this module
 ```

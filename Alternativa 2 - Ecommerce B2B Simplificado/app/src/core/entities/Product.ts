@@ -1,14 +1,14 @@
 /**
- * Entidad de dominio: Producto del catálogo B2B.
- * Incluye soporte para precios escalonados por volumen,
- * algo fundamental en el modelo mayorista.
+ * Domain Entity: B2B Product Catalog Item.
+ * Includes support for volume-based tiered pricing,
+ * a fundamental feature of the wholesale model.
  */
 
 export type ProductStatus = "active" | "draft" | "discontinued";
 
 /**
- * Precio escalonado por volumen.
- * Ejemplo: a partir de 100 unidades, el precio unitario baja a $8.50
+ * Volume-based price tier.
+ * Example: starting at 100 units, the unit price drops to $8.50
  */
 export interface PriceTier {
   minQuantity: number;
@@ -21,15 +21,15 @@ export interface Product {
   name: string;
   description: string;
   category: string;
-  /** Precio base unitario (sin descuento por volumen) */
+  /** Base unit price (before volume discounts) */
   basePrice: number;
-  /** Precios escalonados ordenados de menor a mayor cantidad mínima */
+  /** Tiered prices sorted by ascending minimum quantity */
   priceTiers: PriceTier[];
-  /** Unidad de medida (kg, unidad, caja, etc.) */
+  /** Unit of measure (kg, unit, box, etc.) */
   unit: string;
-  /** Stock disponible actual */
+  /** Current available stock */
   stock: number;
-  /** Cantidad mínima de pedido */
+  /** Minimum order quantity */
   minOrderQuantity: number;
   imageUrl?: string;
   status: ProductStatus;
@@ -38,11 +38,11 @@ export interface Product {
 }
 
 /**
- * Datos para crear un producto nuevo.
+ * Data required to create a new product.
  */
 export type CreateProductInput = Omit<Product, "id" | "createdAt" | "updatedAt">;
 
 /**
- * Datos editables de un producto existente.
+ * Editable product fields.
  */
 export type UpdateProductInput = Partial<Omit<Product, "id" | "createdAt" | "updatedAt">>;

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
 /**
- * Página principal (Landing + Login) de FishiFishi B2B.
+ * Home Page (Landing + Login) for FishiFishi B2B.
  */
 export default function Home() {
   const router = useRouter();
@@ -28,13 +28,13 @@ export default function Home() {
       });
 
       if (result?.error) {
-        setError("Credenciales inválidas. Inténtalo de nuevo.");
+        setError("Invalid credentials. Please try again.");
       } else {
         router.push("/dashboard");
         router.refresh();
       }
     } catch (err) {
-      setError("Ocurrió un error inesperado.");
+      setError("An unexpected error occurred.");
     } finally {
       setIsLoading(false);
     }
@@ -42,43 +42,43 @@ export default function Home() {
 
   return (
     <main className={styles.landing}>
-      {/* ---- Panel Izquierdo: Branding ---- */}
+      {/* ---- Left Panel: Branding ---- */}
       <section className={styles.landing__brand}>
         <div className={styles.landing__logo}>
           <div className={styles["landing__logo-icon"]}>🐟</div>
           <h1 className={styles.landing__title}>FishiFishi</h1>
           <p className={styles.landing__subtitle}>
-            Tu plataforma B2B para pedidos mayoristas. Gestiona inventario,
-            precios por volumen y pedidos en un solo lugar.
+            Your B2B platform for wholesale orders. Manage inventory,
+            volume pricing, and orders in one place.
           </p>
         </div>
 
         <div className={styles.landing__features}>
           <div className={styles.landing__feature}>
             <span className={styles["landing__feature-icon"]}>📦</span>
-            <span>Pedidos al por mayor con precios escalonados</span>
+            <span>Wholesale orders with tiered pricing</span>
           </div>
           <div className={styles.landing__feature}>
             <span className={styles["landing__feature-icon"]}>📊</span>
-            <span>Panel de control con métricas en tiempo real</span>
+            <span>Dashboard with real-time metrics</span>
           </div>
           <div className={styles.landing__feature}>
             <span className={styles["landing__feature-icon"]}>🔒</span>
-            <span>Acceso seguro exclusivo para clientes verificados</span>
+            <span>Secure access for verified clients only</span>
           </div>
           <div className={styles.landing__feature}>
             <span className={styles["landing__feature-icon"]}>🚚</span>
-            <span>Seguimiento de entregas y logística integrada</span>
+            <span>Delivery tracking and integrated logistics</span>
           </div>
         </div>
       </section>
 
-      {/* ---- Panel Derecho: Login ---- */}
+      {/* ---- Right Panel: Login ---- */}
       <aside className={styles["landing__form-panel"]}>
         <div className={styles["landing__form-header"]}>
-          <h2 className={styles["landing__form-title"]}>Inicia sesión</h2>
+          <h2 className={styles["landing__form-title"]}>Sign In</h2>
           <p className={styles["landing__form-desc"]}>
-            Accede a tu cuenta de cliente mayorista
+            Access your wholesale client account
           </p>
         </div>
 
@@ -91,13 +91,13 @@ export default function Home() {
 
           <div className={styles["landing__form-group"]}>
             <label htmlFor="email" className="form-label">
-              Correo electrónico
+              Email Address
             </label>
             <input
               id="email"
               type="email"
               className="input"
-              placeholder="tu@empresa.com"
+              placeholder="you@company.com"
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -107,7 +107,7 @@ export default function Home() {
 
           <div className={styles["landing__form-group"]}>
             <label htmlFor="password" className="form-label">
-              Contraseña
+              Password
             </label>
             <input
               id="password"
@@ -133,10 +133,10 @@ export default function Home() {
               }}
             >
               <input type="checkbox" id="remember" />
-              Recordarme
+              Remember me
             </label>
             <a href="#" className={styles["landing__form-link"]}>
-              ¿Olvidaste tu contraseña?
+              Forgot your password?
             </a>
           </div>
 
@@ -145,15 +145,15 @@ export default function Home() {
             className="btn btn-primary btn-lg"
             disabled={isLoading}
           >
-            {isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
+            {isLoading ? "Signing in..." : "Sign In"}
           </button>
 
           <div className={styles["landing__form-divider"]}>
-            o continúa con
+            or continue with
           </div>
 
           <button type="button" className="btn btn-secondary">
-            Solicitar acceso como nuevo cliente
+            Request access as a new client
           </button>
         </form>
 
@@ -161,8 +161,8 @@ export default function Home() {
           className={styles["landing__form-register"]}
           style={{ marginTop: "var(--space-8)" }}
         >
-          ¿No tienes cuenta?{" "}
-          <a href="#">Contacta a ventas</a>
+          Don&apos;t have an account?{" "}
+          <a href="#">Contact sales</a>
         </p>
       </aside>
     </main>

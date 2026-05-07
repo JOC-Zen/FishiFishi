@@ -5,18 +5,18 @@ import styles from "./page.module.css";
 import { redirect } from "next/navigation";
 
 const mockShipments = [
-  { id: "SHP-1024", orderId: "ORD-2845", client: "Distribuidora Costa", origin: "Almacén Central", destination: "CDMX, Col. Roma", carrier: "FedEx", carrierEmoji: "📦", status: "in_transit", progress: 3, totalSteps: 4, eta: "7 may 2026", etaLabel: "Mañana", weight: "48 kg" },
-  { id: "SHP-1023", orderId: "ORD-2846", client: "Restaurante Marea", origin: "Almacén Central", destination: "Guadalajara, Zona Centro", carrier: "DHL", carrierEmoji: "🚛", status: "preparing", progress: 1, totalSteps: 4, eta: "7 may 2026", etaLabel: "Mañana", weight: "22 kg" },
-  { id: "SHP-1022", orderId: "ORD-2847", client: "Pescadería del Norte", origin: "Almacén Central", destination: "Monterrey, Col. Valle", carrier: "Estafeta", carrierEmoji: "📮", status: "in_transit", progress: 2, totalSteps: 4, eta: "8 may 2026", etaLabel: "En 2 días", weight: "35 kg" },
-  { id: "SHP-1021", orderId: "ORD-2843", client: "Cevichería La Perla", origin: "Almacén Central", destination: "Cancún, Zona Hotelera", carrier: "FedEx", carrierEmoji: "📦", status: "delivered", progress: 4, totalSteps: 4, eta: "5 may 2026", etaLabel: "Entregado", weight: "15 kg" },
-  { id: "SHP-1020", orderId: "ORD-2842", client: "Hotel Grand Marina", origin: "Almacén Central", destination: "Los Cabos, BCS", carrier: "DHL", carrierEmoji: "🚛", status: "in_transit", progress: 3, totalSteps: 4, eta: "6 may 2026", etaLabel: "Hoy", weight: "62 kg" },
-  { id: "SHP-1019", orderId: "ORD-2841", client: "Marisquería Don Pedro", origin: "Almacén Central", destination: "Monterrey, Col. Cumbres", carrier: "Estafeta", carrierEmoji: "📮", status: "delivered", progress: 4, totalSteps: 4, eta: "4 may 2026", etaLabel: "Entregado", weight: "28 kg" },
+  { id: "SHP-1024", orderId: "ORD-2845", client: "Costa Distributors", origin: "Central Warehouse", destination: "Mexico City, Roma District", carrier: "FedEx", carrierEmoji: "📦", status: "in_transit", progress: 3, totalSteps: 4, eta: "May 7, 2026", etaLabel: "Tomorrow", weight: "48 kg" },
+  { id: "SHP-1023", orderId: "ORD-2846", client: "Marea Restaurant", origin: "Central Warehouse", destination: "Guadalajara, Downtown", carrier: "DHL", carrierEmoji: "🚛", status: "preparing", progress: 1, totalSteps: 4, eta: "May 7, 2026", etaLabel: "Tomorrow", weight: "22 kg" },
+  { id: "SHP-1022", orderId: "ORD-2847", client: "Northern Fishery", origin: "Central Warehouse", destination: "Monterrey, Valle District", carrier: "Estafeta", carrierEmoji: "📮", status: "in_transit", progress: 2, totalSteps: 4, eta: "May 8, 2026", etaLabel: "In 2 days", weight: "35 kg" },
+  { id: "SHP-1021", orderId: "ORD-2843", client: "La Perla Cevicheria", origin: "Central Warehouse", destination: "Cancun, Hotel Zone", carrier: "FedEx", carrierEmoji: "📦", status: "delivered", progress: 4, totalSteps: 4, eta: "May 5, 2026", etaLabel: "Delivered", weight: "15 kg" },
+  { id: "SHP-1020", orderId: "ORD-2842", client: "Grand Marina Hotel", origin: "Central Warehouse", destination: "Los Cabos, BCS", carrier: "DHL", carrierEmoji: "🚛", status: "in_transit", progress: 3, totalSteps: 4, eta: "May 6, 2026", etaLabel: "Today", weight: "62 kg" },
+  { id: "SHP-1019", orderId: "ORD-2841", client: "Don Pedro Seafood", origin: "Central Warehouse", destination: "Monterrey, Cumbres", carrier: "Estafeta", carrierEmoji: "📮", status: "delivered", progress: 4, totalSteps: 4, eta: "May 4, 2026", etaLabel: "Delivered", weight: "28 kg" },
 ];
 
 const statusMap: Record<string, { label: string; badge: string }> = {
-  preparing: { label: "En preparación", badge: "badge badge-warning" },
-  in_transit: { label: "En tránsito", badge: "badge badge-info" },
-  delivered: { label: "Entregado", badge: "badge badge-success" },
+  preparing: { label: "Preparing", badge: "badge badge-warning" },
+  in_transit: { label: "In Transit", badge: "badge badge-info" },
+  delivered: { label: "Delivered", badge: "badge badge-success" },
 };
 
 export default async function ShippingPage() {
@@ -29,48 +29,48 @@ export default async function ShippingPage() {
 
   return (
     <>
-      <TopBar title="Envíos" breadcrumb={["Dashboard", "Envíos"]} />
+      <TopBar title="Shipping" breadcrumb={["Dashboard", "Shipping"]} />
       <div style={{ padding: "var(--space-8)" }}>
         <div className={styles["page-header"]}>
           <div className={styles["page-header__left"]}>
-            <h1 className={styles["page-title"]}>Logística y Envíos</h1>
-            <p className={styles["page-subtitle"]}>Seguimiento en tiempo real de entregas</p>
+            <h1 className={styles["page-title"]}>Logistics & Shipping</h1>
+            <p className={styles["page-subtitle"]}>Real-time delivery tracking</p>
           </div>
-          <button className="btn btn-primary" id="create-shipment-btn">+ Crear Envío</button>
+          <button className="btn btn-primary" id="create-shipment-btn">+ Create Shipment</button>
         </div>
 
         <div className={styles.stats}>
           <div className={styles.stat}>
-            <span className={styles.stat__label}>En Tránsito</span>
+            <span className={styles.stat__label}>In Transit</span>
             <span className={styles.stat__value} style={{ color: "var(--color-aqua)" }}>{inTransit}</span>
-            <span className={styles.stat__sub}>envíos activos en ruta</span>
+            <span className={styles.stat__sub}>active shipments en route</span>
           </div>
           <div className={styles.stat}>
-            <span className={styles.stat__label}>En Preparación</span>
+            <span className={styles.stat__label}>Preparing</span>
             <span className={styles.stat__value} style={{ color: "var(--color-warning)" }}>{preparing}</span>
-            <span className={styles.stat__sub}>pendientes de despacho</span>
+            <span className={styles.stat__sub}>pending dispatch</span>
           </div>
           <div className={styles.stat}>
-            <span className={styles.stat__label}>Entregados (Semana)</span>
+            <span className={styles.stat__label}>Delivered (Week)</span>
             <span className={styles.stat__value} style={{ color: "var(--color-success)" }}>{delivered}</span>
-            <span className={styles.stat__sub}>entregas completadas</span>
+            <span className={styles.stat__sub}>completed deliveries</span>
           </div>
           <div className={styles.stat}>
-            <span className={styles.stat__label}>Peso Total Activo</span>
+            <span className={styles.stat__label}>Active Total Weight</span>
             <span className={styles.stat__value}>
               {mockShipments.filter((s) => s.status !== "delivered").reduce((sum, s) => sum + parseInt(s.weight), 0)} kg
             </span>
-            <span className={styles.stat__sub}>en envíos pendientes</span>
+            <span className={styles.stat__sub}>in pending shipments</span>
           </div>
         </div>
 
         <div className={styles["shipments-section"]}>
           <div className={styles["shipments-header"]}>
-            <h2 className={styles["shipments-title"]}>Envíos Activos</h2>
+            <h2 className={styles["shipments-title"]}>Active Shipments</h2>
           </div>
           <table className={styles["shipments-table"]}>
             <thead>
-              <tr><th>Tracking</th><th>Ruta</th><th>Cliente</th><th>Transportista</th><th>Estado</th><th>ETA</th></tr>
+              <tr><th>Tracking</th><th>Route</th><th>Client</th><th>Carrier</th><th>Status</th><th>ETA</th></tr>
             </thead>
             <tbody>
               {mockShipments.map((s) => (

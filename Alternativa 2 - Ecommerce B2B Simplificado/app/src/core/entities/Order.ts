@@ -1,22 +1,22 @@
 /**
- * Entidad de dominio: Pedido B2B.
- * Representa una orden de compra de un cliente mayorista.
+ * Domain Entity: B2B Order.
+ * Represents a purchase order from a wholesale client.
  */
 
 export type OrderStatus =
-  | "pending"     // Recibido, esperando confirmación
-  | "confirmed"   // Confirmado por el vendedor
-  | "processing"  // En preparación / empaque
-  | "shipped"     // Enviado
-  | "delivered"   // Entregado
-  | "cancelled";  // Cancelado
+  | "pending"     // Received, awaiting confirmation
+  | "confirmed"   // Confirmed by the seller
+  | "processing"  // Being prepared / packed
+  | "shipped"     // Shipped
+  | "delivered"   // Delivered
+  | "cancelled";  // Cancelled
 
 export interface OrderItem {
   productId: string;
   productName: string;
   sku: string;
   quantity: number;
-  /** Precio unitario aplicado (ya con descuento por volumen) */
+  /** Applied unit price (with volume discount already applied) */
   unitPrice: number;
   /** quantity * unitPrice */
   subtotal: number;
@@ -24,24 +24,24 @@ export interface OrderItem {
 
 export interface Order {
   id: string;
-  /** ID del cliente que hizo el pedido */
+  /** ID of the client who placed the order */
   clientId: string;
   clientName: string;
   items: OrderItem[];
-  /** Suma de todos los subtotales */
+  /** Sum of all item subtotals */
   totalAmount: number;
   status: OrderStatus;
-  /** Notas del cliente (instrucciones especiales, etc.) */
+  /** Client notes (special instructions, etc.) */
   notes?: string;
-  /** Dirección de entrega */
+  /** Delivery address */
   shippingAddress: string;
-  /** Fecha estimada de entrega */
+  /** Estimated delivery date */
   estimatedDelivery?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
 
 /**
- * Datos para crear un nuevo pedido.
+ * Data required to create a new order.
  */
 export type CreateOrderInput = Pick<Order, "clientId" | "items" | "notes" | "shippingAddress">;

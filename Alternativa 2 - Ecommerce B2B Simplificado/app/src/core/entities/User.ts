@@ -1,9 +1,9 @@
 /**
- * Entidad de dominio: Usuario/Cliente B2B.
- * Representa a un cliente mayorista o administrador del sistema.
+ * Domain Entity: B2B User / Client.
+ * Represents a wholesale customer or system administrator.
  *
- * Esta interfaz es agnóstica al framework: no depende de React,
- * Next.js ni Prisma. Es TypeScript puro.
+ * This interface is framework-agnostic: it does not depend on React,
+ * Next.js, or Prisma. Pure TypeScript.
  */
 
 export type UserRole = "admin" | "client";
@@ -17,7 +17,7 @@ export interface User {
   companyName: string;
   role: UserRole;
   status: UserStatus;
-  /** Nivel de cliente para precios escalonados (Tier 1 = mejor precio) */
+  /** Client tier for volume-based pricing (Tier 1 = best price) */
   pricingTier: number;
   phone?: string;
   createdAt: Date;
@@ -25,14 +25,14 @@ export interface User {
 }
 
 /**
- * Datos necesarios para crear un nuevo usuario.
- * Excluye campos que se generan automáticamente.
+ * Data required to create a new user.
+ * Excludes auto-generated fields.
  */
 export type CreateUserInput = Omit<User, "id" | "createdAt" | "updatedAt" | "status"> & {
   password: string;
 };
 
 /**
- * Datos editables del perfil de usuario.
+ * Editable user profile fields.
  */
 export type UpdateUserInput = Partial<Pick<User, "name" | "companyName" | "phone" | "pricingTier">>;

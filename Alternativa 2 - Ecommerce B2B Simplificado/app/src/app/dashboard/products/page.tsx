@@ -1,58 +1,35 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/shared/lib/auth";
-import prisma from "@/shared/lib/prisma";
+import { AuthService } from "@/features/auth/services/AuthService";
+import { ProductService } from "@/features/products/services/ProductService";
 import TopBar from "@/shared/components/TopBar";
 import styles from "./page.module.css";
-import { redirect } from "next/navigation";
 
 const emojiMap: Record<string, string> = {
-  "Salmón": "🐟",
-  "Camarón": "🦐",
-  "Pulpo": "🐙",
-  "Atún": "🐟",
-  "Robalo": "🐠",
-  "Mariscos": "🦪",
-  "Langosta": "🦞",
+  "Salmon": "🐟", "Shrimp": "🦐", "Octopus": "🐙", "Tuna": "🐟",
+  "Sea Bass": "🐠", "Shellfish": "🦪", "Lobster": "🦞",
 };
 
 /**
- * Página de Catálogo de Productos B2B.
+ * B2B Product Catalog Page.
  */
 export default async function ProductsPage() {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/");
-
-  let products: any[] = [];
-
-  try {
-    products = await prisma.product.findMany({
-      orderBy: { name: "asc" },
-    });
-  } catch (error) {
-    console.warn("DB not connected for Products. Using mock data.");
-    products = [
-      { id: "1", sku: "SAL-FIL-001", name: "Filete de Salmón Premium", category: "Salmón", basePrice: { toNumber: () => 285 }, unit: "kg", stock: { toNumber: () => 12 }, minOrderQuantity: { toNumber: () => 5 }, status: "ACTIVE" },
-      { id: "2", sku: "CAM-JUM-002", name: "Camarón Jumbo (16/20)", category: "Camarón", basePrice: { toNumber: () => 420 }, unit: "kg", stock: { toNumber: () => 25 }, minOrderQuantity: { toNumber: () => 10 }, status: "ACTIVE" },
-      { id: "3", sku: "PUL-FRE-001", name: "Pulpo Fresco Entero", category: "Pulpo", basePrice: { toNumber: () => 350 }, unit: "kg", stock: { toNumber: () => 18 }, minOrderQuantity: { toNumber: () => 3 }, status: "ACTIVE" },
-      { id: "4", sku: "ATU-ALE-001", name: "Atún Aleta Amarilla", category: "Atún", basePrice: { toNumber: () => 520 }, unit: "kg", stock: { toNumber: () => 45 }, minOrderQuantity: { toNumber: () => 5 }, status: "ACTIVE" },
-    ];
-  }
+  await AuthService.requireRole("ADMIN");
+  const products = await ProductService.getAllProducts();
 
   return (
     <>
-      <TopBar title="Productos" breadcrumb={["Dashboard", "Productos"]} />
+      <TopBar title="Products" breadcrumb={["Dashboard", "Products"]} />
 
       <div style={{ padding: "var(--space-8)" }}>
         {/* Header */}
         <div className={styles["page-header"]}>
           <div className={styles["page-header__left"]}>
-            <h1 className={styles["page-title"]}>Catálogo de Productos</h1>
+            <h1 className={styles["page-title"]}>Product Catalog</h1>
             <p className={styles["page-subtitle"]}>
-              {products.length} productos activos en el catálogo
+              {products.length} active products in the catalog
             </p>
           </div>
           <button className="btn btn-primary" id="add-product-btn">
-            + Nuevo Producto
+            + New Product
           </button>
         </div>
 
@@ -63,23 +40,23 @@ export default async function ProductsPage() {
             <input
               type="search"
               className={styles["filters__search-input"]}
-              placeholder="Buscar por nombre, SKU o categoría..."
+              placeholder="Search by name, SKU, or category..."
               id="product-search"
             />
           </div>
           <select className={styles.filters__select} id="category-filter">
-            <option value="">Todas las categorías</option>
-            <option value="salmon">Salmón</option>
-            <option value="camaron">Camarón</option>
-            <option value="atun">Atún</option>
-            <option value="mariscos">Mariscos</option>
-            <option value="langosta">Langosta</option>
+            <option value="">All categories</option>
+            <option value="salmon">Salmon</option>
+            <option value="shrimp">Shrimp</option>
+            <option value="tuna">Tuna</option>
+            <option value="shellfish">Shellfish</option>
+            <option value="lobster">Lobster</option>
           </select>
           <select className={styles.filters__select} id="sort-filter">
-            <option value="name">Ordenar por nombre</option>
-            <option value="price-asc">Precio: menor a mayor</option>
-            <option value="price-desc">Precio: mayor a menor</option>
-            <option value="stock">Stock disponible</option>
+            <option value="name">Sort by name</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="stock">Available stock</option>
           </select>
         </div>
 
@@ -91,7 +68,7 @@ export default async function ProductsPage() {
                 {emojiMap[product.category] || "🐟"}
                 <span className={styles["product-card__status"]}>
                   <span className={`badge ${product.status === "ACTIVE" ? "badge-success" : "badge-error"}`}>
-                    {product.status === "ACTIVE" ? "Activo" : "Inactivo"}
+                    {product.status === "ACTIVE" ? "Active" : "Inactive"}
                   </span>
                 </span>
               </div>
@@ -105,7 +82,7 @@ export default async function ProductsPage() {
                 </span>
                 <div className={styles["product-card__pricing"]}>
                   <span className={styles["product-card__price"]}>
-                    ${product.basePrice.toNumber().toFixed(2)}
+                    ${product.basePrice.toFixed(2)}
                   </span>
                   <span className={styles["product-card__unit"]}>
                     / {product.unit}
@@ -113,10 +90,10 @@ export default async function ProductsPage() {
                 </div>
                 <div className={styles["product-card__footer"]}>
                   <span className={styles["product-card__stock"]}>
-                    Stock: <strong>{product.stock.toNumber()}</strong> {product.unit}
+                    Stock: <strong>{product.stock}</strong> {product.unit}
                   </span>
                   <span className={styles["product-card__min-order"]}>
-                    Mín: {product.minOrderQuantity.toNumber()} {product.unit}
+                    Min: {product.minOrderQuantity} {product.unit}
                   </span>
                 </div>
               </div>
@@ -124,7 +101,7 @@ export default async function ProductsPage() {
           ))}
           {products.length === 0 && (
             <div className={styles["empty-state"]}>
-              <p>No hay productos en el catálogo.</p>
+              <p>No products in the catalog.</p>
             </div>
           )}
         </div>

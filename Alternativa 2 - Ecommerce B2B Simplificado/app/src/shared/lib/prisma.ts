@@ -3,8 +3,8 @@ import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 /**
- * Singleton de Prisma para evitar múltiples conexiones en desarrollo.
- * Actualizado para Prisma 7 con Driver Adapter para PostgreSQL.
+ * Prisma singleton to prevent multiple connections in development.
+ * Updated for Prisma 7 with PostgreSQL Driver Adapter.
  */
 const prismaClientSingleton = () => {
   const connectionString = process.env.DATABASE_URL;
