@@ -13,38 +13,38 @@
    1. CSS Custom Properties (Design Tokens)
    ============================================================ */
 :root {
-  /* ---- Color Palette: Deep Ocean ---- */
-  --color-bg-primary:     hsl(220, 25%, 7%);       /* Fondo principal oscuro   */
-  --color-bg-secondary:   hsl(220, 22%, 11%);      /* Paneles / cards          */
-  --color-bg-tertiary:    hsl(220, 20%, 15%);      /* Hover / elementos suaves */
-  --color-bg-glass:       hsla(220, 25%, 14%, 0.6);/* Glassmorphism            */
+  /* ---- Color Palette: La Cañada Seafood ---- */
+  --color-bg-primary:     hsl(0, 0%, 100%);        /* Fondo principal blanco   */
+  --color-bg-secondary:   hsl(210, 20%, 98%);      /* Paneles / cards          */
+  --color-bg-tertiary:    hsl(210, 14%, 96%);      /* Hover / elementos suaves */
+  --color-bg-glass:       hsla(0, 0%, 100%, 0.8);  /* Glassmorphism            */
 
-  --color-surface:        hsl(220, 18%, 18%);      /* Bordes, separadores      */
-  --color-border:         hsl(220, 15%, 22%);      /* Bordes sutiles           */
-  --color-border-hover:   hsl(220, 15%, 30%);      /* Bordes al hacer hover    */
+  --color-surface:        hsl(210, 14%, 89%);      /* Bordes, separadores      */
+  --color-border:         hsl(210, 14%, 89%);      /* Bordes sutiles           */
+  --color-border-hover:   hsl(210, 14%, 80%);      /* Bordes al hacer hover    */
 
   /* ---- Text Colors ---- */
-  --color-text-primary:   hsl(210, 20%, 95%);      /* Texto principal          */
-  --color-text-secondary: hsl(215, 15%, 60%);      /* Texto secundario/muted   */
-  --color-text-tertiary:  hsl(215, 12%, 42%);      /* Texto muy sutil          */
+  --color-text-primary:   hsl(205, 100%, 14%);     /* Texto principal (Navy)   */
+  --color-text-secondary: hsl(210, 10%, 40%);      /* Texto secundario/muted   */
+  --color-text-tertiary:  hsl(210, 10%, 60%);      /* Texto muy sutil          */
 
-  /* ---- Accent: Coral Reef (Primary Action) ---- */
-  --color-accent:         hsl(12, 85%, 58%);       /* Botones primarios        */
-  --color-accent-hover:   hsl(12, 85%, 50%);       /* Hover de botones         */
-  --color-accent-soft:    hsla(12, 85%, 58%, 0.12);/* Fondos suaves de accent  */
+  /* ---- Accent: Orange (Primary Action) ---- */
+  --color-accent:         hsl(22, 90%, 54%);       /* Botones primarios        */
+  --color-accent-hover:   hsl(22, 90%, 45%);       /* Hover de botones         */
+  --color-accent-soft:    hsla(22, 90%, 54%, 0.1); /* Fondos suaves de accent  */
 
-  /* ---- Accent: Aqua (Secondary / Info) ---- */
-  --color-aqua:           hsl(185, 72%, 48%);      /* Links, badges, info      */
-  --color-aqua-hover:     hsl(185, 72%, 40%);
-  --color-aqua-soft:      hsla(185, 72%, 48%, 0.1);
+  /* ---- Accent: Navy (Secondary / Info) ---- */
+  --color-aqua:           hsl(205, 100%, 14%);     /* Links, badges, info      */
+  --color-aqua-hover:     hsl(205, 100%, 20%);
+  --color-aqua-soft:      hsla(205, 100%, 14%, 0.1);
 
   /* ---- Status Colors ---- */
-  --color-success:        hsl(152, 60%, 46%);
-  --color-success-soft:   hsla(152, 60%, 46%, 0.1);
-  --color-warning:        hsl(38, 92%, 55%);
-  --color-warning-soft:   hsla(38, 92%, 55%, 0.1);
-  --color-error:          hsl(0, 72%, 56%);
-  --color-error-soft:     hsla(0, 72%, 56%, 0.1);
+  --color-success:        hsl(152, 60%, 36%);
+  --color-success-soft:   hsla(152, 60%, 36%, 0.1);
+  --color-warning:        hsl(38, 92%, 45%);
+  --color-warning-soft:   hsla(38, 92%, 45%, 0.1);
+  --color-error:          hsl(0, 72%, 46%);
+  --color-error-soft:     hsla(0, 72%, 46%, 0.1);
 
   /* ---- Typography ---- */
   --font-sans:            'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;

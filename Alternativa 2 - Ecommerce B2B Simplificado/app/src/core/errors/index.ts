@@ -1,5 +1,5 @@
 /**
- * Custom domain errors for FishiFishi B2B.
+ * Custom domain errors for La Cañada Seafood B2B.
  * These errors are framework-agnostic and are used
  * in both services and API routes.
  */

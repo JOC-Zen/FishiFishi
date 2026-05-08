@@ -1,6 +1,6 @@
-# 🐟 FishiFishi B2B — Premium Seafood Ecommerce
+# 🌅 La Cañada Seafood B2B — Premium Seafood Ecommerce
 
-FishiFishi B2B is a state-of-the-art ecommerce platform designed specifically for the seafood wholesale industry. Built with a focus on high-performance, resilience, and a premium "Deep Ocean" aesthetic.
+La Cañada Seafood B2B is a state-of-the-art ecommerce platform designed specifically for the seafood wholesale industry. Built with a focus on high-performance, resilience, and a premium aesthetic.
 
 ## 🚀 Key Features
 

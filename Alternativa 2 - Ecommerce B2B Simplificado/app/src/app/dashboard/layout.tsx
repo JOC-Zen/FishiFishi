@@ -4,8 +4,8 @@ import styles from "./layout.module.css";
 import { getDictionary } from "@/shared/i18n/server";
 
 export const metadata: Metadata = {
-  title: "Dashboard — FishiFishi B2B",
-  description: "FishiFishi B2B platform control panel.",
+  title: "Dashboard — La Cañada Seafood",
+  description: "La Cañada Seafood B2B platform control panel.",
 };
 
 /**

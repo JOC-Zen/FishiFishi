@@ -4,8 +4,8 @@ import styles from "./layout.module.css";
 import { getDictionary } from "@/shared/i18n/server";
 
 export const metadata: Metadata = {
-  title: "Client Portal — FishiFishi B2B",
-  description: "B2B shopping portal for FishiFishi wholesale clients.",
+  title: "Client Portal — La Cañada Seafood",
+  description: "B2B shopping portal for La Cañada Seafood wholesale clients.",
 };
 
 /**
@@ -24,8 +24,8 @@ export default async function PortalLayout({
       {/* ---- Navbar ---- */}
       <nav className={styles.navbar}>
         <Link href="/portal" className={styles.navbar__brand}>
-          <div className={styles.navbar__logo}>🐟</div>
-          <span className={styles.navbar__title}>FishiFishi</span>
+          <div className={styles.navbar__logo}>🌅</div>
+          <span className={styles.navbar__title}>La Cañada Seafood</span>
         </Link>
 
         <div className={styles.navbar__nav}>

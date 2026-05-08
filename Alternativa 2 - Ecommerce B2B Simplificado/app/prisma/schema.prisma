@@ -1,4 +1,4 @@
-// FishiFishi B2B — Prisma Schema
+// La Cañada Seafood B2B — Prisma Schema
 
 generator client {
   provider = "prisma-client-js"

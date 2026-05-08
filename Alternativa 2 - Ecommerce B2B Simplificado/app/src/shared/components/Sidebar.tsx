@@ -52,8 +52,8 @@ export default function Sidebar({ dict }: { dict: any }) {
     <aside className={styles.sidebar}>
       {/* Logo */}
       <Link href="/dashboard" className={styles.sidebar__logo}>
-        <span className={styles["sidebar__logo-icon"]}>🐟</span>
-        <span className={styles["sidebar__logo-text"]}>FishiFishi</span>
+        <span className={styles["sidebar__logo-icon"]}>🌅</span>
+        <span className={styles["sidebar__logo-text"]}>La Cañada Seafood</span>
       </Link>
 
       {/* Navigation */}

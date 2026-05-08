@@ -157,7 +157,7 @@ export default async function ClientOrdersPage() {
         })}
         {orders.length === 0 && (
           <div style={{ textAlign: "center", padding: "var(--space-12)" }}>
-            <p>You haven't placed any orders yet.</p>
+            <p>You haven&apos;t placed any orders yet.</p>
           </div>
         )}
       </div>

@@ -5,9 +5,9 @@ import { getDictionary } from "@/shared/i18n/server";
 import { I18nProvider } from "@/shared/i18n/I18nProvider";
 
 export const metadata: Metadata = {
-  title: "FishiFishi B2B — Wholesale Commerce Platform",
+  title: "La Cañada Seafood — Global. Trade Smart.",
   description:
-    "Simplified B2B platform for wholesale order management, inventory, and volume-based pricing.",
+    "Global B2B platform for seafood wholesale order management, inventory, and volume-based pricing.",
 };
 
 import { Providers } from "./providers";

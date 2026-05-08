@@ -7,7 +7,7 @@ import styles from "./page.module.css";
 import { useTranslation } from "@/shared/i18n/I18nProvider";
 
 /**
- * Home Page (Landing + Login) for FishiFishi B2B.
+ * Home Page (Landing + Login) for La Cañada Seafood B2B.
  */
 export default function Home() {
   const { dict } = useTranslation();
@@ -47,8 +47,8 @@ export default function Home() {
       {/* ---- Left Panel: Branding ---- */}
       <section className={styles.landing__brand}>
         <div className={styles.landing__logo}>
-          <div className={styles["landing__logo-icon"]}>🐟</div>
-          <h1 className={styles.landing__title}>FishiFishi</h1>
+          <div className={styles["landing__logo-icon"]}>🌅</div>
+          <h1 className={styles.landing__title}>La Cañada Seafood</h1>
           <p className={styles.landing__subtitle}>
             {dict.portal.catalog_subtitle}
           </p>

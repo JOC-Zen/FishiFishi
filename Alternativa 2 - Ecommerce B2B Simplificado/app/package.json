@@ -1,7 +1,7 @@
 {
-  "name": "fishifishi-b2b",
+  "name": "la-canada-seafood-b2b",
   "version": "0.1.0",
-  "description": "FishiFishi - Ecommerce B2B Simplificado",
+  "description": "La Cañada Seafood - Ecommerce B2B",
   "private": true,
   "scripts": {
     "dev": "next dev",
