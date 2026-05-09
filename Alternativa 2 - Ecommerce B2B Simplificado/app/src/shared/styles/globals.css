@@ -1,77 +1,55 @@
 /* ============================================================
-   FishiFishi B2B — Global Design System
+   La Cañada Seafood B2B — Global Design System
    ============================================================
-   Este archivo define todas las variables de diseño (tokens),
-   la tipografía base, los resets y las utilidades globales.
-   Cualquier componente puede acceder a estas variables con var(--nombre).
+   Design tokens, typography, resets, and global utilities.
+   Components access these variables with var(--nombre).
    ============================================================ */
 
 /* ---- Google Fonts ---- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@600;700&family=Dancing+Script:wght@600&display=swap');
 
 /* ============================================================
-   1. CSS Custom Properties (Design Tokens)
+   1. CSS Custom Properties (Design Tokens) — Light Theme
    ============================================================ */
 :root {
   /* ---- Color Palette: La Cañada Seafood ---- */
-  --color-bg-primary:     hsl(0, 0%, 100%);        /* Fondo principal blanco   */
+  --color-bg-primary:     #FFFFFF;                 /* Fondo principal blanco   */
   --color-bg-secondary:   hsl(210, 20%, 98%);      /* Paneles / cards          */
   --color-bg-tertiary:    hsl(210, 14%, 96%);      /* Hover / elementos suaves */
-  --color-bg-glass:       hsla(0, 0%, 100%, 0.8);  /* Glassmorphism            */
+  --color-bg-glass:       hsla(0, 0%, 100%, 0.85); /* Glassmorphism            */
 
   --color-surface:        hsl(210, 14%, 89%);      /* Bordes, separadores      */
   --color-border:         hsl(210, 14%, 89%);      /* Bordes sutiles           */
   --color-border-hover:   hsl(210, 14%, 80%);      /* Bordes al hacer hover    */
 
   /* ---- Text Colors ---- */
-  --color-text-primary:   hsl(205, 100%, 14%);     /* Texto principal (Navy)   */
+  --color-text-primary:   #0D2438;                 /* Texto principal (Navy)   */
   --color-text-secondary: hsl(210, 10%, 40%);      /* Texto secundario/muted   */
   --color-text-tertiary:  hsl(210, 10%, 60%);      /* Texto muy sutil          */
 
   /* ---- Accent: Orange (Primary Action) ---- */
   --color-accent:         #FF6A00;                 /* Botones primarios        */
-  --color-accent-hover:   hsl(25, 100%, 45%);      /* Hover de botones         */
-  --color-accent-soft:    hsla(25, 100%, 50%, 0.1);/* Fondos suaves de accent  */
+  --color-accent-hover:   #E55D00;                 /* Hover de botones         */
+  --color-accent-soft:    hsla(25, 100%, 50%, 0.08);/* Fondos suaves de accent */
 
   /* ---- Accent: Navy (Secondary / Info) ---- */
   --color-aqua:           #0D2438;                 /* Links, badges, info      */
-  --color-aqua-hover:     hsl(205, 100%, 20%);
-  --color-aqua-soft:      hsla(205, 100%, 14%, 0.1);
+  --color-aqua-hover:     #163554;
+  --color-aqua-soft:      hsla(208, 62%, 14%, 0.08);
 
   /* ---- Status Colors ---- */
   --color-success:        hsl(152, 60%, 36%);
-  --color-success-soft:   hsla(152, 60%, 36%, 0.1);
-  --color-warning:        hsl(38, 92%, 45%);
-  --color-warning-soft:   hsla(38, 92%, 45%, 0.1);
-  --color-error:          hsl(0, 72%, 46%);
-  --color-error-soft:     hsla(0, 72%, 46%, 0.1);
-}
-
-/* ============================================================
-   Dark Theme (Navy Blue)
-   ============================================================ */
-[data-theme="dark"] {
-  --color-bg-primary:     #0D2438;                 /* Fondo principal oscuro (Navy) */
-  --color-bg-secondary:   #122b42;                 /* Paneles / cards          */
-  --color-bg-tertiary:    #16334e;                 /* Hover / elementos suaves */
-  --color-bg-glass:       hsla(208, 62%, 14%, 0.8);/* Glassmorphism            */
-
-  --color-surface:        #1f4160;                 /* Bordes, separadores      */
-  --color-border:         #1f4160;                 /* Bordes sutiles           */
-  --color-border-hover:   #2a5276;                 /* Bordes al hacer hover    */
-
-  --color-text-primary:   #FFFFFF;                 /* Texto principal          */
-  --color-text-secondary: hsl(210, 20%, 80%);      /* Texto secundario/muted   */
-  --color-text-tertiary:  hsl(210, 20%, 60%);      /* Texto muy sutil          */
-
-  --color-aqua:           hsl(190, 80%, 60%);      /* Links en modo oscuro     */
-  --color-aqua-hover:     hsl(190, 80%, 70%);
-  --color-aqua-soft:      hsla(190, 80%, 60%, 0.1);
-
+  --color-success-soft:   hsla(152, 60%, 36%, 0.08);
+  --color-warning:        hsl(38, 92%, 50%);
+  --color-warning-soft:   hsla(38, 92%, 50%, 0.08);
+  --color-error:          hsl(0, 72%, 50%);
+  --color-error-soft:     hsla(0, 72%, 50%, 0.08);
 
   /* ---- Typography ---- */
   --font-sans:            'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono:            'JetBrains Mono', 'Fira Code', monospace;
+  --font-serif:           'Playfair Display', Georgia, serif;
+  --font-script:          'Dancing Script', cursive;
 
   --text-xs:   0.75rem;     /* 12px */
   --text-sm:   0.875rem;    /* 14px */
@@ -108,13 +86,13 @@
   --radius-2xl:  1.5rem;    /* 24px */
   --radius-full: 9999px;
 
-  /* ---- Shadows ---- */
-  --shadow-sm:  0 1px 2px hsla(0, 0%, 0%, 0.3);
-  --shadow-md:  0 4px 12px hsla(0, 0%, 0%, 0.25);
-  --shadow-lg:  0 8px 32px hsla(0, 0%, 0%, 0.3);
-  --shadow-xl:  0 16px 48px hsla(0, 0%, 0%, 0.35);
-  --shadow-glow-accent: 0 0 20px hsla(12, 85%, 58%, 0.25);
-  --shadow-glow-aqua:   0 0 20px hsla(185, 72%, 48%, 0.2);
+  /* ---- Shadows (tuned for light backgrounds) ---- */
+  --shadow-sm:  0 1px 2px hsla(208, 62%, 14%, 0.06);
+  --shadow-md:  0 4px 12px hsla(208, 62%, 14%, 0.08);
+  --shadow-lg:  0 8px 32px hsla(208, 62%, 14%, 0.10);
+  --shadow-xl:  0 16px 48px hsla(208, 62%, 14%, 0.12);
+  --shadow-glow-accent: 0 0 20px hsla(25, 100%, 50%, 0.20);
+  --shadow-glow-aqua:   0 0 20px hsla(208, 62%, 14%, 0.15);
 
   /* ---- Transitions ---- */
   --transition-fast:   150ms ease;
@@ -134,9 +112,37 @@
   --sidebar-width:     260px;
 }
 
+/* ============================================================
+   2. Dark Theme Override (Navy Blue)
+   ============================================================ */
+[data-theme="dark"] {
+  --color-bg-primary:     #0D2438;
+  --color-bg-secondary:   #122b42;
+  --color-bg-tertiary:    #16334e;
+  --color-bg-glass:       hsla(208, 62%, 14%, 0.85);
+
+  --color-surface:        #1f4160;
+  --color-border:         #1f4160;
+  --color-border-hover:   #2a5276;
+
+  --color-text-primary:   #FFFFFF;
+  --color-text-secondary: hsl(210, 20%, 75%);
+  --color-text-tertiary:  hsl(210, 20%, 55%);
+
+  --color-aqua:           hsl(190, 80%, 60%);
+  --color-aqua-hover:     hsl(190, 80%, 70%);
+  --color-aqua-soft:      hsla(190, 80%, 60%, 0.10);
+
+  --shadow-sm:  0 1px 2px hsla(0, 0%, 0%, 0.20);
+  --shadow-md:  0 4px 12px hsla(0, 0%, 0%, 0.25);
+  --shadow-lg:  0 8px 32px hsla(0, 0%, 0%, 0.30);
+  --shadow-xl:  0 16px 48px hsla(0, 0%, 0%, 0.35);
+  --shadow-glow-accent: 0 0 20px hsla(25, 100%, 50%, 0.25);
+  --shadow-glow-aqua:   0 0 20px hsla(190, 80%, 60%, 0.20);
+}
 
 /* ============================================================
-   2. CSS Reset & Base Styles
+   3. CSS Reset & Base Styles
    ============================================================ */
 *,
 *::before,
@@ -161,6 +167,8 @@ body {
   color: var(--color-text-primary);
   background-color: var(--color-bg-primary);
   min-height: 100vh;
+  transition: background-color var(--transition-base),
+              color var(--transition-base);
 }
 
 a {
@@ -197,8 +205,8 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: var(--color-aqua);
-  box-shadow: 0 0 0 3px var(--color-aqua-soft);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-soft);
 }
 
 ul, ol {
@@ -211,7 +219,7 @@ table {
 }
 
 /* ============================================================
-   3. Utility Classes
+   4. Utility Classes
    ============================================================ */
 
 /* ---- Glassmorphism Card ---- */
@@ -269,7 +277,7 @@ table {
 }
 
 /* ============================================================
-   4. Scrollbar Customization
+   5. Scrollbar Customization
    ============================================================ */
 ::-webkit-scrollbar {
   width: 6px;
@@ -290,7 +298,7 @@ table {
 }
 
 /* ============================================================
-   5. Keyframe Animations
+   6. Keyframe Animations
    ============================================================ */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
@@ -303,8 +311,8 @@ table {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 8px hsla(12, 85%, 58%, 0.15); }
-  50%      { box-shadow: 0 0 24px hsla(12, 85%, 58%, 0.35); }
+  0%, 100% { box-shadow: 0 0 8px hsla(25, 100%, 50%, 0.15); }
+  50%      { box-shadow: 0 0 24px hsla(25, 100%, 50%, 0.30); }
 }
 
 .animate-fade-in {

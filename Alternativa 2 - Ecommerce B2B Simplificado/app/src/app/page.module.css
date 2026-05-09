@@ -1,5 +1,5 @@
 /* ============================================================
-   FishiFishi B2B — Landing Page Styles
+   La Cañada Seafood B2B — Landing Page Styles
    ============================================================ */
 
 .landing {
@@ -18,8 +18,8 @@
   padding: var(--space-16);
   position: relative;
   background:
-    radial-gradient(ellipse at 20% 80%, hsla(185, 72%, 48%, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, hsla(12, 85%, 58%, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 80%, hsla(208, 62%, 14%, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, hsla(25, 100%, 50%, 0.05) 0%, transparent 50%),
     var(--color-bg-primary);
   overflow: hidden;
 }
@@ -32,7 +32,7 @@
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, hsla(185, 72%, 48%, 0.04), transparent 70%);
+  background: radial-gradient(circle, hsla(208, 62%, 14%, 0.04), transparent 70%);
   animation: float 20s ease-in-out infinite;
 }
 
@@ -44,7 +44,7 @@
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, hsla(12, 85%, 58%, 0.04), transparent 70%);
+  background: radial-gradient(circle, hsla(25, 100%, 50%, 0.04), transparent 70%);
   animation: float 25s ease-in-out infinite reverse;
 }
 

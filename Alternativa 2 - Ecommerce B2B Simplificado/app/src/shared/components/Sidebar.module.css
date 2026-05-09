@@ -1,5 +1,5 @@
 /* ============================================================
-   FishiFishi B2B — Sidebar Navigation
+   La Cañada Seafood B2B — Sidebar Navigation
    ============================================================ */
 
 .sidebar {
@@ -151,7 +151,7 @@
   width: 36px;
   height: 36px;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, var(--color-aqua), hsl(200, 60%, 40%));
+  background: linear-gradient(135deg, var(--color-aqua), var(--color-accent));
   display: flex;
   align-items: center;
   justify-content: center;

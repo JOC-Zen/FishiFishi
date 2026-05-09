@@ -33,10 +33,10 @@ export const authOptions: NextAuthOptions = {
         }
 
         // Demo fallback
-        if (credentials.email === "admin@fishifishi.com" && credentials.password === "admin123") {
+        if (credentials.email === "admin@lc-seafood.com" && credentials.password === "admin123") {
           return {
             id: "demo-id",
-            email: "admin@fishifishi.com",
+            email: "admin@lc-seafood.com",
             name: "Admin Demo",
             role: "ADMIN",
             tier: "GOLD",

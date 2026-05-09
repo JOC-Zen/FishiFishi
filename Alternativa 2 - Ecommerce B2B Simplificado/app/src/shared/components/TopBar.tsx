@@ -39,7 +39,7 @@ export default function TopBar({ title, breadcrumb }: TopBarProps) {
         )}
       </div>
 
-        <div className={styles.topbar__actions}>
+      <div className={styles.topbar__actions}>
         {/* Theme Switcher */}
         <ThemeToggle />
 

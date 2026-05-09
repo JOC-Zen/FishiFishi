@@ -26,7 +26,7 @@ export default async function PortalLayout({
       {/* ---- Navbar ---- */}
       <nav className={styles.navbar}>
         <div style={{ padding: "0 var(--space-4)" }}>
-          <Logo variant="negative" href="/portal" />
+          <Logo variant="main" size="sm" href="/portal" />
         </div>
 
         <div className={styles.navbar__nav}>

@@ -1,0 +1,75 @@
+/* ============================================================
+   La Cañada Seafood B2B — Logo Component
+   ============================================================ */
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  user-select: none;
+}
+
+.logo__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+}
+
+.logo__title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  z-index: 2;
+  position: relative;
+}
+
+.logo__subtitle {
+  font-family: var(--font-script);
+  font-weight: 600;
+  font-size: 1.35rem;
+  line-height: 0.9;
+  margin-top: -0.15rem;
+  margin-left: 0.3rem;
+  z-index: 2;
+  position: relative;
+}
+
+/* ---- Color Variants ---- */
+
+/* Main: Navy text + Orange accent (on light backgrounds) */
+.logo--main .logo__title    { color: #0D2438; }
+.logo--main .logo__subtitle { color: #FF6A00; }
+
+/* Negative: White on dark backgrounds */
+.logo--negative .logo__title    { color: #FFFFFF; }
+.logo--negative .logo__subtitle { color: #FFFFFF; }
+
+/* Orange: White on orange backgrounds */
+.logo--orange .logo__title    { color: #FFFFFF; }
+.logo--orange .logo__subtitle { color: #FFFFFF; }
+
+/* ---- Sunburst Icon ---- */
+.logo__sun {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.logo__sun svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Size Variants ---- */
+.logo--sm .logo__title    { font-size: 1.1rem; }
+.logo--sm .logo__subtitle { font-size: 0.95rem; }
+.logo--sm .logo__sun      { width: 26px; height: 26px; }
+
+.logo--lg .logo__title    { font-size: 2.2rem; }
+.logo--lg .logo__subtitle { font-size: 1.8rem; }
+.logo--lg .logo__sun      { width: 48px; height: 48px; }
