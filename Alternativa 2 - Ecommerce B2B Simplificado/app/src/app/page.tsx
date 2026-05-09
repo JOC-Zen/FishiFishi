@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import { useTranslation } from "@/shared/i18n/I18nProvider";
 import Logo from "@/shared/components/Logo";
+import ThemeToggle from "@/shared/components/ThemeToggle";
 
 /**
  * Home Page (Landing + Login) for La Cañada Seafood B2B.
@@ -45,6 +46,9 @@ export default function Home() {
 
   return (
     <main className={styles.landing}>
+      <div style={{ position: "absolute", top: "1rem", right: "1rem", zIndex: 10 }}>
+        <ThemeToggle />
+      </div>
       {/* ---- Left Panel: Branding ---- */}
       <section className={styles.landing__brand}>
         <div className={styles.landing__logo}>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "./layout.module.css";
 import { getDictionary } from "@/shared/i18n/server";
 import Logo from "@/shared/components/Logo";
+import ThemeToggle from "@/shared/components/ThemeToggle";
 
 export const metadata: Metadata = {
   title: "Client Portal — La Cañada Seafood",
@@ -49,6 +50,7 @@ export default async function PortalLayout({
         </div>
 
         <div className={styles.navbar__right}>
+          <ThemeToggle />
           <div className={styles.navbar__user}>
             <div className={styles.navbar__avatar}>JG</div>
             <div>

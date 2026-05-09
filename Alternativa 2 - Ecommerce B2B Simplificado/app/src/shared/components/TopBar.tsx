@@ -1,6 +1,8 @@
 "use client";
 
+import React from "react";
 import styles from "./TopBar.module.css";
+import ThemeToggle from "./ThemeToggle";
 import { useTranslation } from "@/shared/i18n/I18nProvider";
 
 interface TopBarProps {
@@ -37,7 +39,10 @@ export default function TopBar({ title, breadcrumb }: TopBarProps) {
         )}
       </div>
 
-      <div className={styles.topbar__actions}>
+        <div className={styles.topbar__actions}>
+        {/* Theme Switcher */}
+        <ThemeToggle />
+
         {/* Language Switcher */}
         <div className={styles.topbar__language}>
           <button 

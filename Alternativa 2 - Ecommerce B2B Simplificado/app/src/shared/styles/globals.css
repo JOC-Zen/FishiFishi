@@ -29,12 +29,12 @@
   --color-text-tertiary:  hsl(210, 10%, 60%);      /* Texto muy sutil          */
 
   /* ---- Accent: Orange (Primary Action) ---- */
-  --color-accent:         hsl(22, 90%, 54%);       /* Botones primarios        */
-  --color-accent-hover:   hsl(22, 90%, 45%);       /* Hover de botones         */
-  --color-accent-soft:    hsla(22, 90%, 54%, 0.1); /* Fondos suaves de accent  */
+  --color-accent:         #FF6A00;                 /* Botones primarios        */
+  --color-accent-hover:   hsl(25, 100%, 45%);      /* Hover de botones         */
+  --color-accent-soft:    hsla(25, 100%, 50%, 0.1);/* Fondos suaves de accent  */
 
   /* ---- Accent: Navy (Secondary / Info) ---- */
-  --color-aqua:           hsl(205, 100%, 14%);     /* Links, badges, info      */
+  --color-aqua:           #0D2438;                 /* Links, badges, info      */
   --color-aqua-hover:     hsl(205, 100%, 20%);
   --color-aqua-soft:      hsla(205, 100%, 14%, 0.1);
 
@@ -45,6 +45,29 @@
   --color-warning-soft:   hsla(38, 92%, 45%, 0.1);
   --color-error:          hsl(0, 72%, 46%);
   --color-error-soft:     hsla(0, 72%, 46%, 0.1);
+}
+
+/* ============================================================
+   Dark Theme (Navy Blue)
+   ============================================================ */
+[data-theme="dark"] {
+  --color-bg-primary:     #0D2438;                 /* Fondo principal oscuro (Navy) */
+  --color-bg-secondary:   #122b42;                 /* Paneles / cards          */
+  --color-bg-tertiary:    #16334e;                 /* Hover / elementos suaves */
+  --color-bg-glass:       hsla(208, 62%, 14%, 0.8);/* Glassmorphism            */
+
+  --color-surface:        #1f4160;                 /* Bordes, separadores      */
+  --color-border:         #1f4160;                 /* Bordes sutiles           */
+  --color-border-hover:   #2a5276;                 /* Bordes al hacer hover    */
+
+  --color-text-primary:   #FFFFFF;                 /* Texto principal          */
+  --color-text-secondary: hsl(210, 20%, 80%);      /* Texto secundario/muted   */
+  --color-text-tertiary:  hsl(210, 20%, 60%);      /* Texto muy sutil          */
+
+  --color-aqua:           hsl(190, 80%, 60%);      /* Links en modo oscuro     */
+  --color-aqua-hover:     hsl(190, 80%, 70%);
+  --color-aqua-soft:      hsla(190, 80%, 60%, 0.1);
+
 
   /* ---- Typography ---- */
   --font-sans:            'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
