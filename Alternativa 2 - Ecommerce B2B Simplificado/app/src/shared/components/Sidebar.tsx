@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Sidebar.module.css";
 import { useSession, signOut } from "next-auth/react";
+import Logo from "./Logo";
 
 /**
  * Sidebar — Main lateral navigation component.
@@ -51,10 +52,9 @@ export default function Sidebar({ dict }: { dict: any }) {
   return (
     <aside className={styles.sidebar}>
       {/* Logo */}
-      <Link href="/dashboard" className={styles.sidebar__logo}>
-        <span className={styles["sidebar__logo-icon"]}>🌅</span>
-        <span className={styles["sidebar__logo-text"]}>La Cañada Seafood</span>
-      </Link>
+      <div style={{ padding: "var(--space-4)", display: "flex", justifyContent: "center" }}>
+        <Logo variant="main" href="/dashboard" />
+      </div>
 
       {/* Navigation */}
       <nav className={styles.sidebar__nav}>

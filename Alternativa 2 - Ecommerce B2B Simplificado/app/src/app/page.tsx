@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import { useTranslation } from "@/shared/i18n/I18nProvider";
+import Logo from "@/shared/components/Logo";
 
 /**
  * Home Page (Landing + Login) for La Cañada Seafood B2B.
@@ -47,8 +48,7 @@ export default function Home() {
       {/* ---- Left Panel: Branding ---- */}
       <section className={styles.landing__brand}>
         <div className={styles.landing__logo}>
-          <div className={styles["landing__logo-icon"]}>🌅</div>
-          <h1 className={styles.landing__title}>La Cañada Seafood</h1>
+          <Logo variant="main" />
           <p className={styles.landing__subtitle}>
             {dict.portal.catalog_subtitle}
           </p>

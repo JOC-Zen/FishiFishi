@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./layout.module.css";
 import { getDictionary } from "@/shared/i18n/server";
+import Logo from "@/shared/components/Logo";
 
 export const metadata: Metadata = {
   title: "Client Portal — La Cañada Seafood",
@@ -23,10 +24,9 @@ export default async function PortalLayout({
     <div className={styles.portal}>
       {/* ---- Navbar ---- */}
       <nav className={styles.navbar}>
-        <Link href="/portal" className={styles.navbar__brand}>
-          <div className={styles.navbar__logo}>🌅</div>
-          <span className={styles.navbar__title}>La Cañada Seafood</span>
-        </Link>
+        <div style={{ padding: "0 var(--space-4)" }}>
+          <Logo variant="negative" href="/portal" />
+        </div>
 
         <div className={styles.navbar__nav}>
           <Link href="/portal" className={styles.navbar__link} id="nav-catalog">
