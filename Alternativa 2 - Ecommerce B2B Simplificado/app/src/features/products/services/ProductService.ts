@@ -74,4 +74,25 @@ export class ProductService {
       return all.find((p) => p.sku === sku) || null;
     }
   }
+
+  static async getProductById(id: string): Promise<Product | null> {
+    try {
+      const p = await prisma.product.findUnique({ where: { id } });
+      if (!p) return null;
+      return {
+        id: p.id,
+        sku: p.sku,
+        name: p.name,
+        category: p.category,
+        basePrice: p.basePrice.toNumber(),
+        unit: p.unit,
+        stock: p.stock.toNumber(),
+        minOrderQuantity: p.minOrderQuantity.toNumber(),
+        status: p.status as "ACTIVE" | "INACTIVE",
+      };
+    } catch (error) {
+      const all = await this.getAllProducts();
+      return all.find((p) => p.id === id) || null;
+    }
+  }
 }

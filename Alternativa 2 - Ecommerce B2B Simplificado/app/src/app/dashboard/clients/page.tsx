@@ -2,6 +2,7 @@ import { AuthService } from "@/features/auth/services/AuthService";
 import { UserService } from "@/features/users/services/UserService";
 import TopBar from "@/shared/components/TopBar";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 const tierLabels: Record<string, string> = { GOLD: "Gold", SILVER: "Silver", BRONZE: "Bronze" };
 
@@ -143,7 +144,7 @@ export default async function ClientsPage() {
                     {client.email}
                   </span>
                   <div className={styles["client-card__actions"]}>
-                    <button className="btn btn-ghost btn-sm">View</button>
+                    <Link href={`/dashboard/clients/${client.id}`} className="btn btn-ghost btn-sm">View</Link>
                     <button className="btn btn-ghost btn-sm">Edit</button>
                   </div>
                 </div>

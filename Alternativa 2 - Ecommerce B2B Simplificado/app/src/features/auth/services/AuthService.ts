@@ -32,6 +32,10 @@ export class AuthService {
    */
   static async requireRole(role: "ADMIN" | "CLIENT") {
     const session = await this.validateSession();
+    // Allow ADMIN to see CLIENT pages for preview/audit
+    if (session.user.role === "ADMIN" && role === "CLIENT") {
+      return session;
+    }
     if (session.user.role !== role) {
       redirect(session.user.role === "ADMIN" ? "/dashboard" : "/portal");
     }

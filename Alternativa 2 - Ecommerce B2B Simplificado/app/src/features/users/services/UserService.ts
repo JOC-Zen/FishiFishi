@@ -52,4 +52,14 @@ export class UserService {
       ];
     }
   }
+
+  static async getClientById(id: string): Promise<B2BClient | null> {
+    try {
+      const clients = await this.getAllClients();
+      return clients.find(c => c.id === id) || null;
+    } catch (error) {
+      const clients = await this.getAllClients();
+      return clients.find(c => c.id === id) || null;
+    }
+  }
 }

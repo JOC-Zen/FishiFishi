@@ -1,0 +1,180 @@
+/* ============================================================
+   La Canada Seafood B2B - Client Detail Page
+   ============================================================ */
+
+.container {
+  padding: var(--space-8);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ---- Header ---- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.header__left {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: white;
+}
+
+.avatar--gold   { background: linear-gradient(135deg, #FFD700, #DAA520); }
+.avatar--silver { background: linear-gradient(135deg, #C0C0C0, #808080); }
+.avatar--bronze { background: linear-gradient(135deg, #CD7F32, #A0522D); }
+
+.title_wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.company {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+/* ---- Grid ---- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-8);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Card ---- */
+.card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.card__title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-6);
+  color: var(--color-text-primary);
+}
+
+/* ---- Info List ---- */
+.info_list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.info_item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info_label {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.info_value {
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+/* ---- Stats Grid ---- */
+.stats_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.stat {
+  padding: var(--space-4);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.stat__value {
+  display: block;
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--color-text-primary);
+}
+
+.stat__label {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* ---- Orders List ---- */
+.order_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.order_row:last-child {
+  border-bottom: none;
+}
+
+.order_info {
+  display: flex;
+  flex-direction: column;
+}
+
+.order_number {
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.order_date {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+.order_meta {
+  text-align: right;
+}
+
+.order_amount {
+  font-weight: 700;
+  font-size: var(--text-sm);
+}

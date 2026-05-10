@@ -70,7 +70,7 @@ export default async function ShippingPage() {
           </div>
           <table className={styles["shipments-table"]}>
             <thead>
-              <tr><th>Tracking</th><th>Route</th><th>Client</th><th>Carrier</th><th>Status</th><th>ETA</th></tr>
+              <tr><th>Tracking</th><th>Route</th><th>Client</th><th>Carrier</th><th>Progress</th><th>Status</th><th>Weight</th><th>ETA</th></tr>
             </thead>
             <tbody>
               {mockShipments.map((s) => (
@@ -79,7 +79,20 @@ export default async function ShippingPage() {
                   <td><div className={styles["shipment-route"]}><span className={styles["shipment-route__from"]}>{s.origin}</span><span className={styles["shipment-route__arrow"]}>→</span><span className={styles["shipment-route__to"]}>{s.destination}</span></div></td>
                   <td style={{ fontWeight: 500 }}>{s.client}</td>
                   <td><div className={styles.carrier}><div className={styles.carrier__logo}>{s.carrierEmoji}</div><span className={styles.carrier__name}>{s.carrier}</span></div></td>
+                  <td>
+                    <div className={styles["shipment-progress"]}>
+                      {[1, 2, 3, 4].map((step) => (
+                        <div
+                          key={step}
+                          className={`${styles["shipment-progress__step"]} ${
+                            step <= s.progress ? styles["shipment-progress__step--done"] : ""
+                          } ${step === s.progress ? styles["shipment-progress__step--current"] : ""}`}
+                        />
+                      ))}
+                    </div>
+                  </td>
                   <td><span className={statusMap[s.status].badge}>{statusMap[s.status].label}</span></td>
+                  <td><span style={{ fontWeight: 500 }}>{s.weight}</span></td>
                   <td><div className={styles.eta}><span className={styles.eta__date}>{s.eta}</span><span className={styles.eta__label}>{s.etaLabel}</span></div></td>
                 </tr>
               ))}

@@ -1,0 +1,246 @@
+/* ============================================================
+   La Canada Seafood B2B - Order Detail Page
+   ============================================================ */
+
+.container {
+  padding: var(--space-8);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ---- Header ---- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.header__left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+/* ---- Grid Layout ---- */
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-8);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Section Card ---- */
+.card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.card__title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* ---- Order Items Table ---- */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  padding: var(--space-3) var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table td {
+  padding: var(--space-4) var(--space-2);
+  font-size: var(--text-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+}
+
+.product__name {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.product__id {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+}
+
+/* ---- Summary ---- */
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 2px solid var(--color-bg-tertiary);
+}
+
+.summary__row {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-12);
+  font-size: var(--text-sm);
+}
+
+.summary__label {
+  color: var(--color-text-secondary);
+}
+
+.summary__value {
+  font-weight: 600;
+  min-width: 100px;
+  text-align: right;
+}
+
+.summary__row--total {
+  font-size: var(--text-lg);
+  color: var(--color-accent);
+}
+
+.summary__row--total .summary__value {
+  font-weight: 800;
+}
+
+/* ---- Info Groups ---- */
+.info_group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.info_item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.info_label {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.info_value {
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+/* ---- Status Badge ---- */
+.status_pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ---- Progress Timeline ---- */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  position: relative;
+  padding-left: var(--space-8);
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.timeline_item {
+  position: relative;
+}
+
+.timeline_dot {
+  position: absolute;
+  left: -27px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-secondary);
+  border: 2px solid var(--color-border);
+  z-index: 2;
+}
+
+.timeline_item--active .timeline_dot {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
+}
+
+.timeline_item--done .timeline_dot {
+  border-color: var(--color-success);
+  background: var(--color-success);
+}
+
+.timeline_content {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline_title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.timeline_date {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}

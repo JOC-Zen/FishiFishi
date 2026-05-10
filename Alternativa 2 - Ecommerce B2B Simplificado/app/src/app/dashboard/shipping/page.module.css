@@ -1,5 +1,5 @@
 /* ============================================================
-   La Cañada Seafood B2B â€” Shipping Page
+   La Canada Seafood B2B - Shipping Page
    ============================================================ */
 
 .page-header {
@@ -217,6 +217,30 @@
 .eta__label {
   font-size: var(--text-xs);
   color: var(--color-text-tertiary);
+}
+
+/* ---- Shipment Progress Bar ---- */
+.shipment-progress {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.shipment-progress__step {
+  width: 20px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-border);
+  transition: all var(--transition-fast);
+}
+
+.shipment-progress__step--done {
+  background: var(--color-success);
+}
+
+.shipment-progress__step--current {
+  background: var(--color-accent);
+  box-shadow: 0 0 6px hsla(25, 100%, 50%, 0.4);
 }
 
 @media (max-width: 1100px) {

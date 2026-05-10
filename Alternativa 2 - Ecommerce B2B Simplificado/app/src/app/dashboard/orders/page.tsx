@@ -2,6 +2,7 @@ import { AuthService } from "@/features/auth/services/AuthService";
 import { OrderService } from "@/features/orders/services/OrderService";
 import TopBar from "@/shared/components/TopBar";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 const statusClassMap: Record<string, string> = {
   PENDING: "badge badge-warning",
@@ -94,7 +95,9 @@ export default async function OrdersPage() {
                 return (
                   <tr key={order.id}>
                     <td>
-                      <span className={styles["order-id"]}>ORD-{order.orderNumber}</span>
+                      <Link href={`/dashboard/orders/${order.id}`} className={styles["order-id"]}>
+                        ORD-{order.orderNumber}
+                      </Link>
                     </td>
                     <td>
                       <div className={styles["order-client"]}>

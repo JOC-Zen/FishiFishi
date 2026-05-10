@@ -2,6 +2,7 @@ import { AuthService } from "@/features/auth/services/AuthService";
 import { ProductService } from "@/features/products/services/ProductService";
 import TopBar from "@/shared/components/TopBar";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 const emojiMap: Record<string, string> = {
   "Salmon": "🐟", "Shrimp": "🦐", "Octopus": "🐙", "Tuna": "🐟",
@@ -95,6 +96,10 @@ export default async function ProductsPage() {
                   <span className={styles["product-card__min-order"]}>
                     Min: {product.minOrderQuantity} {product.unit}
                   </span>
+                </div>
+                <div className={styles["product-card__actions"]}>
+                  <Link href={`/dashboard/products/${product.id}`} className="btn btn-ghost btn-sm" id={`edit-${product.id}`}>✏️ Edit</Link>
+                  <button className="btn btn-ghost btn-sm" id={`delete-${product.id}`}>🗑️ Delete</button>
                 </div>
               </div>
             </article>
