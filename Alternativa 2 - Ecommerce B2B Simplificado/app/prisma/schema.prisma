@@ -109,6 +109,7 @@ model Order {
   
   notes             String?
   shippingAddress   String?
+  trackingNumber    String?
   estimatedDelivery DateTime?
   
   createdAt         DateTime    @default(now())

@@ -110,8 +110,8 @@ export class OrderService {
           productId: i.productId,
           productName: i.product.name,
           quantity: i.quantity,
-          unitPrice: i.price.toNumber(),
-          subtotal: (i.quantity * i.price.toNumber()),
+          unitPrice: i.unitPrice.toNumber(),
+          subtotal: i.subtotal.toNumber(),
         })),
       };
     } catch (error) {

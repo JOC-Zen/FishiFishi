@@ -8,6 +8,10 @@ import { PrismaPg } from "@prisma/adapter-pg";
  */
 const prismaClientSingleton = () => {
   const connectionString = process.env.DATABASE_URL;
+  if (!connectionString) {
+    console.warn("[Prisma] DATABASE_URL is not defined. Using dummy client for fallback mode.");
+    return new PrismaClient(); // This will fail on actual calls but won't crash on init
+  }
   const pool = new Pool({ connectionString });
   const adapter = new PrismaPg(pool);
   return new PrismaClient({ adapter });
