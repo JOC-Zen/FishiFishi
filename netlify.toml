@@ -1,7 +1,6 @@
 [build]
-  base = "Alternativa 2 - Ecommerce B2B Simplificado/app"
-  command = "npm run build"
-  publish = ".next"
+  command = "cd \"Alternativa 2 - Ecommerce B2B Simplificado/app\" && npm run build"
+  publish = "Alternativa 2 - Ecommerce B2B Simplificado/app/.next"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
@@ -9,5 +8,4 @@
 [build.environment]
   NODE_VERSION = "20"
   NEXT_USE_NETLIFY_EDGE = "true"
-  NPM_FLAGS = "--version"
 
