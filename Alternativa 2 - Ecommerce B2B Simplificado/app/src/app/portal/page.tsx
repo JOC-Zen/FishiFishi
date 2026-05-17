@@ -1,12 +1,30 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import { useProductStore } from "@/features/products/store/useProductStore";
 import styles from "./page.module.css";
 
 const emojiMap: Record<string, string> = {
   "Salmon": "🐟", "Shrimp": "🦐", "Octopus": "🐙", "Tuna": "🐟",
   "Sea Bass": "🐠", "Shellfish": "🦪", "Lobster": "🦞",
+};
+
+const productImageMap: Record<string, string> = {
+  "Salmon": "/images/product-fish.png",
+  "Salmón": "/images/product-fish.png",
+  "Shrimp": "/images/product-shrimp.png",
+  "Camarón": "/images/product-shrimp.png",
+  "Octopus": "/images/product-other-seafood.png",
+  "Pulpo": "/images/product-other-seafood.png",
+  "Tuna": "/images/product-fish.png",
+  "Atún": "/images/product-fish.png",
+  "Sea Bass": "/images/product-fish.png",
+  "Lobster": "/images/product-other-seafood.png",
+  "Shellfish": "/images/product-other-seafood.png",
+  "Crab": "/images/product-crab.png",
+  "Sea Cucumber": "/images/product-sea-cucumber.png",
+  "Fish Maw": "/images/product-fish-maw.png",
 };
 
 const categories = ["All", "Salmon", "Shrimp", "Tuna", "Octopus", "Sea Bass", "Lobster", "Shellfish"];
@@ -108,8 +126,13 @@ export default function CatalogPage() {
           return (
             <article key={product.id} className={styles["product-card"]}>
               {/* Image Area */}
-              <div className={styles["product-card__image"]}>
-                {emojiMap[product.category] || "🐟"}
+              <div className={styles["product-card__image"]} style={{ position: "relative", minHeight: "160px", background: "#F5F7FA" }}>
+                <Image 
+                  src={productImageMap[product.category] || "/images/product-other-seafood.png"} 
+                  alt={product.name} 
+                  fill 
+                  style={{ objectFit: "contain", padding: "12px" }} 
+                />
                 <div className={styles["product-card__badges"]}>
                   <span className={`${styles["product-card__stock-badge"]} ${stockStatus.cls}`}>
                     {stockStatus.label}

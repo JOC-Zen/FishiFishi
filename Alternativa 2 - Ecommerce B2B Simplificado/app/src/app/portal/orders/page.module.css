@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    La Canada Seafood B2B - Client Orders Page
    ============================================================ */
 
@@ -22,22 +22,25 @@
 
 .reorder-btn {
   padding: var(--space-3) var(--space-5);
-  background: linear-gradient(135deg, var(--color-accent), hsl(20, 85%, 50%));
+  background: #0B2C66;
   color: white;
-  font-size: var(--text-sm);
-  font-weight: 600;
+  font-family: 'Montserrat', var(--font-montserrat, sans-serif);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
   border: none;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: all var(--transition-fast);
   display: flex;
   align-items: center;
   gap: var(--space-2);
+  text-transform: uppercase;
 }
 
 .reorder-btn:hover {
+  background: #1E4D9B;
   transform: scale(1.02);
-  box-shadow: var(--shadow-glow-accent);
 }
 
 /* ---- Stats ---- */
@@ -103,7 +106,7 @@
 }
 
 .tab--active {
-  color: var(--color-accent);
+  color: #0B1F33;
 }
 
 .tab--active::after {
@@ -113,7 +116,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: var(--color-accent);
+  background: #0B1F33;
   border-radius: 2px 2px 0 0;
 }
 
@@ -156,7 +159,7 @@
   font-family: var(--font-mono);
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--color-accent);
+  color: #0B2C66;
 }
 
 .order-card__date {
@@ -274,13 +277,13 @@
 }
 
 .order-card__action--primary {
-  background: var(--color-accent-soft);
+  background: rgba(11, 44, 102, 0.08);
   border-color: transparent;
-  color: var(--color-accent);
+  color: #0B2C66;
 }
 
 .order-card__action--primary:hover {
-  background: var(--color-accent);
+  background: #0B2C66;
   color: white;
 }
 

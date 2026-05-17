@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    La Canada Seafood B2B - Client Account Page
    ============================================================ */
 
@@ -38,7 +38,7 @@
   width: 80px;
   height: 80px;
   margin: 0 auto var(--space-4);
-  background: linear-gradient(135deg, var(--color-aqua), hsl(200, 70%, 50%));
+  background: linear-gradient(135deg, #0B2C66, #0D2438);
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
@@ -132,19 +132,23 @@
 
 .section__edit-btn {
   padding: var(--space-2) var(--space-4);
-  font-size: var(--text-xs);
-  font-weight: 500;
-  color: var(--color-aqua);
-  border: 1px solid var(--color-aqua-soft);
-  background: var(--color-aqua-soft);
+  font-family: 'Montserrat', var(--font-montserrat, sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  color: #0B2C66;
+  border: 1px solid rgba(11, 44, 102, 0.15);
+  background: rgba(11, 44, 102, 0.05);
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: all var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .section__edit-btn:hover {
-  background: var(--color-aqua);
+  background: #0B2C66;
   color: white;
+  border-color: #0B2C66;
 }
 
 /* ---- Form Fields ---- */

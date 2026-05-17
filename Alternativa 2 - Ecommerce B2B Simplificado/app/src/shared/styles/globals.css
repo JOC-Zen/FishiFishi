@@ -1,12 +1,16 @@
-/* ============================================================
-   La Cañada Seafood B2B — Global Design System
-   ============================================================
-   Design tokens, typography, resets, and global utilities.
-   Components access these variables with var(--nombre).
-   ============================================================ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* ---- Google Fonts ---- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@600;700&family=Dancing+Script:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=JetBrains+Mono:wght@400;500&family=Dancing+Script:wght@600&display=swap');
+
+@layer base {
+  :root {
+    --font-montserrat: 'Montserrat', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+  }
+}
 
 /* ============================================================
    1. CSS Custom Properties (Design Tokens) — Light Theme

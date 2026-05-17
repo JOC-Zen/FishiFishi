@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    La Canada Seafood B2B - Client Catalog Page
    ============================================================ */
 
@@ -229,7 +229,8 @@
 }
 
 .product-card__name {
-  font-size: var(--text-lg);
+  font-family: 'Montserrat', var(--font-montserrat, sans-serif);
+  font-size: 16px;
   font-weight: 700;
   color: var(--color-text-primary);
   margin-bottom: var(--space-1);
@@ -347,19 +348,22 @@
   justify-content: center;
   gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
-  background: linear-gradient(135deg, var(--color-accent), hsl(20, 85%, 50%));
+  background: #0B2C66;
   color: white;
-  font-size: var(--text-sm);
-  font-weight: 600;
+  font-family: 'Montserrat', var(--font-montserrat, sans-serif);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: all var(--transition-fast);
   border: none;
+  text-transform: uppercase;
 }
 
 .add-to-cart-btn:hover {
+  background: #1E4D9B;
   transform: scale(1.02);
-  box-shadow: var(--shadow-glow-accent);
 }
 
 /* ---- Empty State ---- */

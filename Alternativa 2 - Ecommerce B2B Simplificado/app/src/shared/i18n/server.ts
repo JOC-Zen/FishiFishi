@@ -8,12 +8,21 @@ export async function getDictionary() {
   const cookieStore = await cookies();
   const headerStore = await headers();
   
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || 
-                 headerStore.get("x-next-locale") || 
-                 "en") as Locale;
+  let locale = cookieStore.get("NEXT_LOCALE")?.value || 
+               headerStore.get("x-next-locale");
+               
+  if (!locale) {
+    // Detect from Accept-Language browser headers automatically
+    const acceptLanguage = headerStore.get("accept-language") || "";
+    if (acceptLanguage.toLowerCase().startsWith("es")) {
+      locale = "es";
+    } else {
+      locale = "en";
+    }
+  }
   
   return {
-    dict: await loadDictionary(locale),
-    locale
+    dict: await loadDictionary(locale as Locale),
+    locale: locale as Locale
   };
 }

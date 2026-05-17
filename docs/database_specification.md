@@ -1,4 +1,4 @@
-# FishiFishi B2B Portal: Database Specification
+# La Cañada Seafood B2B Portal: Database Specification
 
 **Subject:** Database Schema & Data Logic  
 **ORM:** Prisma (v7.8.0)  
@@ -8,7 +8,7 @@
 ---
 
 ## 1. Overview
-The FishiFishi B2B database is designed to handle high-volume wholesale transactions, complex pricing structures, and real-time inventory tracking. It utilizes a relational model (PostgreSQL) managed through **Prisma ORM** to ensure data integrity and type safety across the application.
+The La Cañada Seafood B2B database is designed to handle high-volume wholesale transactions, complex pricing structures, and real-time inventory tracking. It utilizes a relational model (PostgreSQL) managed through **Prisma ORM** to ensure data integrity and type safety across the application.
 
 ## 2. Entity Relationship Diagram (ERD)
 

@@ -142,7 +142,7 @@
 
 .summary__row--total {
   font-size: var(--text-lg);
-  color: var(--color-accent);
+  color: #0B2C66;
 }
 
 .summary__row--total .summary__value {
@@ -220,9 +220,9 @@
 }
 
 .timeline_item--active .timeline_dot {
-  border-color: var(--color-accent);
-  background: var(--color-accent);
-  box-shadow: 0 0 0 4px var(--color-accent-soft);
+  border-color: #0B2C66;
+  background: #0B2C66;
+  box-shadow: 0 0 0 4px rgba(11, 44, 102, 0.15);
 }
 
 .timeline_item--done .timeline_dot {

@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    La CaÃ±ada Seafood B2B â€” Client Portal Layout
    ============================================================ */
 
@@ -17,12 +17,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--space-8);
-  height: 64px;
-  background: var(--color-bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--color-border);
+  padding: 0 48px;
+  height: 90px;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #F0F0F0;
 }
 
 .navbar__brand {
@@ -56,31 +56,33 @@
 .navbar__nav {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: 32px;
+  height: 100%;
 }
 
 .navbar__link {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-4);
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--color-text-secondary);
-  border-radius: var(--radius-md);
-  transition: all var(--transition-fast);
+  font-family: 'Montserrat', var(--font-montserrat, sans-serif);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #6B7280;
   text-decoration: none;
-  position: relative;
+  transition: color 0.2s, border-color 0.2s;
+  padding: 0;
+  height: 90px;
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  gap: 8px;
 }
 
-.navbar__link:hover {
-  color: var(--color-text-primary);
-  background: var(--color-bg-tertiary);
+.navbar__link:hover,
+.navbar__link--active {
+  color: #0B1F33;
 }
 
 .navbar__link--active {
-  color: var(--color-accent);
-  background: var(--color-accent-soft);
+  border-bottom: 2px solid #0B1F33;
 }
 
 .navbar__link-icon {

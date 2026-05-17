@@ -1,6 +1,6 @@
-# FishiFishi B2B Portal: Technical Specification & Architecture
+# La Cañada Seafood B2B Portal: Technical Specification & Architecture
 
-**Prepared for:** FishiFishi Executive Team  
+**Prepared for:** La Cañada Seafood Executive Team  
 **Subject:** Technical Logic and Module Integration  
 **Version:** 1.0.0  
 **Language:** English  
@@ -8,7 +8,7 @@
 ---
 
 ## 1. Executive Summary
-FishiFishi B2B is a premium, resilient ecommerce platform designed for the wholesale seafood industry. The system follows a **Feature-based Modular Architecture**, decoupling business logic from the UI to ensure scalability, high performance, and visual excellence. This document outlines the internal logic and inter-module communications that power the platform.
+La Cañada Seafood B2B is a premium, resilient ecommerce platform designed for the wholesale seafood industry. The system follows a **Feature-based Modular Architecture**, decoupling business logic from the UI to ensure scalability, high performance, and visual excellence. This document outlines the internal logic and inter-module communications that power the platform.
 
 ## 2. Architectural Overview
 The application is built on **Next.js 15 (App Router)** with a strict separation of concerns:
@@ -48,7 +48,7 @@ B2B clients are treated as company entities rather than individual users.
 - **Profile Management**: Stores company data, tax IDs, and delivery preferences.
 
 ## 4. Resilience Strategy: Database Fallback
-A unique feature of FishiFishi B2B is its **Zero-Downtime Mock Fallback**.
+A unique feature of La Cañada Seafood B2B is its **Zero-Downtime Mock Fallback**.
 - **The "Try-Catch-Mock" Pattern**: Every Service (`ProductService`, `OrderService`) is wrapped in a resilience layer. 
 - **Logic**: If the PostgreSQL database (Prisma) becomes unreachable, the system automatically catches the error and serves a pre-configured set of **Mock Objects**.
 - **Result**: The UI remains fully functional and navigable, allowing for demos and uninterrupted browsing even during maintenance.

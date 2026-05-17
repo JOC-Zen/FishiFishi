@@ -1,0 +1,22 @@
+{
+  "display_name": "La Cañada Seafood B2B Portal",
+  "description": "Premium B2B Ecommerce portal for La Cañada Seafood catalog and order management.",
+  "logo_url": "https://raw.githubusercontent.com/placeholder/lacanadaseafood-logo.png",
+  "type": "widget",
+  "widget_config": [
+    {
+      "type": "tab",
+      "url": "/index.html",
+      "name": "La Cañada Seafood B2B"
+    },
+    {
+      "type": "button",
+      "url": "/index.html",
+      "name": "View in La Cañada Seafood",
+      "module": ["Contacts", "Accounts", "Products"]
+    }
+  ],
+  "permissions": {
+    "modules": ["Contacts", "Accounts", "Products", "Sales_Orders"]
+  }
+}

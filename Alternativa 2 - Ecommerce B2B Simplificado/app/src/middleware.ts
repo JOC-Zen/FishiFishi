@@ -15,12 +15,18 @@ export default withAuth(
     let locale = req.cookies.get("NEXT_LOCALE")?.value;
     
     if (!locale) {
-      // Try to detect from Netlify/Vercel GeoIP headers
-      const country = req.headers.get("x-vercel-ip-country") || 
-                      req.headers.get("x-nf-geo-country") || 
-                      "US";
-      
-      locale = spanishSpeakingCountries.includes(country.toUpperCase()) ? "es" : "en";
+      // Try browser language headers first
+      const acceptLanguage = req.headers.get("accept-language") || "";
+      if (acceptLanguage.toLowerCase().startsWith("es")) {
+        locale = "es";
+      } else {
+        // Fall back to Netlify/Vercel GeoIP headers
+        const country = req.headers.get("x-vercel-ip-country") || 
+                        req.headers.get("x-nf-geo-country") || 
+                        "US";
+        
+        locale = spanishSpeakingCountries.includes(country.toUpperCase()) ? "es" : "en";
+      }
       
       // Set cookie for future requests
       response.cookies.set("NEXT_LOCALE", locale, { path: "/", maxAge: 60 * 60 * 24 * 30 });

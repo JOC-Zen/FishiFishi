@@ -4,6 +4,7 @@ import prisma from "@/shared/lib/prisma";
 import TopBar from "@/shared/components/TopBar";
 import styles from "./page.module.css";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 /**
  * Dashboard Home — Main B2B panel page.
@@ -114,9 +115,9 @@ export default async function DashboardPage() {
           <section className={styles["orders-section"]}>
             <div className={styles["section-header"]}>
               <h2 className={styles["section-title"]}>Recent Orders</h2>
-              <a href="/dashboard/orders" className={styles["section-link"]}>
+              <Link href="/dashboard/orders" className={styles["section-link"]}>
                 View all →
-              </a>
+              </Link>
             </div>
             <table className={styles["orders-table"]}>
               <thead>
@@ -187,9 +188,9 @@ export default async function DashboardPage() {
             <section className={styles["stock-section"]}>
               <div className={styles["section-header"]}>
                 <h2 className={styles["section-title"]}>Low Stock</h2>
-                <a href="/dashboard/inventory" className={styles["section-link"]}>
+                <Link href="/dashboard/inventory" className={styles["section-link"]}>
                   Inventory →
-                </a>
+                </Link>
               </div>
               <StockItem name="Salmon Fillet" sku="SAL-FIL-001" count={12} level="critical" />
               <StockItem name="Jumbo Shrimp" sku="SHR-JUM-002" count={25} level="warning" />

@@ -41,7 +41,7 @@ src/
 ### Environment Variables
 Create a `.env` file in the root:
 ```bash
-DATABASE_URL="postgresql://user:password@localhost:5432/fishifishi"
+DATABASE_URL="postgresql://user:password@localhost:5432/lacanadaseafood"
 NEXTAUTH_SECRET="your-secret-here"
 NEXTAUTH_URL="http://localhost:3000"
 ```
@@ -63,4 +63,4 @@ The application includes a **Database Fallback Mechanism**. If `DATABASE_URL` is
 This ensures the UI can be showcased and explored even without a live backend environment.
 
 ---
-*Built with ❤️ for FishiFishi by Antigravity.*
+*Built with ❤️ for La Cañada Seafood by Antigravity.*

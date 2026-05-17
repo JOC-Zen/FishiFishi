@@ -21,7 +21,7 @@ async function main() {
   // ---- Create Users ----
   const admin = await prisma.user.create({
     data: {
-      email: "admin@fishifishi.com",
+      email: "admin@lacanadaseafood.com",
       password: "admin123", // In production use bcrypt
       name: "Admin Reyes",
       companyName: "Mariscos Reyes",

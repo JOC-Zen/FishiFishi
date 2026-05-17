@@ -53,7 +53,7 @@ export default function Sidebar({ dict }: { dict: any }) {
     <aside className={styles.sidebar}>
       {/* Logo */}
       <div style={{ padding: "var(--space-4)", display: "flex", justifyContent: "center" }}>
-        <Logo variant="main" href="/dashboard" />
+        <Logo variant="negative" href="/dashboard" />
       </div>
 
       {/* Navigation */}

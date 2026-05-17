@@ -1,8 +1,20 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./page.module.css";
 
 const emojiMap: Record<string, string> = {
   "Salmon": "🐟", "Shrimp": "🦐", "Octopus": "🐙", "Tuna": "🐟",
+};
+
+const productImageMap: Record<string, string> = {
+  "Salmon": "/images/product-fish.png",
+  "Salmón": "/images/product-fish.png",
+  "Shrimp": "/images/product-shrimp.png",
+  "Camarón": "/images/product-shrimp.png",
+  "Octopus": "/images/product-other-seafood.png",
+  "Pulpo": "/images/product-other-seafood.png",
+  "Tuna": "/images/product-fish.png",
+  "Atún": "/images/product-fish.png",
 };
 
 /** Mock client cart data */
@@ -41,8 +53,13 @@ export default function CartPage() {
         <div className={styles["cart-items"]}>
           {cartItems.map((item) => (
             <div key={item.id} className={styles["cart-item"]}>
-              <div className={styles["cart-item__image"]}>
-                {emojiMap[item.category] || "🐟"}
+              <div className={styles["cart-item__image"]} style={{ position: "relative", width: "64px", height: "64px", background: "#F5F7FA", borderRadius: "var(--radius-md)" }}>
+                <Image 
+                  src={productImageMap[item.category] || "/images/product-other-seafood.png"} 
+                  alt={item.name} 
+                  fill 
+                  style={{ objectFit: "contain", padding: "4px" }} 
+                />
               </div>
 
               <div className={styles["cart-item__info"]}>

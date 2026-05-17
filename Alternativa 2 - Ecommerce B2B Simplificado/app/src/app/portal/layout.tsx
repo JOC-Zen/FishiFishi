@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import styles from "./layout.module.css";
 import { getDictionary } from "@/shared/i18n/server";
 import Logo from "@/shared/components/Logo";
 import ThemeToggle from "@/shared/components/ThemeToggle";
+import PortalNav from "@/shared/components/PortalNav";
 
 export const metadata: Metadata = {
   title: "Client Portal — La Cañada Seafood",
@@ -29,25 +29,7 @@ export default async function PortalLayout({
           <Logo variant="main" size="sm" href="/portal" />
         </div>
 
-        <div className={styles.navbar__nav}>
-          <Link href="/portal" className={styles.navbar__link} id="nav-catalog">
-            <span className={styles["navbar__link-icon"]}>🛍️</span>
-            <span>{dict.sidebar.catalog}</span>
-          </Link>
-          <Link href="/portal/orders" className={styles.navbar__link} id="nav-orders">
-            <span className={styles["navbar__link-icon"]}>📋</span>
-            <span>{dict.portal.my_orders}</span>
-          </Link>
-          <Link href="/portal/cart" className={styles.navbar__link} id="nav-cart">
-            <span className={styles["navbar__link-icon"]}>🛒</span>
-            <span>{dict.sidebar.cart}</span>
-            <span className={styles.navbar__badge}>3</span>
-          </Link>
-          <Link href="/portal/account" className={styles.navbar__link} id="nav-account">
-            <span className={styles["navbar__link-icon"]}>👤</span>
-            <span>{dict.portal.my_account}</span>
-          </Link>
-        </div>
+        <PortalNav dict={dict} />
 
         <div className={styles.navbar__right}>
           <ThemeToggle />
