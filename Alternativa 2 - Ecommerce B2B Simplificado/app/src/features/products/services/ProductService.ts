@@ -1,4 +1,5 @@
 import prisma from "@/shared/lib/prisma";
+import { zohoService } from "@/shared/lib/zoho";
 
 export interface Product {
   id: string;
@@ -21,11 +22,12 @@ export class ProductService {
    * Fetches all products from the database or returns mock data if the DB is unavailable.
    */
   static async getAllProducts(): Promise<Product[]> {
+    let products: Product[] = [];
     try {
       const dbProducts = await prisma.product.findMany({
         orderBy: { name: "asc" },
       });
-      return dbProducts.map((p: any) => ({
+      products = dbProducts.map((p: any) => ({
         id: p.id,
         sku: p.sku,
         name: p.name,
@@ -38,7 +40,7 @@ export class ProductService {
       }));
     } catch (error) {
       console.warn("[ProductService] Database unreachable. Using fallback data.");
-      return [
+      products = [
         { id: "1", sku: "SAL-FIL-001", name: "Premium Salmon Fillet", category: "Salmon", basePrice: 285, unit: "kg", stock: 12, minOrderQuantity: 5, status: "ACTIVE" },
         { id: "2", sku: "SHR-JUM-002", name: "Jumbo Shrimp (16/20)", category: "Shrimp", basePrice: 420, unit: "kg", stock: 25, minOrderQuantity: 10, status: "ACTIVE" },
         { id: "3", sku: "OCT-FRE-001", name: "Fresh Whole Octopus", category: "Octopus", basePrice: 350, unit: "kg", stock: 18, minOrderQuantity: 3, status: "ACTIVE" },
@@ -49,6 +51,24 @@ export class ProductService {
         { id: "8", sku: "LOB-TAL-001", name: "Lobster Tail", category: "Lobster", basePrice: 890, unit: "kg", stock: 3, minOrderQuantity: 2, status: "ACTIVE" },
       ];
     }
+
+    // Intercept with Real-Time Zoho Inventory stock levels if credentials exist
+    if (zohoService.hasCredentials()) {
+      try {
+        await Promise.all(
+          products.map(async (p) => {
+            const zohoStock = await zohoService.getInventoryItemStock(p.sku);
+            if (zohoStock !== null) {
+              p.stock = zohoStock;
+            }
+          })
+        );
+      } catch (err) {
+        console.warn("[ProductService] Zoho Inventory stock sync failed, using database/mock fallback stock levels.");
+      }
+    }
+
+    return products;
   }
 
   /**

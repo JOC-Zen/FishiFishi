@@ -1,4 +1,5 @@
 import prisma from "@/shared/lib/prisma";
+import { zohoService } from "@/shared/lib/zoho";
 
 export type OrderStatus = "PENDING" | "CONFIRMED" | "PROCESSING" | "SHIPPED" | "DELIVERED" | "CANCELLED";
 
@@ -31,6 +32,30 @@ export interface Order {
  */
 export class OrderService {
   static async getAllOrders(): Promise<Order[]> {
+    // 1. Intercept with Zoho Creator / CRM orders if credentials exist
+    if (zohoService.hasCredentials()) {
+      try {
+        console.log("[OrderService] Fetching orders from Zoho Creator backend logic...");
+        const creatorOrders = await zohoService.getCreatorRecords("Order_Submission_Report");
+        if (creatorOrders && creatorOrders.length > 0) {
+          return creatorOrders.map((co: any) => ({
+            id: co.ID || co.id || String(co.Order_Number),
+            orderNumber: Number(co.Order_Number) || 3001,
+            clientId: co.Client_ID || "c1",
+            clientName: co.Client_Name || "B2B Buyer",
+            companyName: co.Company || "B2B Enterprise",
+            status: (co.Status?.toUpperCase() || "CONFIRMED") as OrderStatus,
+            totalAmount: Number(co.Total_Amount) || 0,
+            createdAt: co.Added_Time ? new Date(co.Added_Time) : new Date(),
+            itemsCount: Number(co.Items_Count) || 1,
+            trackingNumber: co.Tracking_Number || null,
+          }));
+        }
+      } catch (err) {
+        console.warn("[OrderService] Zoho Creator fetch failed, falling back to database/mock orders:", err);
+      }
+    }
+
     try {
       const dbOrders = await prisma.order.findMany({
         orderBy: { createdAt: "desc" },
