@@ -61,6 +61,13 @@ export async function POST(request: Request) {
       const count = await prisma.order.count();
       const orderNumber = 3000 + count + 1;
 
+      // Fetch products to populate the snapshot fields (productName and sku)
+      const productIds = items.map(item => item.productId);
+      const dbProducts = await prisma.product.findMany({
+        where: { id: { in: productIds } }
+      });
+      const productMap = new Map(dbProducts.map(p => [p.id, p]));
+
       localOrder = await prisma.order.create({
         data: {
           orderNumber,
@@ -68,12 +75,17 @@ export async function POST(request: Request) {
           status: "CONFIRMED",
           totalAmount,
           items: {
-            create: items.map(item => ({
-              productId: item.productId,
-              quantity: item.quantity,
-              unitPrice: item.price,
-              subtotal: item.price * item.quantity
-            }))
+            create: items.map(item => {
+              const prod = productMap.get(item.productId);
+              return {
+                productId: item.productId,
+                productName: prod ? prod.name : "Unknown Seafood",
+                sku: prod ? prod.sku : "SKU-UNKNOWN",
+                quantity: item.quantity,
+                unitPrice: item.price,
+                subtotal: item.price * item.quantity
+              };
+            })
           }
         },
         include: { items: true }

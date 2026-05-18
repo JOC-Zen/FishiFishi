@@ -13,7 +13,7 @@ export default function AboutPage() {
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, margin: "-60px" },
     transition: { duration: 0.55, ease: "easeOut" },
-  };
+  } as const;
 
   const values = [
     {

@@ -1,47 +1,47 @@
-# 🌅 La Cañada Seafood — Nueva Landing Page y Páginas Corporativas Premium
+# 🌅 La Cañada Seafood — New Premium Landing Page & Corporate Pages
 
-Siguiendo los lineamientos de identidad corporativa y las normativas técnicas establecidas, hemos creado una experiencia corporativa completa que proyecta una imagen de exportación internacional, calidad superior y confianza B2B.
-
----
-
-## 🎨 Características de Diseño
-- **Estética Global**: Diseño minimalista con amplio espacio visual, inspirado en exportadoras globales premium y branding marítimo moderno.
-- **Paleta Corporativa**: Dominio absoluto del **Azul Marino Profundo (#0B1F33)** y el **Blanco Puro**, con acentos estratégicos en **Azul Océano (#1D5C8C)** y **Naranja Coral (#FF6A00)**.
-- **Tipografía Premium**: Uso de **Montserrat** para títulos principales, logotipos y navegación, y de **Inter** para contenido informativo y especificaciones técnicas.
-- **Imágenes Cinematográficas**: Activos visuales de alta definición para el Hero (camarón premium), About (pescador tradicional y embarcación), y Productos (pepino de mar, buche de pescado, etc.).
+Following the corporate identity guidelines and established technical standards, we have created a complete corporate experience projecting an international export image, superior quality, and B2B trust.
 
 ---
 
-## 📂 Estructura de Navegación y Páginas Corporativas
+## 🎨 Design Features
+- **Global Aesthetic**: Minimalist design with ample visual space, inspired by premium global exporters and modern maritime branding.
+- **Corporate Palette**: Absolute dominance of **Deep Navy Blue (#0B1F33)** and **Pure White**, with strategic accents of **Ocean Blue (#1D5C8C)** and **Coral Orange (#FF6A00)**.
+- **Premium Typography**: Use of **Montserrat** for main headings, logos, and navigation, and **Inter** for informative content and technical specifications.
+- **Cinematographic Images**: High-definition visual assets for the Hero (premium shrimp), About (traditional fisherman and vessel), and Products (sea cucumber, fish maw, etc.).
 
-El sitio corporativo cuenta con navegación interna fluida y rutas bien definidas:
+---
+
+## 📂 Navigation Structure and Corporate Pages
+
+The corporate site features fluid internal navigation and well-defined routes:
 
 1. **Home (`/`)**: 
-   - El escaparate principal de la marca.
-   - Presenta el hero banner, la sinopsis de la historia, el catálogo general y la sección de soluciones logísticas globales.
+   - The brand's main showcase.
+   - Presents the hero banner, history synopsis, general catalog, and global logistics solutions section.
 2. **About Us (`/about`)**: 
-   - Narrativa extendida sobre la herencia marítima y operaciones comerciales basadas en Mazatlán, Sinaloa.
-   - Incorpora una cuadrícula interactiva que detalla los valores corporativos: *Sustentabilidad*, *Calidad Premium* y *Suministro Global*.
+   - Extended narrative on maritime heritage and commercial operations based in Mazatlán, Sinaloa.
+   - Incorporates an interactive grid detailing corporate values: *Sustainability*, *Premium Quality*, and *Global Supply*.
 3. **Products Catalog (`/products`)**:
-   - Catálogo premium detallado con descripciones y especificaciones de exportación para Camarón, Pepino de Mar, Buche de Pescado, Cangrejo y Pescados salvajes.
-   - Enlace directo e invitaciones claras hacia el Portal de Ecommerce B2B.
+   - Detailed premium catalog with descriptions and export specifications for Shrimp, Sea Cucumber, Fish Maw, Crab, and Wild Fish.
+   - Direct links and clear invitations to the B2B Ecommerce Portal.
 4. **Quality & Certifications (`/certifications`)**:
-   - Espacio técnico dedicado a detallar el cumplimiento de las normativas de inocuidad y control sanitario.
-   - Describe y muestra de manera destacada las certificaciones: **HACCP** (análisis preventivo), **FDA Compliant** (mercado estadounidense) y **SENASICA** (federal mexicano).
+   - Technical space dedicated to detailing compliance with safety and sanitary control standards.
+   - Highlights and describes safety certifications: **HACCP** (preventive analysis), **FDA Compliant** (US market), and **SENASICA** (Mexican federal standard).
 
 ---
 
-## 🏗️ Refactorización y Arquitectura de Código
+## 🏗️ Refactoring and Code Architecture
 
-Para garantizar la coherencia visual y cumplir con la arquitectura desacoplada del proyecto, realizamos las siguientes mejoras estructurales:
+To ensure visual consistency and comply with the project's decoupled architecture, we implemented the following structural improvements:
 
-- **Componentes Reutilizables**:
-  - `Header` (`@/shared/components/Header.tsx`): Administra dinámicamente el sombreado de scroll (`header--scrolled`) y resalta con elegancia la pestaña activa mediante la propiedad `activeLink`.
-  - `Footer` (`@/shared/components/Footer.tsx`): Estructurado en 6 columnas alineadas con el sitemap y datos de contacto, facilitando el mantenimiento centralizado del pie de página.
-- **Cumplimiento de Estándares React/Next.js**:
-  - Se eliminaron todos los caracteres especiales sin escapar en el JSX (`Mexico's` -> `Mexico&apos;s`, `Let's` -> `Let&apos;s`) garantizando que el compilador de Next.js pase todas las etapas de validación de ESLint con **cero errores** en los archivos modificados.
-- **Trazabilidad de Recursos**:
-  - Se integró la nueva imagen editorial aprobada del pescador (`/images/about-fisherman.jpg`) para ilustrar el patrimonio marítimo de la empresa de manera sumamente premium y auténtica.
+- **Reusable Components**:
+  - `Header` (`@/shared/components/Header.tsx`): Dynamically manages scroll shadowing (`header--scrolled`) and elegantly highlights the active tab via the `activeLink` property.
+  - `Footer` (`@/shared/components/Footer.tsx`): Structured in 6 columns aligned with the sitemap and contact details, facilitating centralized footer maintenance.
+- **React/Next.js Standards Compliance**:
+  - Removed all unescaped special characters in JSX (`Mexico's` -> `Mexico&apos;s`, `Let's` -> `Let&apos;s`) to ensure the Next.js compiler passes ESLint validation stages with **zero errors** across all modified files.
+- **Asset Traceability**:
+  - Integrated the new approved editorial image of the fisherman (`/images/about-fisherman.jpg`) to illustrate the company's maritime heritage in an extremely premium and authentic manner.
 
 ---
-*Esta plataforma sirve como la cara internacional de La Cañada Seafood, garantizando una transición fluida al Portal B2B y al panel administrativo.*
+*This platform serves as the international face of La Cañada Seafood, ensuring a seamless transition to the B2B Portal and administrative dashboard.*

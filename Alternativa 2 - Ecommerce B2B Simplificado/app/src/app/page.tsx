@@ -13,7 +13,7 @@ export default function LandingPage() {
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, margin: "-60px" },
     transition: { duration: 0.55, ease: "easeOut" },
-  };
+  } as const;
 
   const products = [
     { name: "SHRIMP", desc: "Vannamei shrimp and specialties.", img: "/images/product-shrimp.png" },

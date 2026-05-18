@@ -1,40 +1,40 @@
-# La Cañada Seafood – Landing Page Layout Documentation
+# La Cañada Seafood – Landing Page Layout Documentation
 
-## 📄 Propósito
-Este documento describe **paso a paso** el layout que debe implementarse para la página de inicio corporativa de **La Cañada Seafood**.  Incluye:
-- Estructura de secciones
-- Colores, tipografía y tamaños de fuente
-- Espaciados y alineaciones
-- Comportamiento responsive
-- Animaciones sutiles con Framer Motion
-- Referencia visual (mock‑up) para verificación pixel‑perfecta.
+## 📄 Purpose
+This document describes **step by step** the layout that must be implemented for the corporate landing page of **La Cañada Seafood**. It includes:
+- Section structure
+- Colors, typography, and font sizes
+- Spacing and alignments
+- Responsive behavior
+- Subtle animations with Framer Motion
+- Visual reference (mock-up) for pixel-perfect verification.
 
 ---
 
-## 🖼️ Referencia visual
-> **Nota:** la imagen a continuación es el mock‑up aprobado para el proyecto.  Use este diseño como **única** referencia; **no** realice reinterpretaciones.
+## 🖼️ Visual Reference
+> **Note:** The image below is the approved mock-up for the project. Use this design as the **sole** reference; **do not** reinterpret it.
 
 ![Landing page mockup](file:///C:/Users/urrac/.gemini/antigravity/brain/8c8c3ed4-684d-4db3-a7d7-d7ce15df7853/landing_page_full_1778961916248.png)
 
 ---
 
-## 🎨 Paleta de colores
-| Variable | Hex | Uso |
+## 🎨 Color Palette
+| Variable | Hex | Usage |
 |---|---|---|
-| `primary` | `#0B2C66` | Azul corporativo (header, botones primary, íconos) |
-| `secondary` | `#1E4D9B` | Azul secundario (hover, accent) |
-| `bgGray` | `#F5F7FA` | Fondos de secciones neutras |
-| `textPrimary` | `#0F172A` | Texto principal |
-| `textSecondary` | `#475569` | Texto secundario |
-| `white` | `#FFFFFF` | Fondo general |
+| `primary` | `#0B2C66` | Corporate blue (header, primary buttons, icons) |
+| `secondary` | `#1E4D9B` | Secondary blue (hover, accent) |
+| `bgGray` | `#F5F7FA` | Neutral section backgrounds |
+| `textPrimary` | `#0F172A` | Primary text |
+| `textSecondary` | `#475569` | Secondary text |
+| `white` | `#FFFFFF` | General background |
 
 ---
 
-## ✍️ Tipografía
-- **Fuente principal:** `Inter` (cargada vía Google Fonts).  fallback: `Helvetica Neue`, `sans‑serif`.
-- **Fuente serif para el título hero:** `Playfair Display` (italic, weight 800).
+## ✍️ Typography
+- **Primary font:** `Inter` (loaded via Google Fonts). fallback: `Helvetica Neue`, `sans-serif`.
+- **Serif font for the hero title:** `Playfair Display` (italic, weight 800).
 
-| Elemento | Tamaño | Peso | Line‑height | Letter‑spacing |
+| Element | Size | Weight | Line-height | Letter-spacing |
 |---|---|---|---|---|
 | Hero title | `72px` | `800` | `0.95` | `-2%` |
 | Section titles | `48px` | `700` | `1.1` | `normal` |
@@ -43,144 +43,144 @@ Este documento describe **paso a paso** el layout que debe implementarse para la
 
 ---
 
-## 📐 Estructura del layout (desktop ≥ 1024 px)
+## 📐 Layout Structure (Desktop ≥ 1024 px)
 
 ### 1️⃣ Header (Sticky)
-- **Altura:** `90px`.
-- **Fondo:** blanco translúcido (opacidad 97 %) → sólido al hacer scroll, con sombra ligera.
-- **Distribución (flex):**
-  - **Izquierda:** Logo (caja 40 × 40 px, borde `primary`, iniciales *LC*).  Texto logo en `Montserrat`.
-  - **Centro:** Navegación horizontal con enlaces:
+- **Height:** `90px`.
+- **Background:** translucent white (97% opacity) → solid on scroll, with a light shadow.
+- **Layout (flex):**
+  - **Left:** Logo (40 × 40 px box, `primary` border, *LC* initials). Logo text in `Montserrat`.
+  - **Center:** Horizontal navigation with links:
     `HOME | ABOUT US | PRODUCTS | CERTIFICATIONS | ECOMMERCE`.
-  - **Derecha:** Botón CTA `CONTACT SALES` (bg `primary`, hover → `secondary`).  Selector de idioma `EN`.
-- **Interacción:** Hover suave (0.25 s).  En scroll > 10 px se agrega `shadow-sm`.
+  - **Right:** CTA button `CONTACT SALES` (bg `primary`, hover → `secondary`). Language selector `EN`.
+- **Interaction:** Smooth hover (0.25s). On scroll > 10 px, add `shadow-sm`.
 
 ### 2️⃣ Hero Section
-- **Layout:** 2 columnas (`flex`):
-  - **Columna izq.** 40 % – contenido textual.
-  - **Columna der.** 60 % – imagen full‑height.
-- **Contenido textual:**
-  - **Label** (p. small, `primary`).  Texto: *"PREMIUM MEXICAN SEAFOOD EXPORTERS"*.
-  - **Título** (h1, `Playfair Display`, italic, 72 px) con saltos de línea exactos:
+- **Layout:** 2 columns (`flex`):
+  - **Left column:** 40% – textual content.
+  - **Right column:** 60% – full-height image.
+- **Textual content:**
+  - **Label** (p. small, `primary`). Text: *"PREMIUM MEXICAN SEAFOOD EXPORTERS"*.
+  - **Title** (h1, `Playfair Display`, italic, 72 px) with exact line breaks:
     ```
     Worldwide
     Seafood
     Trading
     ```
-  - **Subtexto** (p, `body`).  *"Supplying the finest quality seafood from Mexico to the world."*
-  - **Botones:**
+  - **Subtext** (p, `body`). *"Supplying the finest quality seafood from Mexico to the world."*
+  - **Buttons:**
     - Primary: `EXPLORE PRODUCTS →` (bg `primary`).
     - Secondary: `CONTACT SALES` (outline `primary`).
-- **Imagen:** `hero‑seafood.jpg` – camarones sobre hielo, ocupa toda la altura de la columna derecha.
-- **Animación:** Fade‑up del bloque de texto (`x: -30 → 0`, `opacity: 0 → 1`).
+- **Image:** `hero-seafood.jpg` – premium shrimp on ice, occupies full height of the right column.
+- **Animation:** Fade-up of the text block (`x: -30 → 0`, `opacity: 0 → 1`).
 
 ### 3️⃣ About Section
-- **Layout:** Grid 2‑col (`grid-cols-2`).
-- **Izquierda:**
+- **Layout:** 2-col grid (`grid-cols-2`).
+- **Left:**
   - Label: *"ABOUT LA CAÑADA SEAFOOD"* (line + text).
-  - Heading: *"Experience. Quality.\nGlobal Reach."* (48 px, bold).
-  - Body copy (≈ 3‑4 líneas, `body`).
-  - CTA link: `LEARN MORE ABOUT US →` (inline‑flex, arrow).   
-- **Derecha:** Imagen `about‑vessel.jpg` con superposición sutil de líneas de mapa y puntos (logística).
-- **Animación:** Fade‑up con `y:24 → 0`.
+  - Heading: *"Experience. Quality.\nGlobal Reach."* (48 px, bold).
+  - Body copy (≈ 3-4 lines, `body`).
+  - CTA link: `LEARN MORE ABOUT US →` (inline-flex, arrow).   
+- **Right:** Image `about-vessel.jpg` with subtle overlay of map lines and points (logistics).
+- **Animation:** Fade-up with `y:24 → 0`.
 
 ### 4️⃣ Products Section
-- **Fondo:** blanco.
-- **Encabezado central:** label *"OUR PRODUCTS"* + heading *"Premium Seafood, Responsibly Sourced"*.
-- **Grid:** 6 tarjetas en fila (`grid-cols-6`).  Responsive: 3‑col tablet, 2‑col mobile.
-- **Tarjeta:**
-  - Imagen arriba (aspect 3/4, borde gris tenue).  Hover → zoom 1.06.
-  - Título en mayúsculas.
-  - Descripción corta.
-  - Botón circular con flecha (hover → bg `primary`).
-- **CTA inferior:** centrado, botón `ECOMMERCE →` (bg `primary`).
-- **Animación:** Cada tarjeta con `stagger` (delay 0.08 s).
+- **Background:** white.
+- **Centered header:** label *"OUR PRODUCTS"* + heading *"Premium Seafood, Responsibly Sourced"*.
+- **Grid:** 6 cards in a row (`grid-cols-6`). Responsive: 3-col tablet, 2-col mobile.
+- **Card:**
+  - Image on top (3/4 aspect ratio, subtle gray border). Hover → zoom 1.06.
+  - Title in uppercase.
+  - Short description.
+  - Circular button with arrow (hover → bg `primary`).
+- **Bottom CTA:** centered, `ECOMMERCE →` button (bg `primary`).
+- **Animation:** Each card with `stagger` (0.08s delay).
 
 ### 5️⃣ Export Solutions Section
-- **Fondo:** `bgGray`.
+- **Background:** `bgGray`.
 - **Header:** label *"EXPORT SOLUTIONS"*, heading *"From Mexico to the World"*.
-- **Íconos:** 5 items en fila (`grid-cols-5`). Cada ícono es SVG lineal `stroke-primary`.
+- **Icons:** 5 items in a row (`grid-cols-5`). Each icon is a linear SVG `stroke-primary`.
   - Global Shipping
   - Frozen Quality
   - Quality Control
   - Secure Packaging
   - Export Experts
-- **Texto:** título uppercase, descripción corta.
-- **Animación:** Fade‑up con `stagger`.
+- **Text:** uppercase title, short description.
+- **Animation:** Fade-up with `stagger`.
 
 ### 6️⃣ Global Markets + Certifications (Duo Section)
-- **Layout:** 2 columnas.
+- **Layout:** 2 columns.
 - **Left (Markets):**
   - Label *"GLOBAL MARKETS"*.
   - Heading *"Our Products, Around the World"*.
   - CTA `EXPLORE OUR MARKETS →`.
-  - Mapa minimalista (`world‑map.svg`) con opacidad 0.45.
+  - Minimalist map (`world-map.svg`) with 0.45 opacity.
 - **Right (Certifications):**
   - Label *"QUALITY & CERTIFICATIONS"*.
   - Heading *"Committed to Excellence"*.
-  - Badges: HACCP, FDA, SENASICA (SVG logo dentro de caja gris).  Espaciado `gap‑4`.
+  - Badges: HACCP, FDA, SENASICA (SVG logo inside a gray box). Spacing `gap-4`.
   - CTA `VIEW ALL CERTIFICATIONS →`.
-- **Animación:** Fade‑up de cada bloque.
+- **Animation:** Fade-up of each block.
 
 ### 7️⃣ Final CTA Banner
-- **Fondo:** azul `primary` con foto marina oscurecida (overlay `bg‑blend‑multiply`).
-- **Texto (izquierda):**
+- **Background:** blue `primary` with darkened marine photo (overlay `bg-blend-multiply`).
+- **Text (left):**
   - Heading `30px` (white) – *"Looking for a reliable seafood supplier?"*.
-  - Subtexto `13px` – *"Let’s build a successful partnership."*.
-- **Botón (derecha):** `CONTACT OUR SALES TEAM` (bg white, text `primary`).
+  - Subtext `13px` – *"Let’s build a successful partnership."*.
+- **Button (right):** `CONTACT OUR SALES TEAM` (bg white, text `primary`).
 - **Padding:** `py-24`.
 
 ### 8️⃣ Footer
-- **Fondo:** blanco, borde superior gris claro.
-- **Columnas:** 6 (logo + 5 listas):
+- **Background:** white, light gray top border.
+- **Columns:** 6 (logo + 5 lists):
   - Company
   - Products
   - Certifications
   - Ecommerce
   - Contact
-- **Tipografía:** `text-xs` gris `#9CA3AF`.
-- **Bottom bar:** línea superior, copyright + redes (LinkedIn, Instagram) en SVG.
-- **Espaciado amplio:** `gap‑8`, `py‑12`.
+- **Typography:** `text-xs` gray `#9CA3AF`.
+- **Bottom bar:** top line, copyright + socials (LinkedIn, Instagram) in SVG.
+- **Ample spacing:** `gap-8`, `py-12`.
 
 ---
 
-## 📱 Responsividad
-| Breakpoint | Cambios principales |
+## 📱 Responsiveness
+| Breakpoint | Main changes |
 |------------|--------------------|
-| **≥ 1024 px** (desktop) | Layout descrito arriba. |
-| **640 – 1023 px** (tablet) | Header → hamburger (oculta nav).  Hero se apila (texto arriba, imagen abajo).  Products grid → 3 columnas.  Solutions/Duo grid → 3 columnas. |
-| **< 640 px** (mobile) | Todas las secciones se apilan verticalmente.  Products → 2 columnas (ult. pasa a 1 columna en < 380 px).  Texto reduce tamaño (hero ≈ 48 px, titles ≈ 32 px). |
+| **≥ 1024 px** (desktop) | Layout described above. |
+| **640 – 1023 px** (tablet) | Header → hamburger (hides nav). Hero stacks (text top, image bottom). Products grid → 3 columns. Solutions/Duo grid → 3 columns. |
+| **< 640 px** (mobile) | All sections stack vertically. Products → 2 columns (moves to 1 column on < 380 px). Text size reduces (hero ≈ 48 px, titles ≈ 32 px). |
 
 ---
 
-## 🎞️ Animaciones (Framer Motion)
-- **Hero text:** `initial:{opacity:0,x:-30}` → `animate:{opacity:1,x:0}` (0.7 s).
-- **Section fades:** `initial:{opacity:0,y:24}` → `whileInView:{opacity:1,y:0}` (0.55 s) con `staggerChildren:0.1`.
+## 🎞️ Animations (Framer Motion)
+- **Hero text:** `initial:{opacity:0,x:-30}` → `animate:{opacity:1,x:0}` (0.7s).
+- **Section fades:** `initial:{opacity:0,y:24}` → `whileInView:{opacity:1,y:0}` (0.55s) with `staggerChildren:0.1`.
 - **Product cards hover:** `whileHover:{scale:1.02,y:-4}` + Tailwind `hover:shadow-subtle`.
-- **Header scroll shadow:** `useEffect` que añade `shadow-sm` al pasar 10 px.
+- **Header scroll shadow:** `useEffect` that adds `shadow-sm` after passing 10 px.
 
 ---
 
-## 📂 Assets (colocar en `public/images/`)
-| Asset | Descripción |
+## 📂 Assets (place in `public/images/`)
+| Asset | Description |
 |------|--------------|
-| `hero‑seafood.jpg` | Camarones premium sobre hielo (editorial). |
-| `about‑vessel.jpg` | Barco pesquero con mapa tenue. |
-| `product‑shrimp.jpg` … `product‑other‑seafood.jpg` | Imágenes de cada categoría, fondo neutro. |
-| `world‑map.svg` | Mapa minimalista, líneas de conexión. |
-| `cta‑bg.jpg` | Foto marina oscurecida (para el banner final). |
+| `hero-seafood.jpg` | Premium shrimp on ice (editorial). |
+| `about-vessel.jpg` | Fishing vessel with subtle map. |
+| `product-shrimp.jpg` ... `product-other-seafood.jpg` | Images of each category, neutral background. |
+| `world-map.svg` | Minimalist map, connection lines. |
+| `cta-bg.jpg` | Darkened marine photo (for the final banner). |
 
 ---
 
-## ✅ Checklist de implementación
-- [ ] **Tailwind config** con colores, tipografías y extensiones descritas.
-- [ ] **Componentes** (`Header`, `Hero`, `About`, `Products`, `Solutions`, `Duo`, `CTA`, `Footer`) siguiendo las clases exactas.
-- [ ] **Framer Motion** aplicado a los bloques indicados.
-- [ ] **Responsive**: media queries de Tailwind (`md:`, `lg:`) y menú hamburguesa.
-- [ ] **Accesibilidad:** `aria-label` en nav, foco visible, contraste ≥ 4.5.
+## ✅ Implementation Checklist
+- [ ] **Tailwind config** with described colors, typography, and extensions.
+- [ ] **Components** (`Header`, `Hero`, `About`, `Products`, `Solutions`, `Duo`, `CTA`, `Footer`) following exact classes.
+- [ ] **Framer Motion** applied to indicated blocks.
+- [ ] **Responsive**: Tailwind media queries (`md:`, `lg:`) and hamburger menu.
+- [ ] **Accessibility:** `aria-label` in nav, visible focus, contrast ≥ 4.5.
 - [ ] **SEO meta tags** (title, description, OG). 
-- [ ] **Lighthouse** > 90 en todas las métricas.
+- [ ] **Lighthouse** > 90 on all metrics.
 
 ---
 
-**Fin del documento**.  Utilice este archivo como guía única para construir la landing page de La Cañada Seafood.
+**End of Document**. Use this file as the sole guide to build the La Cañada Seafood landing page.

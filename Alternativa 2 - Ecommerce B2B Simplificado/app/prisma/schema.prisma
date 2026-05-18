@@ -70,7 +70,7 @@ model Product {
   description      String?
   category         String
   basePrice        Decimal       @db.Decimal(10, 2)
-  unit             String        // kg, docena, etc.
+  unit             String        // kg, dozen, etc.
   stock            Decimal       @default(0) @db.Decimal(10, 2)
   minOrderQuantity Decimal       @default(1) @db.Decimal(10, 2)
   imageUrl         String?
